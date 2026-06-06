@@ -1,180 +1,104 @@
+import 'package:dompetin_app/app/themes/app_theme.dart';
+import 'package:dompetin_app/modules/onboarding/onboarding_controller.dart';
+import 'package:dompetin_app/widgets/dompetinlogo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../widgets/buttons.dart';
 
-class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({super.key});
+class OnboardingScreen extends StatelessWidget {
+  const OnboardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final controller = Get.put(OnboardingController());
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4F7FC),
+      backgroundColor: AppTheme.white,
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: size.height * 0.03),
-
-            // Logo
-            Image.asset('assets/images/logo.png', width: size.width * 0.45),
-
-            SizedBox(height: size.height * 0.04),
-
-            // Title
+            // Top logo bar
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.08),
-              child: const Text(
-                'Pengeluaran nggak terkendali?',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFF102C6B),
-                ),
-              ),
-            ),
-
-            SizedBox(height: size.height * 0.015),
-
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.1),
-              child: const Text(
-                'Tanpa sadar, uang habis untuk hal-hal yang nggak penting.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  height: 1.5,
-                  color: Color(0xFF455A7A),
-                ),
-              ),
-            ),
-
-            SizedBox(height: size.height * 0.03),
-
-            Expanded(
-              child: Stack(
-                alignment: Alignment.bottomCenter,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Background biru
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      width: size.width * 0.65,
-                      height: size.height * 0.45,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [Color(0xFF5B9BFF), Color(0xFF2F6BFF)],
-                        ),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(120),
-                          topRight: Radius.circular(120),
-                        ),
-                      ),
+                  const DompetinLogo(),
+                  Obx(
+                    () => controller.currentPage.value < 2
+                        ? TextButton(
+                            onPressed: controller.skip,
+                            child: Text(
+                              'Lewati',
+                              style: TextStyle(
+                                color: AppTheme.textGrey,
+                                fontSize: 14,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
+                  ),
+                ],
+              ),
+            ),
+
+            // Page view
+            Expanded(
+              child: PageView.builder(
+                controller: controller.pageController,
+                onPageChanged: controller.onPageChanged,
+                itemCount: controller.slides.length,
+                itemBuilder: (context, index) {
+                  return _OnboardingPage(
+                    data: controller.slides[index],
+                    index: index,
+                  );
+                },
+              ),
+            ),
+
+            // Bottom controls
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 32),
+              child: Column(
+                children: [
+                  // Page indicator
+                  SmoothPageIndicator(
+                    controller: controller.pageController,
+                    count: controller.slides.length,
+                    effect: ExpandingDotsEffect(
+                      activeDotColor: AppTheme.primaryBlue,
+                      dotColor: AppTheme.inputBorder,
+                      dotHeight: 8,
+                      dotWidth: 8,
+                      expansionFactor: 3,
                     ),
                   ),
+                  const SizedBox(height: 24),
 
-                  // Ilustrasi
-                  Positioned(
-                    top: 0,
-                    child: Image.asset(
-                      'assets/images/onboarding1.png',
-                      width: size.width * 0.85,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-
-                  // Bottom content
-                  Positioned(
-                    bottom: 35,
-                    left: 20,
-                    right: 20,
-                    child: Column(
+                  // Navigation buttons
+                  Obx(
+                    () => Row(
                       children: [
-                        // Indicator
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 45,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF0B2D74),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              width: 20,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              width: 20,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: size.height * 0.03),
-
-                        Row(
-                          children: [
-                            Expanded(
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                style: OutlinedButton.styleFrom(
-                                  minimumSize: const Size(0, 58),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                  side: const BorderSide(
-                                    color: Color(0xFF2F6BFF),
-                                  ),
-                                ),
-                                child: const Text(
-                                  'Lewati',
-                                  style: TextStyle(
-                                    color: Color(0xFF2F6BFF),
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            const SizedBox(width: 16),
-
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF2F6BFF),
-                                  elevation: 0,
-                                  minimumSize: const Size(0, 58),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                ),
-                                child: const Text(
-                                  'Next',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                        if (controller.currentPage.value > 0) ...[
+                          OutlineButton(
+                            label: 'Lewati',
+                            onTap: controller.skip,
+                          ),
+                          const SizedBox(width: 12),
+                        ],
+                        Expanded(
+                          child: PrimaryButton(
+                            label:
+                                controller.currentPage.value ==
+                                    controller.slides.length - 1
+                                ? 'Mulai Sekarang'
+                                : 'Next',
+                            onTap: controller.nextPage,
+                          ),
                         ),
                       ],
                     ),
@@ -185,6 +109,186 @@ class OnboardingPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _OnboardingPage extends StatelessWidget {
+  final dynamic data;
+  final int index;
+
+  const _OnboardingPage({required this.data, required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        // Illustration area with diagonal blue background
+        Expanded(flex: 3, child: _OnboardingIllustration(index: index)),
+
+        // Text content
+        Expanded(
+          flex: 2,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 28),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  data.title,
+                  textAlign: TextAlign.center,
+                  style: AppTheme.heading2,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  data.subtitle,
+                  textAlign: TextAlign.center,
+                  style: AppTheme.body,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _OnboardingIllustration extends StatelessWidget {
+  final int index;
+  const _OnboardingIllustration({required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            // Blue diagonal background
+            ClipRect(
+              child: CustomPaint(
+                size: Size(constraints.maxWidth, constraints.maxHeight),
+                painter: _DiagonalPainter(index: index),
+              ),
+            ),
+
+            // Centered illustration placeholder
+            Center(child: _IllustrationWidget(index: index)),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _DiagonalPainter extends CustomPainter {
+  final int index;
+  _DiagonalPainter({required this.index});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = AppTheme.primaryBlue
+      ..style = PaintingStyle.fill;
+
+    if (index == 0) {
+      // Full blue background with white bottom diagonal
+      canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
+      paint.color = AppTheme.white;
+      final path = Path()
+        ..moveTo(0, size.height * 0.72)
+        ..lineTo(size.width, size.height * 0.55)
+        ..lineTo(size.width, size.height)
+        ..lineTo(0, size.height)
+        ..close();
+      canvas.drawPath(path, paint);
+    } else if (index == 1) {
+      // White bg with blue diagonal
+      canvas.drawRect(
+        Rect.fromLTWH(0, 0, size.width, size.height),
+        Paint()..color = AppTheme.offWhite,
+      );
+      final path = Path()
+        ..moveTo(0, 0)
+        ..lineTo(size.width * 0.55, 0)
+        ..lineTo(size.width * 0.38, size.height)
+        ..lineTo(0, size.height)
+        ..close();
+      canvas.drawPath(path, paint);
+    } else {
+      // Blue bottom half diagonal
+      canvas.drawRect(
+        Rect.fromLTWH(0, 0, size.width, size.height),
+        Paint()..color = AppTheme.white,
+      );
+      final path = Path()
+        ..moveTo(0, size.height * 0.3)
+        ..lineTo(size.width, size.height * 0.15)
+        ..lineTo(size.width, size.height)
+        ..lineTo(0, size.height)
+        ..close();
+      canvas.drawPath(path, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class _IllustrationWidget extends StatelessWidget {
+  final int index;
+  const _IllustrationWidget({required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    // Placeholder illustrations using shapes & emojis
+    // Replace with actual Lottie animations or image assets
+    final illustrations = [
+      _Slide1Illustration(),
+      _Slide2Illustration(),
+      _Slide3Illustration(),
+    ];
+    return illustrations[index];
+  }
+}
+
+class _Slide1Illustration extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Person sitting with phone — emoji representation
+        Image.asset('assets/images/onboarding1.png', height: 220),
+        const SizedBox(height: 8),
+      ],
+    );
+  }
+}
+
+class _Slide2Illustration extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset('assets/images/onboarding2.png', height: 220),
+        const SizedBox(height: 8),
+      ],
+    );
+  }
+}
+
+class _Slide3Illustration extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset('assets/images/onboarding3.png', height: 220),
+        const SizedBox(height: 8),
+      ],
     );
   }
 }

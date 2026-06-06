@@ -1,21 +1,41 @@
+import 'package:dompetin_app/app/routes/app_routes.dart';
+import 'package:dompetin_app/app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'app/routes/app_pages.dart';
-
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+  runApp(const DompetinApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class DompetinApp extends StatelessWidget {
+  const DompetinApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      title: 'Dompetin',
       debugShowCheckedModeBanner: false,
-      getPages: AppPages.routes,
-      initialRoute: '/',
+      theme: AppTheme.theme,
+      initialRoute: AppRoutes.splash,
+      getPages: AppRoutes.pages,
+      defaultTransition: Transition.fadeIn,
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(
+            context,
+          ).copyWith(textScaler: const TextScaler.linear(1.0)),
+          child: child!,
+        );
+      },
     );
   }
 }

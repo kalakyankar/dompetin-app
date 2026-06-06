@@ -2,16 +2,29 @@ import 'package:dompetin_app/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+class RegisterController extends GetxController {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   final isPasswordVisible = false.obs;
+  final isConfirmPasswordVisible = false.obs;
   final isLoading = false.obs;
 
   void togglePasswordVisibility() {
     isPasswordVisible.value = !isPasswordVisible.value;
+  }
+
+  void toggleConfirmPasswordVisibility() {
+    isConfirmPasswordVisible.value = !isConfirmPasswordVisible.value;
+  }
+
+  String? validateName(String? value) {
+    if (value == null || value.isEmpty) return 'Nama tidak boleh kosong';
+    if (value.length < 2) return 'Nama terlalu pendek';
+    return null;
   }
 
   String? validateEmail(String? value) {
@@ -26,36 +39,42 @@ class LoginController extends GetxController {
     return null;
   }
 
-  Future<void> login() async {
+  String? validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty)
+      return 'Konfirmasi kata sandi tidak boleh kosong';
+    if (value != passwordController.text) return 'Kata sandi tidak sama';
+    return null;
+  }
+
+  Future<void> register() async {
     if (!formKey.currentState!.validate()) return;
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 2));
     isLoading.value = false;
     Get.snackbar(
       'Berhasil!',
-      'Login berhasil. Selamat datang!',
+      'Akun berhasil dibuat. Silakan masuk.',
       backgroundColor: const Color(0xFF1A6BFF),
       colorText: Colors.white,
       snackPosition: SnackPosition.TOP,
     );
+    Get.offNamed(AppRoutes.login);
   }
 
-  Future<void> loginWithGoogle() async {
+  Future<void> registerWithGoogle() async {
     Get.snackbar(
       'Google',
-      'Masuk dengan Google ditekan',
+      'Daftar dengan Google ditekan',
       snackPosition: SnackPosition.TOP,
     );
   }
 
-  void forgotPassword() {
-    Get.toNamed(AppRoutes.forgotPassword);
-  }
-
   @override
   void onClose() {
+    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.onClose();
   }
 }

@@ -6,6 +6,6 @@ import '../../modules/onboarding/onboarding_page.dart';
 class AppPages {
   static final routes = [
     GetPage(name: '/', page: () => const SplashPage()),
-    GetPage(name: '/onboarding', page: () => const OnboardingPage()),
+    GetPage(name: '/onboarding', page: () => const OnboardingScreen()),
   ];
 }

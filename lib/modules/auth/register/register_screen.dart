@@ -1,18 +1,18 @@
 import 'package:dompetin_app/app/routes/app_routes.dart';
 import 'package:dompetin_app/app/themes/app_theme.dart';
-import 'package:dompetin_app/modules/auth/login/login_controller.dart';
+import 'package:dompetin_app/modules/auth/register/register_controller.dart';
 import 'package:dompetin_app/widgets/buttons.dart';
 import 'package:dompetin_app/widgets/dompetinlogo.dart';
 import 'package:dompetin_app/widgets/google_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(LoginController());
+    final controller = Get.put(RegisterController());
 
     return Scaffold(
       backgroundColor: AppTheme.white,
@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: GestureDetector(
-                    onTap: () => Get.offNamed(AppRoutes.onboarding),
+                    onTap: () => Get.back(),
                     child: Container(
                       width: 38,
                       height: 38,
@@ -61,14 +61,26 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Title
-                Text('Masuk', style: AppTheme.heading2),
+                Text('Daftar', style: AppTheme.heading2),
                 const SizedBox(height: 8),
                 Text(
-                  'Selamat datang kembali di Dompetin!',
+                  'Buat akun Dompetin-mu sekarang!',
                   style: AppTheme.body,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 32),
+
+                // Name field
+                _FieldLabel('Nama'),
+                const SizedBox(height: 8),
+                TextFormField(
+                  controller: controller.nameController,
+                  keyboardType: TextInputType.name,
+                  validator: controller.validateName,
+                  style: AppTheme.label,
+                  decoration: AppTheme.inputDecoration(hint: 'Alamat email'),
+                ),
+                const SizedBox(height: 16),
 
                 // Email field
                 _FieldLabel('Email'),
@@ -106,34 +118,43 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 16),
 
-                // Login button
+                // Confirm password field
+                _FieldLabel('Konfirmasi Kata Sandi'),
+                const SizedBox(height: 8),
                 Obx(
-                  () => PrimaryButton(
-                    label: 'Masuk',
-                    onTap: controller.login,
-                    isLoading: controller.isLoading.value,
-                  ),
-                ),
-                const SizedBox(height: 14),
-
-                // Forgot password
-                Center(
-                  child: TextButton(
-                    onPressed: controller.forgotPassword,
-                    child: Text(
-                      'Lupa Kata Sandi?',
-                      style: TextStyle(
-                        color: AppTheme.primaryBlue,
-                        fontSize: 13,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
+                  () => TextFormField(
+                    controller: controller.confirmPasswordController,
+                    obscureText: !controller.isConfirmPasswordVisible.value,
+                    validator: controller.validateConfirmPassword,
+                    style: AppTheme.label,
+                    decoration: AppTheme.inputDecoration(
+                      hint: 'Ulangi Kata sandi',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          controller.isConfirmPasswordVisible.value
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                          color: AppTheme.textGrey,
+                          size: 20,
+                        ),
+                        onPressed: controller.toggleConfirmPasswordVisibility,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 28),
+
+                // Register button
+                Obx(
+                  () => PrimaryButton(
+                    label: 'Daftar',
+                    onTap: controller.register,
+                    isLoading: controller.isLoading.value,
+                  ),
+                ),
+                const SizedBox(height: 16),
 
                 // Divider
                 const DividerWithText(text: 'atau'),
@@ -142,19 +163,19 @@ class LoginScreen extends StatelessWidget {
                 // Google sign in
                 GoogleSignInButton(
                   label: 'Masuk dengan Google',
-                  onTap: controller.loginWithGoogle,
+                  onTap: controller.registerWithGoogle,
                 ),
                 const SizedBox(height: 28),
 
-                // Register link
+                // Login link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Tidak punya akun? ', style: AppTheme.bodySmall),
+                    Text('Sudah punya akun? ', style: AppTheme.bodySmall),
                     GestureDetector(
-                      onTap: () => Get.toNamed(AppRoutes.register),
+                      onTap: () => Get.offNamed(AppRoutes.login),
                       child: Text(
-                        'Daftar Sekarang',
+                        'Masuk Sekarang',
                         style: TextStyle(
                           color: AppTheme.primaryBlue,
                           fontSize: 12,
