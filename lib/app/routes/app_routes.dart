@@ -1,8 +1,10 @@
 import 'package:dompetin_app/modules/auth/forgot_password/forgot_password_screen.dart';
 import 'package:dompetin_app/modules/auth/login/login_page.dart';
 import 'package:dompetin_app/modules/auth/register/register_screen.dart';
+import 'package:dompetin_app/modules/home/home_screen.dart';
 import 'package:dompetin_app/modules/onboarding/onboarding_page.dart';
 import 'package:dompetin_app/modules/splash/splash_page.dart';
+import 'package:dompetin_app/modules/transaction/pemasukan_screen.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -11,6 +13,8 @@ class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
   static const String forgotPassword = '/forgot-password';
+  static const String home = '/home';
+  static const String pemasukan = '/pemasukan';
 
   static final List<GetPage> pages = [
     GetPage(
@@ -36,6 +40,16 @@ class AppRoutes {
     GetPage(
       name: forgotPassword,
       page: () => const ForgotPasswordScreen(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: home,
+      page: () => const HomeScreen(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: pemasukan,
+      page: () => const PemasukanScreen(),
       transition: Transition.rightToLeft,
     ),
   ];
