@@ -1,6 +1,6 @@
-import 'package:dompetin_app/app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../theme/app_theme.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String label;
@@ -44,7 +44,7 @@ class PrimaryButton extends StatelessWidget {
               )
             : Text(
                 label,
-                style: GoogleFonts.inter(
+                style: GoogleFonts.poppins(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: textColor ?? AppTheme.white,
@@ -59,7 +59,11 @@ class OutlineButton extends StatelessWidget {
   final String label;
   final VoidCallback onTap;
 
-  const OutlineButton({super.key, required this.label, required this.onTap});
+  const OutlineButton({
+    super.key,
+    required this.label,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +80,7 @@ class OutlineButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: GoogleFonts.inter(
+          style: GoogleFonts.poppins(
             fontSize: 15,
             fontWeight: FontWeight.w500,
             color: AppTheme.textGrey,

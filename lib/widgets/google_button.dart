@@ -1,6 +1,6 @@
-import 'package:dompetin_app/app/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../theme/app_theme.dart';
 
 class GoogleSignInButton extends StatelessWidget {
   final String label;
@@ -33,7 +33,7 @@ class GoogleSignInButton extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               label,
-              style: GoogleFonts.inter(
+              style: GoogleFonts.poppins(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: AppTheme.textDark,
@@ -78,22 +78,41 @@ class _GooglePainter extends CustomPainter {
       -0.5,
       1.5,
       false,
-      paint
-        ..strokeWidth = 3 * s
-        ..style = PaintingStyle.stroke,
+      paint..strokeWidth = 3 * s ..style = PaintingStyle.stroke,
     );
     paint.color = colors[2];
-    canvas.drawArc(Rect.fromLTWH(0, 0, 20 * s, 20 * s), 1.0, 1.2, false, paint);
+    canvas.drawArc(
+      Rect.fromLTWH(0, 0, 20 * s, 20 * s),
+      1.0,
+      1.2,
+      false,
+      paint,
+    );
     paint.color = colors[1];
-    canvas.drawArc(Rect.fromLTWH(0, 0, 20 * s, 20 * s), 2.2, 1.0, false, paint);
+    canvas.drawArc(
+      Rect.fromLTWH(0, 0, 20 * s, 20 * s),
+      2.2,
+      1.0,
+      false,
+      paint,
+    );
     paint.color = colors[3];
-    canvas.drawArc(Rect.fromLTWH(0, 0, 20 * s, 20 * s), 3.2, 1.5, false, paint);
+    canvas.drawArc(
+      Rect.fromLTWH(0, 0, 20 * s, 20 * s),
+      3.2,
+      1.5,
+      false,
+      paint,
+    );
 
     // Horizontal bar for "G"
     paint
       ..color = colors[0]
       ..style = PaintingStyle.fill;
-    canvas.drawRect(Rect.fromLTWH(10 * s, 8 * s, 10 * s, 4 * s), paint);
+    canvas.drawRect(
+      Rect.fromLTWH(10 * s, 8 * s, 10 * s, 4 * s),
+      paint,
+    );
   }
 
   @override
@@ -113,7 +132,7 @@ class DividerWithText extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             text,
-            style: GoogleFonts.inter(
+            style: GoogleFonts.poppins(
               fontSize: 13,
               color: AppTheme.textGrey,
               fontWeight: FontWeight.w400,
