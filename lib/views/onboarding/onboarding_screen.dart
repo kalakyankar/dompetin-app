@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../controllers/onboarding_controller.dart';
+import '../../controllers/onboarding_controller.dart' show OnboardingController, OnboardingData;
 import '../../theme/app_theme.dart';
 import '../../widgets/buttons.dart';
 import '../../widgets/dompetin_logo.dart';
@@ -33,7 +33,7 @@ class OnboardingScreen extends StatelessWidget {
                             style: TextStyle(
                               color: AppTheme.textGrey,
                               fontSize: 14,
-                              fontFamily: 'Poppins',
+                              fontFamily: 'Inter Tight',
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -64,17 +64,18 @@ class OnboardingScreen extends StatelessWidget {
               child: Column(
                 children: [
                   // Page indicator
-                  Obx(() => SmoothPageIndicator(
-                        controller: controller.pageController,
-                        count: controller.slides.length,
-                        effect: ExpandingDotsEffect(
-                          activeDotColor: AppTheme.primaryBlue,
-                          dotColor: AppTheme.inputBorder,
-                          dotHeight: 8,
-                          dotWidth: 8,
-                          expansionFactor: 3,
-                        ),
-                      )),
+                  SmoothPageIndicator(
+                    controller: controller.pageController,
+                    count: controller.slides.length,
+                    effect: ExpandingDotsEffect(
+                      activeDotColor: AppTheme.primaryBlue,
+                      dotColor: AppTheme.inputBorder,
+                      dotHeight: 8,
+                      dotWidth: 8,
+                      expansionFactor: 3,
+                    ),
+                  ),
+
                   const SizedBox(height: 24),
 
                   // Navigation buttons
@@ -109,7 +110,7 @@ class OnboardingScreen extends StatelessWidget {
 }
 
 class _OnboardingPage extends StatelessWidget {
-  final dynamic data;
+  final OnboardingData data;
   final int index;
 
   const _OnboardingPage({required this.data, required this.index});
@@ -203,8 +204,7 @@ class _DiagonalPainter extends CustomPainter {
       canvas.drawPath(path, paint);
     } else if (index == 1) {
       // White bg with blue diagonal
-      canvas.drawRect(
-          Rect.fromLTWH(0, 0, size.width, size.height),
+      canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height),
           Paint()..color = AppTheme.offWhite);
       final path = Path()
         ..moveTo(0, 0)
@@ -215,8 +215,7 @@ class _DiagonalPainter extends CustomPainter {
       canvas.drawPath(path, paint);
     } else {
       // Blue bottom half diagonal
-      canvas.drawRect(
-          Rect.fromLTWH(0, 0, size.width, size.height),
+      canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height),
           Paint()..color = AppTheme.white);
       final path = Path()
         ..moveTo(0, size.height * 0.3)

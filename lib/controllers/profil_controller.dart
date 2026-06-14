@@ -16,7 +16,7 @@ class ProfilController extends GetxController {
   late TextEditingController teleponCtrl;
 
   // ── Notification toggles ───────────────────────────────────────────────────
-  final pengingaTarGet = true.obs;
+  final pengingatTarget = true.obs;
   final pengingatPemasukan = true.obs;
   final batasAnggaran = true.obs;
   final laporanMingguan = false.obs;
@@ -45,7 +45,7 @@ class ProfilController extends GetxController {
     email.value = prefs.getString('email') ?? email.value;
     telepon.value = prefs.getString('telepon') ?? telepon.value;
     jenisKelamin.value = prefs.getString('jenisKelamin') ?? jenisKelamin.value;
-    pengingaTarGet.value = prefs.getBool('pengingatTarget') ?? true;
+    pengingatTarget.value = prefs.getBool('pengingatTarget') ?? true;
     pengingatPemasukan.value = prefs.getBool('pengingatPemasukan') ?? true;
     batasAnggaran.value = prefs.getBool('batasAnggaran') ?? true;
     laporanMingguan.value = prefs.getBool('laporanMingguan') ?? false;
@@ -78,7 +78,7 @@ class ProfilController extends GetxController {
 
   // ── Toggle reminders ───────────────────────────────────────────────────────
   Future<void> togglePengingatTarget(bool v) async {
-    pengingaTarGet.value = v;
+    pengingatTarget.value = v;
     final p = await SharedPreferences.getInstance();
     await p.setBool('pengingatTarget', v);
   }
@@ -131,7 +131,7 @@ class ProfilController extends GetxController {
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Container(width: 64, height: 64,
                 decoration: BoxDecoration(
-                    color: const Color(0xFF22C55E).withOpacity(0.1), shape: BoxShape.circle),
+                    color: const Color(0xFF22C55E).withValues(alpha: 0.1), shape: BoxShape.circle),
                 child: const Icon(Icons.lock_outlined, color: Color(0xFF22C55E), size: 32)),
             const SizedBox(height: 16),
             const Text('Kata sandi baru berhasil dibuat!',
@@ -170,7 +170,7 @@ class ProfilController extends GetxController {
           child: Column(mainAxisSize: MainAxisSize.min, children: [
             Container(width: 56, height: 56,
                 decoration: BoxDecoration(
-                    color: const Color(0xFFEF4444).withOpacity(0.1), shape: BoxShape.circle),
+                    color: const Color(0xFFEF4444).withValues(alpha: 0.1), shape: BoxShape.circle),
                 child: const Icon(Icons.logout_rounded, color: Color(0xFFEF4444), size: 28)),
             const SizedBox(height: 14),
             const Text('Keluar dari Akun?',

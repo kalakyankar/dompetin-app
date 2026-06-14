@@ -7,7 +7,6 @@ import '../../widgets/dompetin_logo.dart';
 import '../target/target_screen.dart';
 import '../riwayat/riwayat_screen.dart';
 import '../profil/profil_screen.dart';
-import '../scan/scan_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       body: Obx(() => _buildBody(ctrl)),
       floatingActionButton: _QrFab(ctrl: ctrl),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Obx(() => _BottomNav(ctrl: ctrl)),
+      bottomNavigationBar: Obx(() => _BottomNav(ctrl: ctrl, currentIndex: ctrl.currentTabIndex.value)),
     );
   }
 
@@ -132,25 +131,25 @@ class _BalanceCard extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: AppTheme.primaryBlue.withOpacity(0.35),
+        boxShadow: [BoxShadow(color: AppTheme.primaryBlue.withValues(alpha: 0.35),
             blurRadius: 24, offset: const Offset(0, 8))],
       ),
       child: Stack(children: [
         Positioned(right: -20, top: -20, child: Container(width: 130, height: 130,
             decoration: BoxDecoration(shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.06)))),
+                color: Colors.white.withValues(alpha: 0.06)))),
         Positioned(right: 10, top: 10, child: Container(width: 75, height: 75,
             decoration: BoxDecoration(shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.09)))),
+                color: Colors.white.withValues(alpha: 0.09)))),
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text('Total Saldo Utama', style: TextStyle(
-                color: Colors.white.withOpacity(0.8), fontSize: 13, fontFamily: 'Poppins')),
+                color: Colors.white.withValues(alpha: 0.8), fontSize: 13, fontFamily: 'Poppins')),
             Row(children: [
-              Icon(Icons.credit_card, color: Colors.white.withOpacity(0.7), size: 20),
+              Icon(Icons.credit_card, color: Colors.white.withValues(alpha: 0.7), size: 20),
               const SizedBox(width: 8),
               Icon(Icons.account_balance_wallet_outlined,
-                  color: Colors.white.withOpacity(0.7), size: 20),
+                  color: Colors.white.withValues(alpha: 0.7), size: 20),
             ]),
           ]),
           const SizedBox(height: 8),
@@ -168,7 +167,7 @@ class _BalanceCard extends StatelessWidget {
                   child: Icon(
                     ctrl.isBalanceVisible.value
                         ? Icons.visibility_outlined : Icons.visibility_off_outlined,
-                    color: Colors.white.withOpacity(0.7), size: 18,
+                    color: Colors.white.withValues(alpha: 0.7), size: 18,
                   ),
                 ),
               ])),
@@ -177,7 +176,7 @@ class _BalanceCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
+                  color: Colors.white.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20)),
               child: Row(children: [
                 const Icon(Icons.trending_up, color: Colors.greenAccent, size: 14),
@@ -188,7 +187,7 @@ class _BalanceCard extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text('Bulan ini', style: TextStyle(
-                color: Colors.white.withOpacity(0.7), fontSize: 11, fontFamily: 'Poppins')),
+                color: Colors.white.withValues(alpha: 0.7), fontSize: 11, fontFamily: 'Poppins')),
           ]),
         ]),
       ]),
@@ -236,7 +235,7 @@ class _TabChip extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: isActive ? activeColor.withOpacity(0.1) : AppTheme.white,
+            color: isActive ? activeColor.withValues(alpha: 0.1) : AppTheme.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: isActive ? activeColor : AppTheme.inputBorder, width: 1.5),
           ),
@@ -317,7 +316,7 @@ class _WalletFilled extends StatelessWidget {
                 Row(children: [
                   Container(width: 32, height: 32,
                       decoration: BoxDecoration(
-                          color: AppTheme.primaryBlue.withOpacity(0.1), shape: BoxShape.circle),
+                          color: AppTheme.primaryBlue.withValues(alpha: 0.1), shape: BoxShape.circle),
                       child: const Icon(Icons.account_balance_wallet_outlined,
                           size: 16, color: AppTheme.primaryBlue)),
                   const SizedBox(width: 8),
@@ -338,9 +337,9 @@ class _WalletFilled extends StatelessWidget {
           child: Container(
             width: 64, height: 64,
             decoration: BoxDecoration(
-                color: AppTheme.primaryBlue.withOpacity(0.08),
+                color: AppTheme.primaryBlue.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppTheme.primaryBlue.withOpacity(0.3))),
+                border: Border.all(color: AppTheme.primaryBlue.withValues(alpha: 0.3))),
             child: Column(mainAxisAlignment: MainAxisAlignment.center, children: const [
               Icon(Icons.add, color: AppTheme.primaryBlue, size: 22),
               Text('Tambahkan', style: TextStyle(fontSize: 8, color: AppTheme.primaryBlue,
@@ -400,9 +399,9 @@ class _WalletFilled extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
-                    color: const Color(0xFF22C55E).withOpacity(0.08),
+                    color: const Color(0xFF22C55E).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFF22C55E).withOpacity(0.4))),
+                    border: Border.all(color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
                 child: Column(children: const [
                   Icon(Icons.arrow_downward_rounded, color: Color(0xFF22C55E), size: 28),
                   SizedBox(height: 6),
@@ -417,9 +416,9 @@ class _WalletFilled extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
-                    color: const Color(0xFFEF4444).withOpacity(0.08),
+                    color: const Color(0xFFEF4444).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFEF4444).withOpacity(0.4))),
+                    border: Border.all(color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
                 child: Column(children: const [
                   Icon(Icons.arrow_upward_rounded, color: Color(0xFFEF4444), size: 28),
                   SizedBox(height: 6),
@@ -527,7 +526,7 @@ class _WarningBanner extends StatelessWidget {
       decoration: BoxDecoration(
           color: const Color(0xFFFFF1F1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFEF4444).withOpacity(0.4))),
+          border: Border.all(color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
           const Icon(Icons.warning_amber_rounded, color: Color(0xFFEF4444), size: 18),
@@ -621,8 +620,8 @@ class _TransactionList extends StatelessWidget {
                   width: 42, height: 42,
                   decoration: BoxDecoration(
                       color: t.isIncome
-                          ? const Color(0xFF22C55E).withOpacity(0.1)
-                          : const Color(0xFFEF4444).withOpacity(0.1),
+                          ? const Color(0xFF22C55E).withValues(alpha: 0.1)
+                          : const Color(0xFFEF4444).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12)),
                   child: Icon(
                     t.isIncome ? Icons.arrow_downward_rounded : Icons.arrow_upward_rounded,
@@ -652,30 +651,12 @@ class _TransactionList extends StatelessWidget {
 }
 
 
-// ─── Placeholder Tabs ─────────────────────────────────────────────────────────
-
-class _PlaceholderTab extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  const _PlaceholderTab({required this.title, required this.icon});
-
-  @override
-  Widget build(BuildContext context) => Center(
-    child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Icon(icon, size: 64, color: AppTheme.textGrey),
-      const SizedBox(height: 16),
-      Text(title, style: AppTheme.heading2),
-      const SizedBox(height: 8),
-      Text('Segera hadir', style: AppTheme.body),
-    ]),
-  );
-}
-
 // ─── Bottom Nav ───────────────────────────────────────────────────────────────
 
 class _BottomNav extends StatelessWidget {
   final HomeController ctrl;
-  const _BottomNav({required this.ctrl});
+  final int currentIndex;
+  const _BottomNav({required this.ctrl, required this.currentIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -688,14 +669,14 @@ class _BottomNav extends StatelessWidget {
         height: 64,
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           _NavItem(icon: Icons.home_rounded, label: 'Home',
-              isActive: ctrl.currentTabIndex.value == 0, onTap: () => ctrl.switchTab(0)),
+              isActive: currentIndex == 0, onTap: () => ctrl.switchTab(0)),
           _NavItem(icon: Icons.flag_outlined, label: 'Target',
-              isActive: ctrl.currentTabIndex.value == 1, onTap: () => ctrl.switchTab(1)),
+              isActive: currentIndex == 1, onTap: () => ctrl.switchTab(1)),
           const SizedBox(width: 48),
           _NavItem(icon: Icons.history_rounded, label: 'Riwayat',
-              isActive: ctrl.currentTabIndex.value == 2, onTap: () => ctrl.switchTab(2)),
+              isActive: currentIndex == 2, onTap: () => ctrl.switchTab(2)),
           _NavItem(icon: Icons.person_outline_rounded, label: 'Profil',
-              isActive: ctrl.currentTabIndex.value == 3, onTap: () => ctrl.switchTab(3)),
+              isActive: currentIndex == 3, onTap: () => ctrl.switchTab(3)),
         ]),
       ),
     );
@@ -762,9 +743,9 @@ class _QrFab extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
-                    color: const Color(0xFF22C55E).withOpacity(0.08),
+                    color: const Color(0xFF22C55E).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFF22C55E).withOpacity(0.4))),
+                    border: Border.all(color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
                 child: Column(children: const [
                   Icon(Icons.arrow_downward_rounded, color: Color(0xFF22C55E), size: 28),
                   SizedBox(height: 6),
@@ -779,9 +760,9 @@ class _QrFab extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
-                    color: const Color(0xFFEF4444).withOpacity(0.08),
+                    color: const Color(0xFFEF4444).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFEF4444).withOpacity(0.4))),
+                    border: Border.all(color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
                 child: Column(children: const [
                   Icon(Icons.arrow_upward_rounded, color: Color(0xFFEF4444), size: 28),
                   SizedBox(height: 6),
@@ -799,9 +780,9 @@ class _QrFab extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 14),
               decoration: BoxDecoration(
-                  color: AppTheme.primaryBlue.withOpacity(0.06),
+                  color: AppTheme.primaryBlue.withValues(alpha: 0.06),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: AppTheme.primaryBlue.withOpacity(0.3))),
+                  border: Border.all(color: AppTheme.primaryBlue.withValues(alpha: 0.3))),
               child: Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
                 Icon(Icons.document_scanner_outlined, color: AppTheme.primaryBlue, size: 22),
                 SizedBox(width: 8),

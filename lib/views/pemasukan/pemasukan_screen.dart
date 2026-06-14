@@ -215,7 +215,7 @@ class _CategoryGrid extends StatelessWidget {
                 duration: const Duration(milliseconds: 180),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? AppTheme.primaryBlue.withOpacity(0.08)
+                      ? AppTheme.primaryBlue.withValues(alpha: 0.08)
                       : AppTheme.white,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
@@ -231,7 +231,7 @@ class _CategoryGrid extends StatelessWidget {
                       height: 44,
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? AppTheme.primaryBlue.withOpacity(0.12)
+                            ? AppTheme.primaryBlue.withValues(alpha: 0.12)
                             : AppTheme.inputFill,
                         shape: BoxShape.circle,
                       ),
@@ -354,7 +354,7 @@ class _SimpanCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
             color: isSelected
-                ? AppTheme.primaryBlue.withOpacity(0.08)
+                ? AppTheme.primaryBlue.withValues(alpha: 0.08)
                 : AppTheme.white,
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
@@ -369,7 +369,7 @@ class _SimpanCard extends StatelessWidget {
                 height: 48,
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? AppTheme.primaryBlue.withOpacity(0.12)
+                      ? AppTheme.primaryBlue.withValues(alpha: 0.12)
                       : AppTheme.inputFill,
                   shape: BoxShape.circle,
                 ),
@@ -420,7 +420,7 @@ class _RutinToggleRow extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryBlue.withOpacity(0.1),
+                  color: AppTheme.primaryBlue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.repeat_rounded,
@@ -448,7 +448,7 @@ class _RutinToggleRow extends StatelessWidget {
                   ctrl.toggleRutin(v);
                   if (v) ctrl.showRutinSheet(context);
                 },
-                activeColor: AppTheme.primaryBlue,
+                activeThumbColor: AppTheme.primaryBlue,
               ),
             ],
           )),

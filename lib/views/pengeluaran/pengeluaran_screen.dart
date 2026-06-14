@@ -183,7 +183,7 @@ class _CategoryGrid extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 180),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppTheme.primaryBlue.withOpacity(0.08) : AppTheme.white,
+                  color: isSelected ? AppTheme.primaryBlue.withValues(alpha: 0.08) : AppTheme.white,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
                     color: isSelected ? AppTheme.primaryBlue : AppTheme.inputBorder,
@@ -197,7 +197,7 @@ class _CategoryGrid extends StatelessWidget {
                       width: 40, height: 40,
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? AppTheme.primaryBlue.withOpacity(0.12)
+                            ? AppTheme.primaryBlue.withValues(alpha: 0.12)
                             : AppTheme.inputFill,
                         shape: BoxShape.circle,
                       ),
@@ -276,7 +276,7 @@ class _AsalDanaRow extends StatelessWidget {
                 margin: EdgeInsets.only(right: opt['label'] == 'Dana' ? 10 : 0),
                 padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppTheme.primaryBlue.withOpacity(0.06) : AppTheme.white,
+                  color: isSelected ? AppTheme.primaryBlue.withValues(alpha: 0.06) : AppTheme.white,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
                     color: isSelected ? AppTheme.primaryBlue : AppTheme.inputBorder,
@@ -289,7 +289,7 @@ class _AsalDanaRow extends StatelessWidget {
                       width: 36, height: 36,
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? AppTheme.primaryBlue.withOpacity(0.1) : AppTheme.inputFill,
+                            ? AppTheme.primaryBlue.withValues(alpha: 0.1) : AppTheme.inputFill,
                         shape: BoxShape.circle,
                       ),
                       child: Icon(opt['icon'] as IconData, size: 18,
@@ -339,7 +339,7 @@ class _RutinToggleRow extends StatelessWidget {
               Container(
                 width: 40, height: 40,
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryBlue.withOpacity(0.1),
+                  color: AppTheme.primaryBlue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Icon(Icons.repeat_rounded, size: 20, color: AppTheme.primaryBlue),
@@ -362,7 +362,7 @@ class _RutinToggleRow extends StatelessWidget {
                   ctrl.toggleRutin(v);
                   if (v) ctrl.showRutinSheet(context);
                 },
-                activeColor: AppTheme.primaryBlue,
+                activeThumbColor: AppTheme.primaryBlue,
               ),
             ],
           )),

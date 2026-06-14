@@ -244,7 +244,7 @@ class _PengeluaranRutinSheet extends StatelessWidget {
                     Container(
                       width: 36, height: 36,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1A6BFF).withOpacity(0.1),
+                        color: const Color(0xFF1A6BFF).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: const Icon(Icons.notifications_outlined,
@@ -266,7 +266,7 @@ class _PengeluaranRutinSheet extends StatelessWidget {
                     Switch(
                       value: controller.isNotifikasiAktif.value,
                       onChanged: controller.toggleNotifikasi,
-                      activeColor: const Color(0xFF1A6BFF),
+                      activeThumbColor: const Color(0xFF1A6BFF),
                     ),
                   ],
                 )),

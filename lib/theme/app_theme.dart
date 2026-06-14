@@ -7,6 +7,7 @@ class AppTheme {
   static const Color deepBlue = Color(0xFF0A4FD8);
   static const Color lightBlue = Color(0xFF4D8EFF);
   static const Color accentYellow = Color(0xFFFFCC00);
+  static const Color onboardingBackground = Color(0xFFF6F9FF);
   static const Color white = Color(0xFFFFFFFF);
   static const Color offWhite = Color(0xFFF5F7FF);
   static const Color textDark = Color(0xFF1A1F36);
@@ -26,7 +27,7 @@ class AppTheme {
         surface: white,
       ),
       textTheme: GoogleFonts.poppinsTextTheme(),
-      scaffoldBackgroundColor: white,
+      scaffoldBackgroundColor: onboardingBackground,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -87,7 +88,7 @@ class AppTheme {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: primaryBlue.withOpacity(0.08),
+            color: primaryBlue.withValues(alpha: 0.08),
             blurRadius: 20,
             offset: const Offset(0, 4),
           ),
@@ -110,7 +111,8 @@ class AppTheme {
         fillColor: inputFill,
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: inputBorder, width: 1),

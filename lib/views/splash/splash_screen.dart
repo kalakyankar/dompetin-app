@@ -33,7 +33,7 @@ class SplashScreen extends StatelessWidget {
                 height: 220,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.07),
+                  color: Colors.white.withValues(alpha: 0.07),
                 ),
               ),
             ),
@@ -45,7 +45,7 @@ class SplashScreen extends StatelessWidget {
                 height: 280,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white.withOpacity(0.05),
+                  color: Colors.white.withValues(alpha: 0.05),
                 ),
               ),
             ),
@@ -97,7 +97,7 @@ class SplashScreen extends StatelessWidget {
                       'Kelola keuanganmu dengan mudah',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                         fontWeight: FontWeight.w400,
                         fontFamily: 'Poppins',
                       ),
@@ -118,8 +118,8 @@ class SplashScreen extends StatelessWidget {
                   height: 24,
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(Colors.white.withOpacity(0.6)),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        Colors.white.withValues(alpha: 0.6)),
                   ),
                 ),
               ),
@@ -147,7 +147,7 @@ class _CreditCardIllustration extends StatelessWidget {
               width: 120,
               height: 20,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
@@ -162,7 +162,7 @@ class _CreditCardIllustration extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withValues(alpha: 0.3),
                     blurRadius: 30,
                     offset: const Offset(0, 16),
                   ),
@@ -184,7 +184,7 @@ class _CreditCardIllustration extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: Colors.white.withOpacity(0.3),
+                  color: Colors.white.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -199,7 +199,7 @@ class _CreditCardIllustration extends StatelessWidget {
                       height: 70,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white.withOpacity(0.08),
+                        color: Colors.white.withValues(alpha: 0.08),
                       ),
                     ),
                   ),
@@ -223,7 +223,7 @@ class _CreditCardIllustration extends StatelessWidget {
                               width: 20,
                               height: 20,
                               decoration: BoxDecoration(
-                                color: AppTheme.accentYellow.withOpacity(0.6),
+                                color: AppTheme.accentYellow.withValues(alpha: 0.6),
                                 shape: BoxShape.circle,
                               ),
                             ),
@@ -233,7 +233,7 @@ class _CreditCardIllustration extends StatelessWidget {
                         Text(
                           '**** **** **** 4242',
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.9),
+                            color: Colors.white.withValues(alpha: 0.9),
                             fontSize: 9,
                             letterSpacing: 1.5,
                             fontFamily: 'Poppins',
@@ -244,7 +244,7 @@ class _CreditCardIllustration extends StatelessWidget {
                         Text(
                           'DOMPETIN USER',
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.7),
+                            color: Colors.white.withValues(alpha: 0.7),
                             fontSize: 8,
                             letterSpacing: 1,
                             fontFamily: 'Poppins',
@@ -264,7 +264,7 @@ class _CreditCardIllustration extends StatelessWidget {
               width: 90,
               height: 36,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.15),
+                color: Colors.white.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(40),
               ),
             ),

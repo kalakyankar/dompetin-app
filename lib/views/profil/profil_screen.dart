@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/profil_controller.dart';
+import '../../routes/app_routes.dart';
 import '../../theme/app_theme.dart';
 
 class ProfilScreen extends StatelessWidget {
@@ -42,7 +43,7 @@ class ProfilScreen extends StatelessWidget {
           _MI(Icons.security_outlined, AppTheme.primaryBlue, 'Keamanan Akun',
               () => Get.to(() => const KeamananAkunScreen())),
           _MI(Icons.bar_chart_rounded, const Color(0xFF8B5CF6), 'Insight',
-              () => Get.toNamed('/insight')),
+              () => Get.toNamed(AppRoutes.insight)),
           _MI(Icons.notifications_outlined, const Color(0xFFF59E0B), 'Pengingat',
               () => Get.to(() => const PengingatScreen())),
           _MI(Icons.help_outline_rounded, const Color(0xFF22C55E), 'Pusat Bantuan',
@@ -82,7 +83,7 @@ class _MenuCard extends StatelessWidget {
           ListTile(
             onTap: item.onTap,
             leading: Container(width: 36, height: 36,
-                decoration: BoxDecoration(color: item.color.withOpacity(0.1),
+                decoration: BoxDecoration(color: item.color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10)),
                 child: Icon(item.icon, size: 18, color: item.color)),
             title: Text(item.label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,
@@ -132,7 +133,7 @@ class EditProfilScreen extends StatelessWidget {
                 color: AppTheme.textDark, fontFamily: 'Poppins')),
             const SizedBox(height: 6),
             Obx(() => DropdownButtonFormField<String>(
-              value: ctrl.jenisKelamin.value,
+              initialValue: ctrl.jenisKelamin.value,
               items: ['Laki-Laki','Perempuan','Lainnya'].map((v) => DropdownMenuItem(
                   value: v, child: Text(v, style: AppTheme.label))).toList(),
               onChanged: (v) => ctrl.jenisKelamin.value = v ?? ctrl.jenisKelamin.value,
@@ -226,7 +227,7 @@ class PengingatScreen extends StatelessWidget {
         _sh('Pengingat keuangan'), const SizedBox(height: 8),
         _toggleCard([
           (Icons.savings_outlined, AppTheme.primaryBlue, 'Pengingat Target',
-           'Notifikasi Pencapaian Target', ctrl.pengingaTarGet, ctrl.togglePengingatTarget),
+            'Notifikasi Pencapaian Target', ctrl.pengingatTarget, ctrl.togglePengingatTarget),
           (Icons.notifications_outlined, const Color(0xFF22C55E), 'Pengingat Pemasukan',
            'Notifikasi per bulan', ctrl.pengingatPemasukan, ctrl.togglePengingatPemasukan),
         ]),
@@ -251,9 +252,9 @@ class PengingatScreen extends StatelessWidget {
         final i = e.key; final it = e.value;
         return Column(children: [
           Obx(() => SwitchListTile(
-            value: it.$5.value, onChanged: it.$6, activeColor: AppTheme.primaryBlue,
+            value: it.$5.value, onChanged: it.$6,             activeThumbColor: AppTheme.primaryBlue,
             secondary: Container(width: 36, height: 36,
-                decoration: BoxDecoration(color: it.$2.withOpacity(0.1),
+                decoration: BoxDecoration(color: it.$2.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(10)),
                 child: Icon(it.$1, size: 18, color: it.$2)),
             title: Text(it.$3, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500,

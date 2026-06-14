@@ -17,14 +17,10 @@ class DompetinLogo extends StatelessWidget {
           width: 36 * size,
           height: 28 * size,
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: white
-                  ? [Colors.white, Colors.white70]
-                  : [AppTheme.primaryBlue, AppTheme.deepBlue],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+            image: DecorationImage(
+              image: AssetImage('assets/images/logo.png'),
+              fit: BoxFit.contain,
             ),
-            borderRadius: BorderRadius.circular(6 * size),
           ),
           child: Stack(
             alignment: Alignment.center,
@@ -32,29 +28,9 @@ class DompetinLogo extends StatelessWidget {
               Positioned(
                 bottom: 4 * size,
                 left: 5 * size,
-                child: Container(
+                child: SizedBox(
                   width: 22 * size,
                   height: 14 * size,
-                  decoration: BoxDecoration(
-                    color: white ? Colors.white.withOpacity(0.3) : Colors.white.withOpacity(0.25),
-                    borderRadius: BorderRadius.circular(3 * size),
-                    border: Border.all(
-                      color: white ? Colors.white.withOpacity(0.6) : Colors.white.withOpacity(0.5),
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 5 * size,
-                right: 5 * size,
-                child: Container(
-                  width: 9 * size,
-                  height: 6 * size,
-                  decoration: BoxDecoration(
-                    color: AppTheme.accentYellow,
-                    borderRadius: BorderRadius.circular(2 * size),
-                  ),
                 ),
               ),
             ],
@@ -66,7 +42,7 @@ class DompetinLogo extends StatelessWidget {
             children: [
               TextSpan(
                 text: 'Dompet',
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.interTight(
                   fontSize: 18 * size,
                   fontWeight: FontWeight.w700,
                   color: white ? Colors.white : AppTheme.textDark,
@@ -74,7 +50,7 @@ class DompetinLogo extends StatelessWidget {
               ),
               TextSpan(
                 text: 'in',
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.interTight(
                   fontSize: 18 * size,
                   fontWeight: FontWeight.w700,
                   color: AppTheme.primaryBlue,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/riwayat_controller.dart';
-import '../../controllers/home_controller.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_theme.dart';
 
@@ -209,7 +208,7 @@ class _TransactionTile extends StatelessWidget {
           Container(
             width: 42, height: 42,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, size: 20, color: color),

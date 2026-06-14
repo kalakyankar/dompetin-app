@@ -292,7 +292,7 @@ class _BatasPengeluaranSheetState extends State<_BatasPengeluaranSheet> {
                 Switch(
                   value: aktifkan,
                   onChanged: (v) => setState(() => aktifkan = v),
-                  activeColor: const Color(0xFF1A6BFF),
+                  activeThumbColor: const Color(0xFF1A6BFF),
                 ),
               ],
             ),

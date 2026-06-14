@@ -124,7 +124,6 @@ class TargetController extends GetxController {
       simpanDi: updated.simpanDi,
       notifikasiAktif: updated.notifikasiAktif,
     );
-    targets.refresh();
   }
 
   // ── Progress Sheet ────────────────────────────────────────────────────────
@@ -191,7 +190,6 @@ class TargetController extends GetxController {
       simpanDi: simpanDi,
       notifikasiAktif: notifikasi,
     );
-    targets.refresh();
     Get.snackbar('Diperbarui', 'Target berhasil diperbarui',
         backgroundColor: const Color(0xFF1A6BFF),
         colorText: Colors.white,
@@ -330,7 +328,7 @@ class _AddTargetSheetState extends State<_AddTargetSheet> {
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500,
                     color: Color(0xFF1A1F36), fontFamily: 'Poppins'))),
             Switch(value: notifikasi, onChanged: (v) => setState(() => notifikasi = v),
-                activeColor: const Color(0xFF1A6BFF)),
+                activeThumbColor: const Color(0xFF1A6BFF)),
           ]),
           const SizedBox(height: 20),
 
@@ -440,7 +438,7 @@ class _TambahKurangiSheetState extends State<_TambahKurangiSheet> {
           child: Row(children: [
             Container(width: 40, height: 40,
                 decoration: BoxDecoration(
-                    color: const Color(0xFF1A6BFF).withOpacity(0.1), shape: BoxShape.circle),
+                    color: const Color(0xFF1A6BFF).withValues(alpha: 0.1), shape: BoxShape.circle),
                 child: const Icon(Icons.savings_outlined, size: 20, color: Color(0xFF1A6BFF))),
             const SizedBox(width: 12),
             Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -503,8 +501,6 @@ class _TambahKurangiSheetState extends State<_TambahKurangiSheet> {
       ]),
     );
   }
-
-  SavingTarget get date => widget.target;
 
   @override
   void dispose() { amountCtrl.dispose(); super.dispose(); }
@@ -702,7 +698,7 @@ class _OptionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Container(width: 36, height: 36,
-          decoration: BoxDecoration(color: color.withOpacity(0.1), shape: BoxShape.circle),
+          decoration: BoxDecoration(color: color.withValues(alpha: 0.1), shape: BoxShape.circle),
           child: Icon(icon, size: 18, color: color)),
       title: Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,
           color: color == const Color(0xFFEF4444) ? color : const Color(0xFF1A1F36),

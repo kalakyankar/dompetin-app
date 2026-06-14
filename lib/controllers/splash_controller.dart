@@ -10,6 +10,10 @@ class SplashController extends GetxController {
 
   void _navigateAfterDelay() async {
     await Future.delayed(const Duration(seconds: 3));
-    Get.offNamed(AppRoutes.onboarding);
+
+    Get.offNamed(
+      AppRoutes.onboarding,
+      arguments: null,
+    );
   }
 }

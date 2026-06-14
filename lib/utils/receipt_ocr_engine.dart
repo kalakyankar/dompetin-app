@@ -1,6 +1,6 @@
-/// receipt_ocr_engine.dart
-/// Parses raw text from MLKit Text Recognition into structured receipt data.
-/// Works with Indonesian receipts (Struk Belanja).
+// receipt_ocr_engine.dart
+// Parses raw text from MLKit Text Recognition into structured receipt data.
+// Works with Indonesian receipts (Struk Belanja).
 
 class ReceiptOcrEngine {
   /// Run OCR on recognized text blocks from MLKit
@@ -110,7 +110,6 @@ class ReceiptOcrEngine {
           r'^(\d+)\s*[xX×\*]?\s*(.+?)\s+([\d.,]+)\s*$');
       final simplePat = RegExp(
           r'^(.+?)\s{2,}([\d.,]+)\s*$');
-      final pricePat = RegExp(r'([\d.,]{4,})');
 
       Match? m = itemPat.firstMatch(line);
       if (m != null) {
@@ -222,14 +221,14 @@ class ReceiptOcrEngine {
     if (lower.contains('debit') || lower.contains('kartu debit')) return 'Kartu Debit';
     if (lower.contains('kredit') || lower.contains('kartu kredit')) return 'Kartu Kredit';
     if (lower.contains('transfer') || lower.contains('bca') ||
-        lower.contains('bri') || lower.contains('bni') || lower.contains('mandiri')) return 'Transfer';
-    if (lower.contains('tunai') || lower.contains('cash')) return 'Cash';
+        lower.contains('bri') || lower.contains('bni') || lower.contains('mandiri')) { return 'Transfer'; }
+    if (lower.contains('tunai') || lower.contains('cash')) { return 'Cash'; }
     return 'Cash';
   }
 
   // ── Category Detection ─────────────────────────────────────────────────────
   static String detectCategory(String storeName, List<ReceiptItem> items) {
-    final allText = (storeName + ' ' + items.map((i) => i.name).join(' ')).toLowerCase();
+    final allText = '$storeName ${items.map((i) => i.name).join(' ')}'.toLowerCase();
 
     if (_matches(allText, ['restoran', 'restaurant', 'cafe', 'kafe', 'coffee', 'makan',
         'bakery', 'bakeri', 'donut', 'pizza', 'burger', 'sushi', 'ramen',

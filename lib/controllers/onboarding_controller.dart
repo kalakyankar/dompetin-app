@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import '../routes/app_routes.dart';
 
 class OnboardingController extends GetxController {
-  final pageController = PageController();
+  late final PageController pageController;
+
   final currentPage = 0.obs;
 
-  final List<OnboardingData> slides = [
+  final slides = <OnboardingData>[
     OnboardingData(
       title: 'Pengeluaran nggak terkendali?',
       subtitle: 'Tanpa sadar, uang habis untuk hal-hal yang nggak penting.',
@@ -14,7 +15,8 @@ class OnboardingController extends GetxController {
     ),
     OnboardingData(
       title: 'Kenalin, Dompetin',
-      subtitle: 'Cara simpel buat lacak pengeluaran dan atur keuanganmu setiap hari.',
+      subtitle:
+          'Cara simpel buat lacak pengeluaran dan atur keuanganmu setiap hari.',
       illustrationKey: 'onboarding2',
     ),
     OnboardingData(
@@ -24,23 +26,30 @@ class OnboardingController extends GetxController {
     ),
   ];
 
+  @override
+  void onInit() {
+    super.onInit();
+    pageController = PageController();
+  }
+
   void onPageChanged(int index) {
     currentPage.value = index;
   }
 
   void nextPage() {
     if (currentPage.value < slides.length - 1) {
-      pageController.nextPage(
+      pageController.animateToPage(
+        currentPage.value + 1,
         duration: const Duration(milliseconds: 350),
         curve: Curves.easeInOut,
       );
     } else {
-      Get.offNamed(AppRoutes.login);
+      Get.offAllNamed(AppRoutes.login);
     }
   }
 
   void skip() {
-    Get.offNamed(AppRoutes.login);
+    Get.offAllNamed(AppRoutes.login);
   }
 
   @override
@@ -55,7 +64,7 @@ class OnboardingData {
   final String subtitle;
   final String illustrationKey;
 
-  OnboardingData({
+  const OnboardingData({
     required this.title,
     required this.subtitle,
     required this.illustrationKey,

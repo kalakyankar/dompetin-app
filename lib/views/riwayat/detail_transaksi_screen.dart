@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/home_controller.dart';
 import '../../controllers/riwayat_controller.dart';
 import '../../theme/app_theme.dart';
 
@@ -88,7 +87,7 @@ class DetailTransaksiScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF22C55E).withOpacity(0.1),
+                  color: const Color(0xFF22C55E).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(mainAxisSize: MainAxisSize.min, children: const [
@@ -121,7 +120,7 @@ class DetailTransaksiScreen extends StatelessWidget {
                   Container(
                     width: 32, height: 32,
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.1),
+                      color: color.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(catIcon, size: 16, color: color),
@@ -239,7 +238,7 @@ class _DetailRow extends StatelessWidget {
             Container(
               width: 28, height: 28,
               decoration: BoxDecoration(
-                color: AppTheme.primaryBlue.withOpacity(0.1),
+                color: AppTheme.primaryBlue.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(leftIcon!, size: 14, color: AppTheme.primaryBlue),
