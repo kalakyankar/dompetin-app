@@ -30,7 +30,8 @@ class _EmptyState extends StatelessWidget {
       // AppBar area
       Padding(
         padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text('Target', style: AppTheme.heading2),
           const SizedBox(width: 40),
         ]),
@@ -62,12 +63,16 @@ class _EmptyState extends StatelessWidget {
             onPressed: () => ctrl.showAddTargetSheet(context),
             icon: const Icon(Icons.add, size: 18, color: Colors.white),
             label: const Text('Tambah Target',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,
-                    color: Colors.white, fontFamily: 'Poppins')),
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    fontFamily: 'InterTight')),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.primaryBlue,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
               elevation: 0,
             ),
           ),
@@ -93,16 +98,19 @@ class _FilledState extends StatelessWidget {
       // Target Tabungan header
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text('Target Tabungan', style: AppTheme.heading3),
           GestureDetector(
             onTap: () => ctrl.showAddTargetSheet(context),
             child: Container(
-              width: 32, height: 32,
+              width: 32,
+              height: 32,
               decoration: BoxDecoration(
                   color: AppTheme.primaryBlue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8)),
-              child: const Icon(Icons.add, color: AppTheme.primaryBlue, size: 18),
+              child:
+                  const Icon(Icons.add, color: AppTheme.primaryBlue, size: 18),
             ),
           ),
         ]),
@@ -115,7 +123,8 @@ class _FilledState extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               itemCount: ctrl.targets.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemBuilder: (_, i) => _TargetCard(ctrl: ctrl, target: ctrl.targets[i]),
+              itemBuilder: (_, i) =>
+                  _TargetCard(ctrl: ctrl, target: ctrl.targets[i]),
             )),
       ),
       const SizedBox(height: 12),
@@ -142,38 +151,62 @@ class _TargetBalanceCard extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: AppTheme.primaryBlue.withValues(alpha: 0.35),
-            blurRadius: 20, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: AppTheme.primaryBlue.withValues(alpha: 0.35),
+              blurRadius: 20,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Stack(children: [
-        Positioned(right: -10, top: -10,
-            child: Container(width: 100, height: 100,
-                decoration: BoxDecoration(shape: BoxShape.circle,
+        Positioned(
+            right: -10,
+            top: -10,
+            child: Container(
+                width: 100,
+                height: 100,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
                     color: Colors.white.withValues(alpha: 0.07)))),
         // Piggy bank icon
-        Positioned(right: 16, bottom: 0,
-            child: Text('🐷', style: TextStyle(fontSize: 48,
-                shadows: [Shadow(color: Colors.black.withValues(alpha: 0.2), blurRadius: 8)]))),
+        Positioned(
+            right: 16,
+            bottom: 0,
+            child: Text('🐷',
+                style: TextStyle(fontSize: 48, shadows: [
+                  Shadow(
+                      color: Colors.black.withValues(alpha: 0.2), blurRadius: 8)
+                ]))),
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text('Total Tabungan',
-              style: TextStyle(color: Colors.white.withValues(alpha: 0.8),
-                  fontSize: 12, fontFamily: 'Poppins')),
+              style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.8),
+                  fontSize: 12,
+                  fontFamily: 'InterTight')),
           const SizedBox(height: 6),
           Obx(() => Text(ctrl.formatRupiah(ctrl.totalTabungan),
-              style: const TextStyle(color: Colors.white, fontSize: 26,
-                  fontWeight: FontWeight.w700, fontFamily: 'Poppins'))),
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 26,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'InterTight'))),
           const SizedBox(height: 12),
           Obx(() => Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.18),
                     borderRadius: BorderRadius.circular(20)),
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  const Icon(Icons.show_chart_rounded, color: Colors.white, size: 14),
+                  const Icon(Icons.show_chart_rounded,
+                      color: Colors.white, size: 14),
                   const SizedBox(width: 4),
                   Text('${ctrl.activeTargetCount} Target aktif',
-                      style: const TextStyle(color: Colors.white, fontSize: 11,
-                          fontWeight: FontWeight.w600, fontFamily: 'Poppins')),
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'InterTight')),
                 ]),
               )),
           const SizedBox(height: 4),
@@ -202,24 +235,38 @@ class _TargetCard extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         // Header row
         Row(children: [
-          Container(width: 40, height: 40,
+          Container(
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
-                  color: AppTheme.primaryBlue.withValues(alpha: 0.1), shape: BoxShape.circle),
-              child: const Icon(Icons.savings_outlined, size: 20, color: AppTheme.primaryBlue)),
+                  color: AppTheme.primaryBlue.withValues(alpha: 0.1),
+                  shape: BoxShape.circle),
+              child: const Icon(Icons.savings_outlined,
+                  size: 20, color: AppTheme.primaryBlue)),
           const SizedBox(width: 10),
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(t.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700,
-                color: AppTheme.textDark, fontFamily: 'Poppins')),
-            Row(children: [
-              const Icon(Icons.calendar_today_outlined, size: 11, color: AppTheme.textGrey),
-              const SizedBox(width: 3),
-              Text('${t.targetDate.day}/${t.targetDate.month}/${t.targetDate.year}',
-                  style: AppTheme.bodySmall.copyWith(fontSize: 11)),
-            ]),
-          ])),
+          Expanded(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                Text(t.name,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.textDark,
+                        fontFamily: 'InterTight')),
+                Row(children: [
+                  const Icon(Icons.calendar_today_outlined,
+                      size: 11, color: AppTheme.textGrey),
+                  const SizedBox(width: 3),
+                  Text(
+                      '${t.targetDate.day}/${t.targetDate.month}/${t.targetDate.year}',
+                      style: AppTheme.bodySmall.copyWith(fontSize: 11)),
+                ]),
+              ])),
           GestureDetector(
             onTap: () => ctrl.showOptionsPopup(context, t),
-            child: const Icon(Icons.more_vert, color: AppTheme.textGrey, size: 20),
+            child:
+                const Icon(Icons.more_vert, color: AppTheme.textGrey, size: 20),
           ),
         ]),
         const SizedBox(height: 6),
@@ -234,17 +281,20 @@ class _TargetCard extends StatelessWidget {
 
         Row(children: [
           Expanded(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('${ctrl.formatRupiah(t.currentAmount)} / ${ctrl.formatRupiah(t.targetAmount)}',
-                  style: AppTheme.bodySmall),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                  '${ctrl.formatRupiah(t.currentAmount)} / ${ctrl.formatRupiah(t.targetAmount)}',
+                  style: AppTheme.bodySmall.copyWith(fontFamily: 'InterTight')),
               const SizedBox(height: 4),
               ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: LinearProgressIndicator(
                   value: t.progress,
                   backgroundColor: const Color(0xFFE4E9F2),
-                  valueColor: AlwaysStoppedAnimation(
-                      t.isComplete ? const Color(0xFF22C55E) : AppTheme.primaryBlue),
+                  valueColor: AlwaysStoppedAnimation(t.isComplete
+                      ? const Color(0xFF22C55E)
+                      : AppTheme.primaryBlue),
                   minHeight: 8,
                 ),
               ),
@@ -254,8 +304,11 @@ class _TargetCard extends StatelessWidget {
           GestureDetector(
             onTap: () => ctrl.showProgressSheet(context, t),
             child: Text('${t.progressPct.toStringAsFixed(0)}%',
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700,
-                    color: AppTheme.primaryBlue, fontFamily: 'Poppins')),
+                style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.primaryBlue,
+                    fontFamily: 'InterTight')),
           ),
         ]),
         const SizedBox(height: 12),
@@ -266,11 +319,15 @@ class _TargetCard extends StatelessWidget {
               onPressed: () => ctrl.showTambahSheet(context, t),
               icon: const Icon(Icons.add, size: 16, color: Colors.white),
               label: const Text('Tambah',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600,
-                      color: Colors.white, fontFamily: 'Poppins')),
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontFamily: 'InterTight')),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.primaryBlue,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 elevation: 0,
               ),
@@ -280,13 +337,18 @@ class _TargetCard extends StatelessWidget {
           Expanded(
             child: OutlinedButton.icon(
               onPressed: () => ctrl.showKurangiSheet(context, t),
-              icon: const Icon(Icons.remove, size: 16, color: AppTheme.textGrey),
+              icon:
+                  const Icon(Icons.remove, size: 16, color: AppTheme.textGrey),
               label: const Text('Tarik',
-                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600,
-                      color: AppTheme.textGrey, fontFamily: 'Poppins')),
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: AppTheme.textGrey,
+                      fontFamily: 'InterTight')),
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: AppTheme.inputBorder),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
                 padding: const EdgeInsets.symmetric(vertical: 10),
               ),
             ),

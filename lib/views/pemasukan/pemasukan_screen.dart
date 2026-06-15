@@ -34,7 +34,7 @@ class PemasukanScreen extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.w700,
             color: AppTheme.textDark,
-            fontFamily: 'Poppins',
+            fontFamily: 'InterTight',
           ),
         ),
         centerTitle: true,
@@ -98,13 +98,14 @@ class PemasukanScreen extends StatelessWidget {
                             height: 22,
                             child: CircularProgressIndicator(
                                 strokeWidth: 2.5,
-                                valueColor: AlwaysStoppedAnimation(Colors.white)))
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white)))
                         : const Text('Simpan',
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
-                                fontFamily: 'Poppins')),
+                                fontFamily: 'InterTight')),
                   ),
                 )),
             const SizedBox(height: 24),
@@ -151,7 +152,7 @@ class _AmountCard extends StatelessWidget {
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                   color: AppTheme.textDark,
-                  fontFamily: 'Poppins',
+                  fontFamily: 'InterTight',
                 ),
               ),
               const SizedBox(width: 12),
@@ -165,7 +166,7 @@ class _AmountCard extends StatelessWidget {
                     fontSize: 32,
                     fontWeight: FontWeight.w700,
                     color: AppTheme.textDark,
-                    fontFamily: 'Poppins',
+                    fontFamily: 'InterTight',
                   ),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -219,7 +220,9 @@ class _CategoryGrid extends StatelessWidget {
                       : AppTheme.white,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: isSelected ? AppTheme.primaryBlue : AppTheme.inputBorder,
+                    color: isSelected
+                        ? AppTheme.primaryBlue
+                        : AppTheme.inputBorder,
                     width: isSelected ? 1.5 : 1,
                   ),
                 ),
@@ -238,7 +241,9 @@ class _CategoryGrid extends StatelessWidget {
                       child: Icon(
                         cat.icon,
                         size: 22,
-                        color: isSelected ? AppTheme.primaryBlue : AppTheme.textGrey,
+                        color: isSelected
+                            ? AppTheme.primaryBlue
+                            : AppTheme.textGrey,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -248,8 +253,10 @@ class _CategoryGrid extends StatelessWidget {
                         fontSize: 12,
                         fontWeight:
                             isSelected ? FontWeight.w600 : FontWeight.w400,
-                        color: isSelected ? AppTheme.primaryBlue : AppTheme.textDark,
-                        fontFamily: 'Poppins',
+                        color: isSelected
+                            ? AppTheme.primaryBlue
+                            : AppTheme.textDark,
+                        fontFamily: 'InterTight',
                       ),
                     ),
                   ],
@@ -291,7 +298,7 @@ class _DatePicker extends StatelessWidget {
                     color: ctrl.selectedDate.value == null
                         ? AppTheme.textGrey
                         : AppTheme.textDark,
-                    fontFamily: 'Poppins',
+                    fontFamily: 'InterTight',
                   ),
                 ),
                 const Icon(Icons.calendar_today_outlined,
@@ -375,20 +382,17 @@ class _SimpanCard extends StatelessWidget {
                 ),
                 child: Icon(icon,
                     size: 22,
-                    color: isSelected
-                        ? AppTheme.primaryBlue
-                        : AppTheme.textGrey),
+                    color:
+                        isSelected ? AppTheme.primaryBlue : AppTheme.textGrey),
               ),
               const SizedBox(height: 8),
               Text(
                 label,
                 style: TextStyle(
                   fontSize: 13,
-                  fontWeight:
-                      isSelected ? FontWeight.w600 : FontWeight.w400,
-                  color:
-                      isSelected ? AppTheme.primaryBlue : AppTheme.textDark,
-                  fontFamily: 'Poppins',
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                  color: isSelected ? AppTheme.primaryBlue : AppTheme.textDark,
+                  fontFamily: 'InterTight',
                 ),
               ),
             ],
@@ -436,9 +440,8 @@ class _RutinToggleRow extends StatelessWidget {
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: AppTheme.textDark,
-                            fontFamily: 'Poppins')),
-                    Text('Ulangi setiap bulan',
-                        style: AppTheme.bodySmall),
+                            fontFamily: 'InterTight')),
+                    Text('Ulangi setiap bulan', style: AppTheme.bodySmall),
                   ],
                 ),
               ),

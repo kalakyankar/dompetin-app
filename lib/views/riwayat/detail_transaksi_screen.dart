@@ -53,8 +53,11 @@ class DetailTransaksiScreen extends StatelessWidget {
           ),
         ),
         title: const Text('Detail Transaksi',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                color: AppTheme.textDark, fontFamily: 'Poppins')),
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: AppTheme.textDark,
+                fontFamily: 'InterTight')),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -77,15 +80,17 @@ class DetailTransaksiScreen extends StatelessWidget {
               Text(
                 '${isIncome ? '' : ''}${ctrl.formatRupiah(t.amount)}',
                 style: TextStyle(
-                  fontSize: 32, fontWeight: FontWeight.w700,
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
                   color: isIncome ? AppTheme.textDark : AppTheme.textDark,
-                  fontFamily: 'Poppins',
+                  fontFamily: 'InterTight',
                 ),
               ),
               const SizedBox(height: 10),
               // Sukses badge
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
                 decoration: BoxDecoration(
                   color: const Color(0xFF22C55E).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
@@ -93,9 +98,12 @@ class DetailTransaksiScreen extends StatelessWidget {
                 child: Row(mainAxisSize: MainAxisSize.min, children: const [
                   Icon(Icons.check_circle, color: Color(0xFF22C55E), size: 14),
                   SizedBox(width: 4),
-                  Text('Sukses', style: TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.w600,
-                      color: Color(0xFF22C55E), fontFamily: 'Poppins')),
+                  Text('Sukses',
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF22C55E),
+                          fontFamily: 'InterTight')),
                 ]),
               ),
             ]),
@@ -111,14 +119,15 @@ class DetailTransaksiScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: AppTheme.inputBorder),
             ),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               // Kategori
               _DetailSection(
                 label: 'Kategori',
                 child: Row(children: [
                   Container(
-                    width: 32, height: 32,
+                    width: 32,
+                    height: 32,
                     decoration: BoxDecoration(
                       color: color.withValues(alpha: 0.1),
                       shape: BoxShape.circle,
@@ -127,9 +136,11 @@ class DetailTransaksiScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   Text(t.category,
-                      style: const TextStyle(fontSize: 14,
+                      style: const TextStyle(
+                          fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: AppTheme.textDark, fontFamily: 'Poppins')),
+                          color: AppTheme.textDark,
+                          fontFamily: 'InterTight')),
                 ]),
               ),
               const Divider(color: AppTheme.divider, height: 24),
@@ -140,7 +151,8 @@ class DetailTransaksiScreen extends StatelessWidget {
                   leftLabel: 'Nama Instansi',
                   rightLabel: 'Tanggal & Waktu',
                   leftValue: t.note.isEmpty ? t.source : t.note,
-                  rightValue: '${ctrl.formatDateShort(t.date)} •\n${ctrl.formatTime(t.date)}',
+                  rightValue:
+                      '${ctrl.formatDateShort(t.date)} •\n${ctrl.formatTime(t.date)}',
                   leftIcon: Icons.business_outlined,
                 ),
               ] else ...[
@@ -148,8 +160,11 @@ class DetailTransaksiScreen extends StatelessWidget {
                   label: 'Catatan',
                   child: Text(
                     t.note.isEmpty ? t.title : t.note,
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500,
-                        color: AppTheme.textDark, fontFamily: 'Poppins'),
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppTheme.textDark,
+                        fontFamily: 'InterTight'),
                   ),
                 ),
                 const Divider(color: AppTheme.divider, height: 24),
@@ -157,7 +172,8 @@ class DetailTransaksiScreen extends StatelessWidget {
                   leftLabel: 'Pembayaran',
                   rightLabel: 'Tanggal & Waktu',
                   leftValue: t.source.isEmpty ? 'Dana' : t.source,
-                  rightValue: '${ctrl.formatDateShort(t.date)} •\n${ctrl.formatTime(t.date)}',
+                  rightValue:
+                      '${ctrl.formatDateShort(t.date)} •\n${ctrl.formatTime(t.date)}',
                   leftIcon: Icons.account_balance_wallet_outlined,
                 ),
               ],
@@ -178,8 +194,11 @@ class DetailTransaksiScreen extends StatelessWidget {
                 elevation: 0,
               ),
               child: const Text('Selesai',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,
-                      color: Colors.white, fontFamily: 'Poppins')),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontFamily: 'InterTight')),
             ),
           ),
         ]),
@@ -199,8 +218,11 @@ class _DetailSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(label,
-          style: const TextStyle(fontSize: 12, color: AppTheme.textGrey,
-              fontFamily: 'Poppins', fontWeight: FontWeight.w400)),
+          style: const TextStyle(
+              fontSize: 12,
+              color: AppTheme.textGrey,
+              fontFamily: 'InterTight',
+              fontWeight: FontWeight.w400)),
       const SizedBox(height: 8),
       child,
     ]);
@@ -228,15 +250,21 @@ class _DetailRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
       // Left
-      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Expanded(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(leftLabel,
-            style: const TextStyle(fontSize: 12, color: AppTheme.textGrey,
-                fontFamily: 'Poppins')),
+            style: const TextStyle(
+                fontSize: 12,
+                color: AppTheme.textGrey,
+                fontFamily: 'InterTight',
+                fontWeight: FontWeight.w400)),
         const SizedBox(height: 6),
         Row(children: [
           if (leftIcon != null) ...[
             Container(
-              width: 28, height: 28,
+              width: 28,
+              height: 28,
               decoration: BoxDecoration(
                 color: AppTheme.primaryBlue.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
@@ -247,22 +275,33 @@ class _DetailRow extends StatelessWidget {
           ],
           Expanded(
             child: Text(leftValue,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500,
-                    color: AppTheme.textDark, fontFamily: 'Poppins')),
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppTheme.textDark,
+                    fontFamily: 'InterTight')),
           ),
         ]),
       ])),
       const SizedBox(width: 16),
 
       // Right
-      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Expanded(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text(rightLabel,
-            style: const TextStyle(fontSize: 12, color: AppTheme.textGrey,
-                fontFamily: 'Poppins')),
+            style: const TextStyle(
+                fontSize: 12,
+                color: AppTheme.textGrey,
+                fontFamily: 'InterTight')),
         const SizedBox(height: 6),
         Text(rightValue,
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500,
-                color: AppTheme.textDark, fontFamily: 'Poppins', height: 1.5)),
+            style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: AppTheme.textDark,
+                fontFamily: 'InterTight',
+                height: 1.5)),
       ])),
     ]);
   }

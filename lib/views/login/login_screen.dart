@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(
                         color: AppTheme.primaryBlue,
                         fontSize: 13,
-                        fontFamily: 'Poppins',
+                        fontFamily: 'InterTight',
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -156,7 +156,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AppTheme.primaryBlue,
                           fontSize: 12,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'InterTight',
                           fontWeight: FontWeight.w600,
                         ),
                       ),

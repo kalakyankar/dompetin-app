@@ -350,8 +350,10 @@ extension HomeControllerInsight on HomeController {
   }
 
   double get savingsRate {
-    final total = totalIncome + totalExpense;
+    final income = totalIncome;
+    final expense = totalExpense;
+    final total = income + expense;
     if (total == 0) return 0;
-    return ((totalIncome - totalExpense) / totalIncome * 100).clamp(0, 100);
+    return ((income - expense) / income * 100).clamp(0, 100);
   }
 }

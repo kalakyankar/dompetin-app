@@ -33,7 +33,7 @@ class GoogleSignInButton extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               label,
-              style: GoogleFonts.poppins(
+              style: GoogleFonts.interTight(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: AppTheme.textDark,
@@ -78,7 +78,9 @@ class _GooglePainter extends CustomPainter {
       -0.5,
       1.5,
       false,
-      paint..strokeWidth = 3 * s ..style = PaintingStyle.stroke,
+      paint
+        ..strokeWidth = 3 * s
+        ..style = PaintingStyle.stroke,
     );
     paint.color = colors[2];
     canvas.drawArc(
@@ -132,7 +134,7 @@ class DividerWithText extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Text(
             text,
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.interTight(
               fontSize: 13,
               color: AppTheme.textGrey,
               fontWeight: FontWeight.w400,

@@ -175,7 +175,7 @@ class RegisterScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AppTheme.primaryBlue,
                           fontSize: 12,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'InterTight',
                           fontWeight: FontWeight.w600,
                         ),
                       ),

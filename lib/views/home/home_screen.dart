@@ -19,17 +19,23 @@ class HomeScreen extends StatelessWidget {
       body: Obx(() => _buildBody(ctrl)),
       floatingActionButton: _QrFab(ctrl: ctrl),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Obx(() => _BottomNav(ctrl: ctrl, currentIndex: ctrl.currentTabIndex.value)),
+      bottomNavigationBar: Obx(() =>
+          _BottomNav(ctrl: ctrl, currentIndex: ctrl.currentTabIndex.value)),
     );
   }
 
   Widget _buildBody(HomeController ctrl) {
     switch (ctrl.currentTabIndex.value) {
-      case 0: return _HomeTab(ctrl: ctrl);
-      case 1: return const TargetScreen();
-      case 2: return const RiwayatScreen();
-      case 3: return const ProfilScreen();
-      default: return _HomeTab(ctrl: ctrl);
+      case 0:
+        return _HomeTab(ctrl: ctrl);
+      case 1:
+        return const TargetScreen();
+      case 2:
+        return const RiwayatScreen();
+      case 3:
+        return const ProfilScreen();
+      default:
+        return _HomeTab(ctrl: ctrl);
     }
   }
 }
@@ -55,21 +61,26 @@ class _HomeTab extends StatelessWidget {
                   const DompetinLogo(),
                   GestureDetector(
                     onTap: () {},
-                    child: const CircleAvatar(radius: 20,
+                    child: const CircleAvatar(
+                        radius: 20,
                         backgroundColor: AppTheme.primaryBlue,
-                        child: Icon(Icons.person_outline, color: Colors.white, size: 20)),
+                        child: Icon(Icons.person_outline,
+                            color: Colors.white, size: 20)),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 20),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: _BalanceCard(ctrl: ctrl)),
             const SizedBox(height: 16),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 20),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: _TransactionTabBar(ctrl: ctrl)),
             const SizedBox(height: 20),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 20),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text('Dompet Digital', style: AppTheme.heading3)),
             const SizedBox(height: 12),
             Padding(
@@ -81,29 +92,18 @@ class _HomeTab extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Chart (only when has transactions)
-            Obx(() {
-              if (ctrl.transactions.isEmpty) return const SizedBox();
-              return Column(children: [
-                Padding(padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: _ChartSection(ctrl: ctrl)),
-                const SizedBox(height: 20),
-              ]);
-            }),
+            _ChartSection(ctrl: ctrl),
 
             // Warning banner
-            Obx(() {
-              if (!ctrl.isOverBudget || ctrl.isWarningDismissed.value) return const SizedBox();
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                child: _WarningBanner(ctrl: ctrl),
-              );
-            }),
+            _WarningBanner(ctrl: ctrl),
 
             // Transaksi Terbaru
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 20),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text('Transaksi Terbaru', style: AppTheme.heading3)),
             const SizedBox(height: 12),
-            Padding(padding: const EdgeInsets.symmetric(horizontal: 20),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: _TransactionList(ctrl: ctrl)),
             const SizedBox(height: 100),
           ],
@@ -131,22 +131,42 @@ class _BalanceCard extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: AppTheme.primaryBlue.withValues(alpha: 0.35),
-            blurRadius: 24, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: AppTheme.primaryBlue.withValues(alpha: 0.35),
+              blurRadius: 24,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Stack(children: [
-        Positioned(right: -20, top: -20, child: Container(width: 130, height: 130,
-            decoration: BoxDecoration(shape: BoxShape.circle,
-                color: Colors.white.withValues(alpha: 0.06)))),
-        Positioned(right: 10, top: 10, child: Container(width: 75, height: 75,
-            decoration: BoxDecoration(shape: BoxShape.circle,
-                color: Colors.white.withValues(alpha: 0.09)))),
+        Positioned(
+            right: -20,
+            top: -20,
+            child: Container(
+                width: 130,
+                height: 130,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withValues(alpha: 0.06)))),
+        Positioned(
+            right: 10,
+            top: 10,
+            child: Container(
+                width: 75,
+                height: 75,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withValues(alpha: 0.09)))),
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text('Total Saldo Utama', style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.8), fontSize: 13, fontFamily: 'Poppins')),
+            Text('Total Saldo Utama',
+                style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.8),
+                    fontSize: 13,
+                    fontFamily: 'InterTight')),
             Row(children: [
-              Icon(Icons.credit_card, color: Colors.white.withValues(alpha: 0.7), size: 20),
+              Icon(Icons.credit_card,
+                  color: Colors.white.withValues(alpha: 0.7), size: 20),
               const SizedBox(width: 8),
               Icon(Icons.account_balance_wallet_outlined,
                   color: Colors.white.withValues(alpha: 0.7), size: 20),
@@ -158,16 +178,21 @@ class _BalanceCard extends StatelessWidget {
                   ctrl.isBalanceVisible.value
                       ? ctrl.formatRupiah(ctrl.totalBalance.value)
                       : 'Rp ••••••',
-                  style: const TextStyle(color: Colors.white, fontSize: 28,
-                      fontWeight: FontWeight.w700, fontFamily: 'Poppins'),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'InterTight'),
                 ),
                 const SizedBox(width: 8),
                 GestureDetector(
                   onTap: ctrl.toggleBalanceVisibility,
                   child: Icon(
                     ctrl.isBalanceVisible.value
-                        ? Icons.visibility_outlined : Icons.visibility_off_outlined,
-                    color: Colors.white.withValues(alpha: 0.7), size: 18,
+                        ? Icons.visibility_outlined
+                        : Icons.visibility_off_outlined,
+                    color: Colors.white.withValues(alpha: 0.7),
+                    size: 18,
                   ),
                 ),
               ])),
@@ -179,15 +204,23 @@ class _BalanceCard extends StatelessWidget {
                   color: Colors.white.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20)),
               child: Row(children: [
-                const Icon(Icons.trending_up, color: Colors.greenAccent, size: 14),
+                const Icon(Icons.trending_up,
+                    color: Colors.greenAccent, size: 14),
                 const SizedBox(width: 4),
-                const Text('+10%', style: TextStyle(color: Colors.white,
-                    fontSize: 11, fontFamily: 'Poppins', fontWeight: FontWeight.w600)),
+                const Text('+10%',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontFamily: 'InterTight',
+                        fontWeight: FontWeight.w600)),
               ]),
             ),
             const SizedBox(width: 8),
-            Text('Bulan ini', style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.7), fontSize: 11, fontFamily: 'Poppins')),
+            Text('Bulan ini',
+                style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.7),
+                    fontSize: 11,
+                    fontFamily: 'InterTight')),
           ]),
         ]),
       ]),
@@ -204,12 +237,16 @@ class _TransactionTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Row(children: [
-          _TabChip(label: 'Pemasukan', icon: Icons.arrow_downward_rounded,
+          _TabChip(
+              label: 'Pemasukan',
+              icon: Icons.arrow_downward_rounded,
               isActive: ctrl.activeTransactionTab.value == 0,
               activeColor: const Color(0xFF22C55E),
               onTap: () => ctrl.switchTransactionTab(0)),
           const SizedBox(width: 12),
-          _TabChip(label: 'Pengeluaran', icon: Icons.arrow_upward_rounded,
+          _TabChip(
+              label: 'Pengeluaran',
+              icon: Icons.arrow_upward_rounded,
               isActive: ctrl.activeTransactionTab.value == 1,
               activeColor: const Color(0xFFEF4444),
               onTap: () => ctrl.switchTransactionTab(1)),
@@ -223,8 +260,12 @@ class _TabChip extends StatelessWidget {
   final bool isActive;
   final Color activeColor;
   final VoidCallback onTap;
-  const _TabChip({required this.label, required this.icon,
-      required this.isActive, required this.activeColor, required this.onTap});
+  const _TabChip(
+      {required this.label,
+      required this.icon,
+      required this.isActive,
+      required this.activeColor,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -235,18 +276,28 @@ class _TabChip extends StatelessWidget {
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: isActive ? activeColor.withValues(alpha: 0.1) : AppTheme.white,
+            color:
+                isActive ? activeColor.withValues(alpha: 0.1) : AppTheme.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: isActive ? activeColor : AppTheme.inputBorder, width: 1.5),
+            border: Border.all(
+                color: isActive ? activeColor : AppTheme.inputBorder,
+                width: 1.5),
           ),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(width: 24, height: 24,
+            Container(
+                width: 24,
+                height: 24,
                 decoration: BoxDecoration(
-                    color: isActive ? activeColor : AppTheme.inputBorder, shape: BoxShape.circle),
+                    color: isActive ? activeColor : AppTheme.inputBorder,
+                    shape: BoxShape.circle),
                 child: Icon(icon, size: 14, color: Colors.white)),
             const SizedBox(width: 8),
-            Text(label, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600,
-                color: isActive ? activeColor : AppTheme.textGrey, fontFamily: 'Poppins')),
+            Text(label,
+                style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: isActive ? activeColor : AppTheme.textGrey,
+                    fontFamily: 'InterTight')),
           ]),
         ),
       ),
@@ -265,28 +316,42 @@ class _WalletEmpty extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
-      decoration: BoxDecoration(color: AppTheme.white,
+      decoration: BoxDecoration(
+          color: AppTheme.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppTheme.inputBorder)),
       child: Column(children: [
-        Container(width: 60, height: 60,
-            decoration: const BoxDecoration(color: AppTheme.inputFill, shape: BoxShape.circle),
-            child: const Icon(Icons.add_outlined, size: 28, color: AppTheme.primaryBlue)),
+        Container(
+            width: 60,
+            height: 60,
+            decoration: const BoxDecoration(
+                color: AppTheme.inputFill, shape: BoxShape.circle),
+            child: const Icon(Icons.add_outlined,
+                size: 28, color: AppTheme.primaryBlue)),
         const SizedBox(height: 16),
         Text('Mulai Perjalananmu', style: AppTheme.heading3),
         const SizedBox(height: 8),
-        Text('Masukkan saldo awal untuk memulai pencatatan dan raih kendali penuh atas finansialmu',
-            style: AppTheme.body, textAlign: TextAlign.center),
+        Text(
+            'Masukkan saldo awal untuk memulai pencatatan dan raih kendali penuh atas finansialmu',
+            style: AppTheme.body,
+            textAlign: TextAlign.center),
         const SizedBox(height: 20),
         SizedBox(
-          width: double.infinity, height: 48,
+          width: double.infinity,
+          height: 48,
           child: ElevatedButton(
             onPressed: () => Get.toNamed(AppRoutes.pemasukan),
-            style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryBlue,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: AppTheme.primaryBlue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
                 elevation: 0),
-            child: const Text('Tambah saldo', style: TextStyle(fontSize: 14,
-                fontWeight: FontWeight.w600, color: Colors.white, fontFamily: 'Poppins')),
+            child: const Text('Tambah saldo',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                    fontFamily: 'InterTight')),
           ),
         ),
       ]),
@@ -309,25 +374,41 @@ class _WalletFilled extends StatelessWidget {
             onTap: () => Get.toNamed(AppRoutes.insight),
             child: Container(
               padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(color: AppTheme.white,
+              decoration: BoxDecoration(
+                  color: AppTheme.white,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(color: AppTheme.inputBorder)),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Row(children: [
-                  Container(width: 32, height: 32,
-                      decoration: BoxDecoration(
-                          color: AppTheme.primaryBlue.withValues(alpha: 0.1), shape: BoxShape.circle),
-                      child: const Icon(Icons.account_balance_wallet_outlined,
-                          size: 16, color: AppTheme.primaryBlue)),
-                  const SizedBox(width: 8),
-                  const Text('Dana', style: TextStyle(fontSize: 13,
-                      fontWeight: FontWeight.w500, color: AppTheme.textGrey, fontFamily: 'Poppins')),
-                ]),
-                const SizedBox(height: 8),
-                Obx(() => Text(ctrl.formatRupiah(ctrl.totalBalance.value),
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                        color: AppTheme.textDark, fontFamily: 'Poppins'))),
-              ]),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: [
+                      Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                              color:
+                                  AppTheme.primaryBlue.withValues(alpha: 0.1),
+                              shape: BoxShape.circle),
+                          child: const Icon(
+                              Icons.account_balance_wallet_outlined,
+                              size: 16,
+                              color: AppTheme.primaryBlue)),
+                      const SizedBox(width: 8),
+                      const Text('Dana',
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                              color: AppTheme.textGrey,
+                              fontFamily: 'InterTight')),
+                    ]),
+                    const SizedBox(height: 8),
+                    Obx(() => Text(ctrl.formatRupiah(ctrl.totalBalance.value),
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.textDark,
+                            fontFamily: 'InterTight'))),
+                  ]),
             ),
           ),
         ),
@@ -335,16 +416,24 @@ class _WalletFilled extends StatelessWidget {
         GestureDetector(
           onTap: () => _showAddMenu(context),
           child: Container(
-            width: 64, height: 64,
+            width: 64,
+            height: 64,
             decoration: BoxDecoration(
                 color: AppTheme.primaryBlue.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppTheme.primaryBlue.withValues(alpha: 0.3))),
-            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: const [
-              Icon(Icons.add, color: AppTheme.primaryBlue, size: 22),
-              Text('Tambahkan', style: TextStyle(fontSize: 8, color: AppTheme.primaryBlue,
-                  fontFamily: 'Poppins', fontWeight: FontWeight.w500)),
-            ]),
+                border: Border.all(
+                    color: AppTheme.primaryBlue.withValues(alpha: 0.3))),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.add, color: AppTheme.primaryBlue, size: 22),
+                  Text('Tambahkan',
+                      style: TextStyle(
+                          fontSize: 8,
+                          color: AppTheme.primaryBlue,
+                          fontFamily: 'InterTight',
+                          fontWeight: FontWeight.w500)),
+                ]),
           ),
         ),
       ]),
@@ -354,14 +443,17 @@ class _WalletFilled extends StatelessWidget {
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(color: AppTheme.white,
+          decoration: BoxDecoration(
+              color: AppTheme.white,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(color: AppTheme.inputBorder)),
           child: Obx(() {
             final hasBatas = ctrl.batasPengeluaran.value > 0;
             return Row(children: [
               Icon(Icons.shield_outlined,
-                  color: ctrl.isOverBudget ? const Color(0xFFEF4444) : AppTheme.primaryBlue,
+                  color: ctrl.isOverBudget
+                      ? const Color(0xFFEF4444)
+                      : AppTheme.primaryBlue,
                   size: 18),
               const SizedBox(width: 10),
               Expanded(
@@ -369,12 +461,17 @@ class _WalletFilled extends StatelessWidget {
                   hasBatas
                       ? 'Batas: ${ctrl.formatRupiah(ctrl.batasPengeluaran.value)}'
                       : 'Tetapkan Batas Pengeluaran',
-                  style: TextStyle(fontSize: 13, fontFamily: 'Poppins',
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontFamily: 'InterTight',
                       fontWeight: FontWeight.w500,
-                      color: ctrl.isOverBudget ? const Color(0xFFEF4444) : AppTheme.textDark),
+                      color: ctrl.isOverBudget
+                          ? const Color(0xFFEF4444)
+                          : AppTheme.textDark),
                 ),
               ),
-              const Icon(Icons.chevron_right, color: AppTheme.textGrey, size: 18),
+              const Icon(Icons.chevron_right,
+                  color: AppTheme.textGrey, size: 18),
             ]);
           }),
         ),
@@ -387,43 +484,67 @@ class _WalletFilled extends StatelessWidget {
       Container(
         margin: const EdgeInsets.all(12),
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
-        decoration: BoxDecoration(color: Colors.white,
-            borderRadius: BorderRadius.circular(24)),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(24)),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Text('Tambah Transaksi', style: TextStyle(fontSize: 16,
-              fontWeight: FontWeight.w700, color: AppTheme.textDark, fontFamily: 'Poppins')),
+          const Text('Tambah Transaksi',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.textDark,
+                  fontFamily: 'InterTight')),
           const SizedBox(height: 20),
           Row(children: [
-            Expanded(child: GestureDetector(
-              onTap: () { Get.back(); Get.toNamed(AppRoutes.pemasukan); },
+            Expanded(
+                child: GestureDetector(
+              onTap: () {
+                Get.back();
+                Get.toNamed(AppRoutes.pemasukan);
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
                     color: const Color(0xFF22C55E).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
+                    border: Border.all(
+                        color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
                 child: Column(children: const [
-                  Icon(Icons.arrow_downward_rounded, color: Color(0xFF22C55E), size: 28),
+                  Icon(Icons.arrow_downward_rounded,
+                      color: Color(0xFF22C55E), size: 28),
                   SizedBox(height: 6),
-                  Text('Pemasukan', style: TextStyle(fontSize: 14,
-                      fontWeight: FontWeight.w600, color: Color(0xFF22C55E), fontFamily: 'Poppins')),
+                  Text('Pemasukan',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF22C55E),
+                          fontFamily: 'InterTight')),
                 ]),
               ),
             )),
             const SizedBox(width: 12),
-            Expanded(child: GestureDetector(
-              onTap: () { Get.back(); Get.toNamed(AppRoutes.pengeluaran); },
+            Expanded(
+                child: GestureDetector(
+              onTap: () {
+                Get.back();
+                Get.toNamed(AppRoutes.pengeluaran);
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
                     color: const Color(0xFFEF4444).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
+                    border: Border.all(
+                        color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
                 child: Column(children: const [
-                  Icon(Icons.arrow_upward_rounded, color: Color(0xFFEF4444), size: 28),
+                  Icon(Icons.arrow_upward_rounded,
+                      color: Color(0xFFEF4444), size: 28),
                   SizedBox(height: 6),
-                  Text('Pengeluaran', style: TextStyle(fontSize: 14,
-                      fontWeight: FontWeight.w600, color: Color(0xFFEF4444), fontFamily: 'Poppins')),
+                  Text('Pengeluaran',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFEF4444),
+                          fontFamily: 'InterTight')),
                 ]),
               ),
             )),
@@ -443,9 +564,35 @@ class _ChartSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      if (ctrl.transactions.isEmpty) return const SizedBox();
+      final list = ctrl.transactions.toList();
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: _ChartContent(ctrl: ctrl, transactions: list),
+      );
+    });
+  }
+}
+
+class _ChartContent extends StatelessWidget {
+  final HomeController ctrl;
+  final List<Transaction> transactions;
+  const _ChartContent({required this.ctrl, required this.transactions});
+
+  @override
+  Widget build(BuildContext context) {
+    final income = ctrl.totalIncome;
+    final expense = ctrl.totalExpense;
+    final maxVal = income > expense ? income : expense;
+    final incomeH = maxVal > 0 ? (income / maxVal) * 90 : 8.0;
+    final expenseH = maxVal > 0 ? (expense / maxVal) * 90 : 8.0;
+    final isOver = ctrl.isOverBudget;
+
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(color: AppTheme.white,
+      decoration: BoxDecoration(
+          color: AppTheme.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: AppTheme.inputBorder)),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -453,60 +600,81 @@ class _ChartSection extends StatelessWidget {
           Text('Pemasukan vs Pengeluaran', style: AppTheme.label),
           GestureDetector(
             onTap: () => Get.toNamed(AppRoutes.insight),
-            child: const Icon(Icons.more_vert, color: AppTheme.textGrey, size: 20),
+            child:
+                const Icon(Icons.more_vert, color: AppTheme.textGrey, size: 20),
           ),
         ]),
         Text('Bulan ini', style: AppTheme.bodySmall),
         const SizedBox(height: 16),
-        Obx(() {
-          final income = ctrl.totalIncome;
-          final expense = ctrl.totalExpense;
-          final maxVal = income > expense ? income : expense;
-          final incomeH = maxVal > 0 ? (income / maxVal) * 90 : 8.0;
-          final expenseH = maxVal > 0 ? (expense / maxVal) * 90 : 8.0;
-          final isOver = ctrl.isOverBudget;
-
-          return SizedBox(
-            height: 100,
-            child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-              Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 600),
-                  height: incomeH.clamp(8.0, 100.0),
-                  decoration: BoxDecoration(
-                      color: const Color(0xFF22C55E),
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-              ])),
-              const SizedBox(width: 16),
-              Expanded(child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 600),
-                  height: expenseH.clamp(8.0, 100.0),
-                  decoration: BoxDecoration(
-                      color: isOver ? const Color(0xFFEF4444) : const Color(0xFFFFB3C1),
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-              ])),
-            ]),
-          );
-        }),
+        SizedBox(
+          height: 100,
+          child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+            Expanded(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 600),
+                    height: incomeH.clamp(8.0, 100.0),
+                    decoration: BoxDecoration(
+                        color: const Color(0xFF22C55E),
+                        borderRadius: BorderRadius.circular(8)),
+                  ),
+                ])),
+            const SizedBox(width: 16),
+            Expanded(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 600),
+                    height: expenseH.clamp(8.0, 100.0),
+                    decoration: BoxDecoration(
+                        color: isOver
+                            ? const Color(0xFFEF4444)
+                            : const Color(0xFFFFB3C1),
+                        borderRadius: BorderRadius.circular(8)),
+                  ),
+                ])),
+          ]),
+        ),
         const SizedBox(height: 8),
-        Obx(() => Row(children: [
-              Expanded(child: Center(child: Text(ctrl.formatRupiah(ctrl.totalIncome),
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600,
-                      color: Color(0xFF22C55E), fontFamily: 'Poppins')))),
-              Expanded(child: Center(child: Text(ctrl.formatRupiah(ctrl.totalExpense),
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600,
-                      color: ctrl.isOverBudget ? const Color(0xFFEF4444) : const Color(0xFFFFB3C1),
-                      fontFamily: 'Poppins')))),
-            ])),
+        Row(children: [
+          Expanded(
+              child: Center(
+                  child: Text(ctrl.formatRupiah(income),
+                      style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF22C55E),
+                          fontFamily: 'InterTight')))),
+          Expanded(
+              child: Center(
+                  child: Text(ctrl.formatRupiah(expense),
+                      style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: isOver
+                              ? const Color(0xFFEF4444)
+                              : const Color(0xFFFFB3C1),
+                          fontFamily: 'InterTight')))),
+        ]),
         const SizedBox(height: 2),
         const Row(children: [
-          Expanded(child: Center(child: Text('Masuk', style: TextStyle(fontSize: 10,
-              color: AppTheme.textGrey, fontFamily: 'Poppins')))),
-          Expanded(child: Center(child: Text('Keluar', style: TextStyle(fontSize: 10,
-              color: AppTheme.textGrey, fontFamily: 'Poppins')))),
+          Expanded(
+              child: Center(
+                  child: Text('Masuk',
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: AppTheme.textGrey,
+                          fontFamily: 'InterTight')))),
+          Expanded(
+              child: Center(
+                  child: Text('Keluar',
+                      style: TextStyle(
+                          fontSize: 10,
+                          color: AppTheme.textGrey,
+                          fontFamily: 'InterTight')))),
         ]),
       ]),
     );
@@ -521,59 +689,102 @@ class _WarningBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Obx(() {
+      if (!ctrl.isOverBudget || ctrl.isWarningDismissed.value) {
+        return const SizedBox();
+      }
+      final limit = ctrl.batasPengeluaran.value;
+      final expense = ctrl.totalExpense;
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: _WarningContent(ctrl: ctrl, limit: limit, expense: expense),
+      );
+    });
+  }
+}
+
+class _WarningContent extends StatelessWidget {
+  final HomeController ctrl;
+  final double limit;
+  final double expense;
+  const _WarningContent({
+    required this.ctrl,
+    required this.limit,
+    required this.expense,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final progress = (expense / limit).clamp(0.0, 1.0);
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
           color: const Color(0xFFFFF1F1),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
+          border: Border.all(
+              color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(children: [
-          const Icon(Icons.warning_amber_rounded, color: Color(0xFFEF4444), size: 18),
+          const Icon(Icons.warning_amber_rounded,
+              color: Color(0xFFEF4444), size: 18),
           const SizedBox(width: 8),
-          const Expanded(child: Text('Maksimal Pengeluaran',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700,
-                  color: Color(0xFFEF4444), fontFamily: 'Poppins'))),
-          GestureDetector(onTap: ctrl.dismissWarning,
-              child: const Icon(Icons.close, size: 16, color: Color(0xFFEF4444))),
+          const Expanded(
+              child: Text('Maksimal Pengeluaran',
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFFEF4444),
+                      fontFamily: 'InterTight'))),
+          GestureDetector(
+              onTap: ctrl.dismissWarning,
+              child:
+                  const Icon(Icons.close, size: 16, color: Color(0xFFEF4444))),
         ]),
         const SizedBox(height: 8),
-        Obx(() {
-          final progress = ctrl.budgetProgress;
-          return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text('Rp 0', style: const TextStyle(fontSize: 11,
-                  color: Color(0xFFEF4444), fontFamily: 'Poppins')),
-              Text('Limit: ${ctrl.formatRupiah(ctrl.batasPengeluaran.value)}',
-                  style: const TextStyle(fontSize: 11,
-                      color: Color(0xFFEF4444), fontFamily: 'Poppins')),
-            ]),
-            const SizedBox(height: 4),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: LinearProgressIndicator(
-                value: progress,
-                backgroundColor: const Color(0xFFFFD5D5),
-                valueColor: const AlwaysStoppedAnimation(Color(0xFFEF4444)),
-                minHeight: 8,
-              ),
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text('Rp 0',
+                    style: TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFFEF4444),
+                        fontFamily: 'InterTight')),
+                Text('Limit: ${ctrl.formatRupiah(limit)}',
+                    style: const TextStyle(
+                        fontSize: 11,
+                        color: Color(0xFFEF4444),
+                        fontFamily: 'InterTight')),
+              ]),
+          const SizedBox(height: 4),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: progress,
+              backgroundColor: const Color(0xFFFFD5D5),
+              valueColor: const AlwaysStoppedAnimation(Color(0xFFEF4444)),
+              minHeight: 8,
             ),
-          ]);
-        }),
+          ),
+        ]),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(color: const Color(0xFFFFE8E8),
+          decoration: BoxDecoration(
+              color: const Color(0xFFFFE8E8),
               borderRadius: BorderRadius.circular(8)),
-          child: Obx(() => Row(children: [
-                const Icon(Icons.info_outline, size: 14, color: Color(0xFFEF4444)),
-                const SizedBox(width: 6),
-                Expanded(child: Text(
-                  'Pengeluaran ${ctrl.formatRupiah(ctrl.totalExpense)} melebihi batas ${ctrl.formatRupiah(ctrl.batasPengeluaran.value)}. Harap kurangi pengeluaran untuk bulan ini.',
-                  style: const TextStyle(fontSize: 11,
-                      color: Color(0xFFEF4444), fontFamily: 'Poppins'),
-                )),
-              ])),
+          child: Row(children: [
+            const Icon(Icons.info_outline, size: 14, color: Color(0xFFEF4444)),
+            const SizedBox(width: 6),
+            Expanded(
+                child: Text(
+              'Pengeluaran ${ctrl.formatRupiah(expense)} melebihi batas ${ctrl.formatRupiah(limit)}. Harap kurangi pengeluaran untuk bulan ini.',
+              style: const TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFFEF4444),
+                  fontFamily: 'InterTight'),
+            )),
+          ]),
         ),
       ]),
     );
@@ -594,11 +805,13 @@ class _TransactionList extends StatelessWidget {
         return Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 28),
-          decoration: BoxDecoration(color: AppTheme.white,
+          decoration: BoxDecoration(
+              color: AppTheme.white,
               borderRadius: BorderRadius.circular(16),
               border: Border.all(color: AppTheme.inputBorder)),
           child: Column(children: [
-            const Icon(Icons.history_rounded, size: 36, color: AppTheme.textGrey),
+            const Icon(Icons.history_rounded,
+                size: 36, color: AppTheme.textGrey),
             const SizedBox(height: 8),
             Text('Belum ada transaksi', style: AppTheme.body),
           ]),
@@ -606,7 +819,8 @@ class _TransactionList extends StatelessWidget {
       }
 
       return Container(
-        decoration: BoxDecoration(color: AppTheme.white,
+        decoration: BoxDecoration(
+            color: AppTheme.white,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: AppTheme.inputBorder)),
         child: Column(
@@ -615,33 +829,51 @@ class _TransactionList extends StatelessWidget {
             final t = entry.value;
             return Column(children: [
               ListTile(
-                onTap: () => Get.toNamed(AppRoutes.detailTransaksi, arguments: t),
+                onTap: () =>
+                    Get.toNamed(AppRoutes.detailTransaksi, arguments: t),
                 leading: Container(
-                  width: 42, height: 42,
+                  width: 42,
+                  height: 42,
                   decoration: BoxDecoration(
                       color: t.isIncome
                           ? const Color(0xFF22C55E).withValues(alpha: 0.1)
                           : const Color(0xFFEF4444).withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12)),
                   child: Icon(
-                    t.isIncome ? Icons.arrow_downward_rounded : Icons.arrow_upward_rounded,
-                    color: t.isIncome ? const Color(0xFF22C55E) : const Color(0xFFEF4444),
+                    t.isIncome
+                        ? Icons.arrow_downward_rounded
+                        : Icons.arrow_upward_rounded,
+                    color: t.isIncome
+                        ? const Color(0xFF22C55E)
+                        : const Color(0xFFEF4444),
                     size: 20,
                   ),
                 ),
-                title: Text(t.title, style: const TextStyle(fontSize: 14,
-                    fontWeight: FontWeight.w600, fontFamily: 'Poppins', color: AppTheme.textDark)),
+                title: Text(t.title,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'InterTight',
+                        color: AppTheme.textDark)),
                 subtitle: Text('${t.category} • ${t.date.day}/${t.date.month}',
                     style: AppTheme.bodySmall),
                 trailing: Text(
                   '${t.isIncome ? '+' : '-'}${ctrl.formatRupiah(t.amount)}',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700,
-                      color: t.isIncome ? const Color(0xFF22C55E) : const Color(0xFFEF4444),
-                      fontFamily: 'Poppins'),
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: t.isIncome
+                          ? const Color(0xFF22C55E)
+                          : const Color(0xFFEF4444),
+                      fontFamily: 'InterTight'),
                 ),
               ),
               if (i < list.length - 1)
-                const Divider(height: 1, color: AppTheme.divider, indent: 16, endIndent: 16),
+                const Divider(
+                    height: 1,
+                    color: AppTheme.divider,
+                    indent: 16,
+                    endIndent: 16),
             ]);
           }).toList(),
         ),
@@ -649,7 +881,6 @@ class _TransactionList extends StatelessWidget {
     });
   }
 }
-
 
 // ─── Bottom Nav ───────────────────────────────────────────────────────────────
 
@@ -668,15 +899,27 @@ class _BottomNav extends StatelessWidget {
       child: SizedBox(
         height: 64,
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          _NavItem(icon: Icons.home_rounded, label: 'Home',
-              isActive: currentIndex == 0, onTap: () => ctrl.switchTab(0)),
-          _NavItem(icon: Icons.flag_outlined, label: 'Target',
-              isActive: currentIndex == 1, onTap: () => ctrl.switchTab(1)),
+          _NavItem(
+              icon: Icons.home_rounded,
+              label: 'Home',
+              isActive: currentIndex == 0,
+              onTap: () => ctrl.switchTab(0)),
+          _NavItem(
+              icon: Icons.flag_outlined,
+              label: 'Target',
+              isActive: currentIndex == 1,
+              onTap: () => ctrl.switchTab(1)),
           const SizedBox(width: 48),
-          _NavItem(icon: Icons.history_rounded, label: 'Riwayat',
-              isActive: currentIndex == 2, onTap: () => ctrl.switchTab(2)),
-          _NavItem(icon: Icons.person_outline_rounded, label: 'Profil',
-              isActive: currentIndex == 3, onTap: () => ctrl.switchTab(3)),
+          _NavItem(
+              icon: Icons.history_rounded,
+              label: 'Riwayat',
+              isActive: currentIndex == 2,
+              onTap: () => ctrl.switchTab(2)),
+          _NavItem(
+              icon: Icons.person_outline_rounded,
+              label: 'Profil',
+              isActive: currentIndex == 3,
+              onTap: () => ctrl.switchTab(3)),
         ]),
       ),
     );
@@ -688,8 +931,11 @@ class _NavItem extends StatelessWidget {
   final String label;
   final bool isActive;
   final VoidCallback onTap;
-  const _NavItem({required this.icon, required this.label,
-      required this.isActive, required this.onTap});
+  const _NavItem(
+      {required this.icon,
+      required this.label,
+      required this.isActive,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -699,12 +945,16 @@ class _NavItem extends StatelessWidget {
       child: SizedBox(
         width: 64,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Icon(icon, size: 22,
+          Icon(icon,
+              size: 22,
               color: isActive ? AppTheme.primaryBlue : AppTheme.textGrey),
           const SizedBox(height: 2),
-          Text(label, style: TextStyle(fontSize: 10,
-              fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
-              color: isActive ? AppTheme.primaryBlue : AppTheme.textGrey, fontFamily: 'Poppins')),
+          Text(label,
+              style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
+                  color: isActive ? AppTheme.primaryBlue : AppTheme.textGrey,
+                  fontFamily: 'InterTight')),
         ]),
       ),
     );
@@ -723,7 +973,8 @@ class _QrFab extends StatelessWidget {
       onPressed: () => _showAddMenu(context),
       backgroundColor: AppTheme.primaryBlue,
       elevation: 4,
-      child: const Icon(Icons.qr_code_scanner_rounded, color: Colors.white, size: 26),
+      child: const Icon(Icons.qr_code_scanner_rounded,
+          color: Colors.white, size: 26),
     );
   }
 
@@ -732,42 +983,67 @@ class _QrFab extends StatelessWidget {
       Container(
         margin: const EdgeInsets.all(12),
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24)),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(24)),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Text('Tambah Transaksi', style: TextStyle(fontSize: 16,
-              fontWeight: FontWeight.w700, color: AppTheme.textDark, fontFamily: 'Poppins')),
+          const Text('Tambah Transaksi',
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: AppTheme.textDark,
+                  fontFamily: 'InterTight')),
           const SizedBox(height: 20),
           Row(children: [
-            Expanded(child: GestureDetector(
-              onTap: () { Get.back(); Get.toNamed(AppRoutes.pemasukan); },
+            Expanded(
+                child: GestureDetector(
+              onTap: () {
+                Get.back();
+                Get.toNamed(AppRoutes.pemasukan);
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
                     color: const Color(0xFF22C55E).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
+                    border: Border.all(
+                        color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
                 child: Column(children: const [
-                  Icon(Icons.arrow_downward_rounded, color: Color(0xFF22C55E), size: 28),
+                  Icon(Icons.arrow_downward_rounded,
+                      color: Color(0xFF22C55E), size: 28),
                   SizedBox(height: 6),
-                  Text('Pemasukan', style: TextStyle(fontSize: 14,
-                      fontWeight: FontWeight.w600, color: Color(0xFF22C55E), fontFamily: 'Poppins')),
+                  Text('Pemasukan',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF22C55E),
+                          fontFamily: 'InterTight')),
                 ]),
               ),
             )),
             const SizedBox(width: 12),
-            Expanded(child: GestureDetector(
-              onTap: () { Get.back(); Get.toNamed(AppRoutes.pengeluaran); },
+            Expanded(
+                child: GestureDetector(
+              onTap: () {
+                Get.back();
+                Get.toNamed(AppRoutes.pengeluaran);
+              },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
                     color: const Color(0xFFEF4444).withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
+                    border: Border.all(
+                        color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
                 child: Column(children: const [
-                  Icon(Icons.arrow_upward_rounded, color: Color(0xFFEF4444), size: 28),
+                  Icon(Icons.arrow_upward_rounded,
+                      color: Color(0xFFEF4444), size: 28),
                   SizedBox(height: 6),
-                  Text('Pengeluaran', style: TextStyle(fontSize: 14,
-                      fontWeight: FontWeight.w600, color: Color(0xFFEF4444), fontFamily: 'Poppins')),
+                  Text('Pengeluaran',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFEF4444),
+                          fontFamily: 'InterTight')),
                 ]),
               ),
             )),
@@ -775,20 +1051,31 @@ class _QrFab extends StatelessWidget {
           const SizedBox(height: 12),
           // Scan Struk button
           GestureDetector(
-            onTap: () { Get.back(); Get.toNamed(AppRoutes.scan); },
+            onTap: () {
+              Get.back();
+              Get.toNamed(AppRoutes.scan);
+            },
             child: Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 14),
               decoration: BoxDecoration(
                   color: AppTheme.primaryBlue.withValues(alpha: 0.06),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: AppTheme.primaryBlue.withValues(alpha: 0.3))),
-              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
-                Icon(Icons.document_scanner_outlined, color: AppTheme.primaryBlue, size: 22),
-                SizedBox(width: 8),
-                Text('Scan Struk', style: TextStyle(fontSize: 14,
-                    fontWeight: FontWeight.w600, color: AppTheme.primaryBlue, fontFamily: 'Poppins')),
-              ]),
+                  border: Border.all(
+                      color: AppTheme.primaryBlue.withValues(alpha: 0.3))),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.document_scanner_outlined,
+                        color: AppTheme.primaryBlue, size: 22),
+                    SizedBox(width: 8),
+                    Text('Scan Struk',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.primaryBlue,
+                            fontFamily: 'InterTight')),
+                  ]),
             ),
           ),
         ]),

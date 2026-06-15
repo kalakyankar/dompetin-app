@@ -29,8 +29,11 @@ class PengeluaranScreen extends StatelessWidget {
           ),
         ),
         title: const Text('Pengeluaran',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                color: AppTheme.textDark, fontFamily: 'Poppins')),
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: AppTheme.textDark,
+                fontFamily: 'InterTight')),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -46,8 +49,12 @@ class PengeluaranScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Kategori', style: TextStyle(fontSize: 14,
-                    fontWeight: FontWeight.w500, color: AppTheme.textDark, fontFamily: 'Poppins')),
+                const Text('Kategori',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: AppTheme.textDark,
+                        fontFamily: 'InterTight')),
                 Icon(Icons.add, color: AppTheme.primaryBlue, size: 20),
               ],
             ),
@@ -56,15 +63,23 @@ class PengeluaranScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Tanggal
-            const Text('Tanggal', style: TextStyle(fontSize: 14,
-                fontWeight: FontWeight.w500, color: AppTheme.textDark, fontFamily: 'Poppins')),
+            const Text('Tanggal',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppTheme.textDark,
+                    fontFamily: 'InterTight')),
             const SizedBox(height: 10),
             _DatePicker(ctrl: ctrl),
             const SizedBox(height: 20),
 
             // Catatan
-            const Text('Catatan', style: TextStyle(fontSize: 14,
-                fontWeight: FontWeight.w500, color: AppTheme.textDark, fontFamily: 'Poppins')),
+            const Text('Catatan',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppTheme.textDark,
+                    fontFamily: 'InterTight')),
             const SizedBox(height: 10),
             TextField(
               controller: ctrl.catatanController,
@@ -74,8 +89,12 @@ class PengeluaranScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             // Asal Dana
-            const Text('Asal Dana', style: TextStyle(fontSize: 14,
-                fontWeight: FontWeight.w500, color: AppTheme.textDark, fontFamily: 'Poppins')),
+            const Text('Asal Dana',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: AppTheme.textDark,
+                    fontFamily: 'InterTight')),
             const SizedBox(height: 10),
             _AsalDanaRow(ctrl: ctrl),
             const SizedBox(height: 20),
@@ -97,12 +116,19 @@ class PengeluaranScreen extends StatelessWidget {
                       elevation: 0,
                     ),
                     child: ctrl.isLoading.value
-                        ? const SizedBox(width: 22, height: 22,
-                            child: CircularProgressIndicator(strokeWidth: 2.5,
-                                valueColor: AlwaysStoppedAnimation(Colors.white)))
+                        ? const SizedBox(
+                            width: 22,
+                            height: 22,
+                            child: CircularProgressIndicator(
+                                strokeWidth: 2.5,
+                                valueColor:
+                                    AlwaysStoppedAnimation(Colors.white)))
                         : const Text('Simpan',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,
-                                color: Colors.white, fontFamily: 'Poppins')),
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                                fontFamily: 'InterTight')),
                   ),
                 )),
             const SizedBox(height: 24),
@@ -134,8 +160,12 @@ class _AmountCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Rp', style: TextStyle(fontSize: 24,
-                  fontWeight: FontWeight.w700, color: AppTheme.textDark, fontFamily: 'Poppins')),
+              const Text('Rp',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.textDark,
+                      fontFamily: 'InterTight')),
               const SizedBox(width: 12),
               IntrinsicWidth(
                 child: TextField(
@@ -143,10 +173,15 @@ class _AmountCard extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w700,
-                      color: AppTheme.textDark, fontFamily: 'Poppins'),
+                  style: const TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.textDark,
+                      fontFamily: 'InterTight'),
                   decoration: const InputDecoration(
-                      border: InputBorder.none, isDense: true, contentPadding: EdgeInsets.zero),
+                      border: InputBorder.none,
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero),
                 ),
               ),
             ],
@@ -183,10 +218,14 @@ class _CategoryGrid extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 180),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppTheme.primaryBlue.withValues(alpha: 0.08) : AppTheme.white,
+                  color: isSelected
+                      ? AppTheme.primaryBlue.withValues(alpha: 0.08)
+                      : AppTheme.white,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: isSelected ? AppTheme.primaryBlue : AppTheme.inputBorder,
+                    color: isSelected
+                        ? AppTheme.primaryBlue
+                        : AppTheme.inputBorder,
                     width: isSelected ? 1.5 : 1,
                   ),
                 ),
@@ -194,22 +233,31 @@ class _CategoryGrid extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: 40, height: 40,
+                      width: 40,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: isSelected
                             ? AppTheme.primaryBlue.withValues(alpha: 0.12)
                             : AppTheme.inputFill,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(cat.icon, size: 20,
-                          color: isSelected ? AppTheme.primaryBlue : AppTheme.textGrey),
+                      child: Icon(cat.icon,
+                          size: 20,
+                          color: isSelected
+                              ? AppTheme.primaryBlue
+                              : AppTheme.textGrey),
                     ),
                     const SizedBox(height: 6),
-                    Text(cat.label, textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 10,
-                            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                            color: isSelected ? AppTheme.primaryBlue : AppTheme.textDark,
-                            fontFamily: 'Poppins')),
+                    Text(cat.label,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontWeight:
+                                isSelected ? FontWeight.w600 : FontWeight.w400,
+                            color: isSelected
+                                ? AppTheme.primaryBlue
+                                : AppTheme.textDark,
+                            fontFamily: 'InterTight')),
                   ],
                 ),
               ),
@@ -239,13 +287,18 @@ class _DatePicker extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  ctrl.selectedDate.value == null ? 'Tanggal'
+                  ctrl.selectedDate.value == null
+                      ? 'Tanggal'
                       : '${ctrl.selectedDate.value!.day}/${ctrl.selectedDate.value!.month}/${ctrl.selectedDate.value!.year}',
-                  style: TextStyle(fontSize: 14, fontFamily: 'Poppins',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: 'InterTight',
                       color: ctrl.selectedDate.value == null
-                          ? AppTheme.textGrey : AppTheme.textDark),
+                          ? AppTheme.textGrey
+                          : AppTheme.textDark),
                 ),
-                const Icon(Icons.calendar_today_outlined, size: 18, color: AppTheme.textGrey),
+                const Icon(Icons.calendar_today_outlined,
+                    size: 18, color: AppTheme.textGrey),
               ],
             ),
           ),
@@ -262,7 +315,11 @@ class _AsalDanaRow extends StatelessWidget {
     return Obx(() {
       // Source options with balance
       final options = [
-        {'label': 'Dana', 'icon': Icons.account_balance_wallet_outlined, 'sub': 'Rp 4.000.000'},
+        {
+          'label': 'Dana',
+          'icon': Icons.account_balance_wallet_outlined,
+          'sub': 'Rp 4.000.000'
+        },
         {'label': 'Cash', 'icon': Icons.payments_outlined, 'sub': 'Rp 0'},
       ];
       return Row(
@@ -274,26 +331,36 @@ class _AsalDanaRow extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 180),
                 margin: EdgeInsets.only(right: opt['label'] == 'Dana' ? 10 : 0),
-                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppTheme.primaryBlue.withValues(alpha: 0.06) : AppTheme.white,
+                  color: isSelected
+                      ? AppTheme.primaryBlue.withValues(alpha: 0.06)
+                      : AppTheme.white,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
-                    color: isSelected ? AppTheme.primaryBlue : AppTheme.inputBorder,
+                    color: isSelected
+                        ? AppTheme.primaryBlue
+                        : AppTheme.inputBorder,
                     width: isSelected ? 1.5 : 1,
                   ),
                 ),
                 child: Row(
                   children: [
                     Container(
-                      width: 36, height: 36,
+                      width: 36,
+                      height: 36,
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? AppTheme.primaryBlue.withValues(alpha: 0.1) : AppTheme.inputFill,
+                            ? AppTheme.primaryBlue.withValues(alpha: 0.1)
+                            : AppTheme.inputFill,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(opt['icon'] as IconData, size: 18,
-                          color: isSelected ? AppTheme.primaryBlue : AppTheme.textGrey),
+                      child: Icon(opt['icon'] as IconData,
+                          size: 18,
+                          color: isSelected
+                              ? AppTheme.primaryBlue
+                              : AppTheme.textGrey),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
@@ -301,12 +368,18 @@ class _AsalDanaRow extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(opt['label'] as String,
-                              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600,
-                                  color: isSelected ? AppTheme.primaryBlue : AppTheme.textDark,
-                                  fontFamily: 'Poppins')),
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: isSelected
+                                      ? AppTheme.primaryBlue
+                                      : AppTheme.textDark,
+                                  fontFamily: 'InterTight')),
                           Text(opt['sub'] as String,
-                              style: const TextStyle(fontSize: 11, color: AppTheme.textGrey,
-                                  fontFamily: 'Poppins')),
+                              style: const TextStyle(
+                                  fontSize: 11,
+                                  color: AppTheme.textGrey,
+                                  fontFamily: 'InterTight')),
                         ],
                       ),
                     ),
@@ -337,12 +410,14 @@ class _RutinToggleRow extends StatelessWidget {
       child: Obx(() => Row(
             children: [
               Container(
-                width: 40, height: 40,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                   color: AppTheme.primaryBlue.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.repeat_rounded, size: 20, color: AppTheme.primaryBlue),
+                child: const Icon(Icons.repeat_rounded,
+                    size: 20, color: AppTheme.primaryBlue),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -350,8 +425,11 @@ class _RutinToggleRow extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Pengeluaran Rutin',
-                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,
-                            color: AppTheme.textDark, fontFamily: 'Poppins')),
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.textDark,
+                            fontFamily: 'InterTight')),
                     Text('Ulangi setiap bulan', style: AppTheme.bodySmall),
                   ],
                 ),

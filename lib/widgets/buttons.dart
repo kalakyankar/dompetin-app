@@ -44,7 +44,7 @@ class PrimaryButton extends StatelessWidget {
               )
             : Text(
                 label,
-                style: GoogleFonts.poppins(
+                style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: textColor ?? AppTheme.white,
@@ -80,7 +80,7 @@ class OutlineButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: GoogleFonts.poppins(
+          style: GoogleFonts.inter(
             fontSize: 15,
             fontWeight: FontWeight.w500,
             color: AppTheme.textGrey,

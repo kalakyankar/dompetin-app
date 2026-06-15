@@ -207,7 +207,7 @@ class _CheckEmailStep extends StatelessWidget {
                           color: AppTheme.primaryBlue,
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
-                          fontFamily: 'Poppins',
+                          fontFamily: 'InterTight',
                         ),
                       ),
                       const TextSpan(
@@ -234,7 +234,7 @@ class _CheckEmailStep extends StatelessWidget {
                     style: const TextStyle(
                         color: AppTheme.errorRed,
                         fontSize: 12,
-                        fontFamily: 'Poppins'),
+                        fontFamily: 'InterTight'),
                   ),
                 )
               : const SizedBox()),
@@ -260,7 +260,7 @@ class _CheckEmailStep extends StatelessWidget {
                   style: TextStyle(
                     color: AppTheme.primaryBlue,
                     fontSize: 12,
-                    fontFamily: 'Poppins',
+                    fontFamily: 'InterTight',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -297,7 +297,7 @@ class _OtpInputRow extends StatelessWidget {
               fontSize: 24,
               fontWeight: FontWeight.w700,
               color: AppTheme.textDark,
-              fontFamily: 'Poppins',
+              fontFamily: 'InterTight',
             ),
             decoration: InputDecoration(
               counterText: '',
@@ -384,7 +384,6 @@ class _ResetPasswordStep extends StatelessWidget {
               subtitle:
                   'Buat kata sandi baru. Pastikan kata sandi tersebut berbeda dari kata sandi sebelumnya demi keamanan.',
             ),
-
             Text('Kata Sandi', style: AppTheme.label),
             const SizedBox(height: 8),
             Obx(() => TextFormField(
@@ -407,7 +406,6 @@ class _ResetPasswordStep extends StatelessWidget {
                   ),
                 )),
             const SizedBox(height: 16),
-
             Text('Konfirmasi Kata Sandi', style: AppTheme.label),
             const SizedBox(height: 8),
             Obx(() => TextFormField(
@@ -430,7 +428,6 @@ class _ResetPasswordStep extends StatelessWidget {
                   ),
                 )),
             const SizedBox(height: 28),
-
             Obx(() => PrimaryButton(
                   label: 'Perbaru Kata Sandi',
                   onTap: controller.resetPassword,

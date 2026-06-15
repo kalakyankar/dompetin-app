@@ -61,7 +61,8 @@ class RiwayatScreen extends StatelessWidget {
                 const SizedBox(width: 8),
                 _FilterChip(
                   label: 'Pengeluaran',
-                  isActive: ctrl.activeFilter.value == RiwayatFilter.pengeluaran,
+                  isActive:
+                      ctrl.activeFilter.value == RiwayatFilter.pengeluaran,
                   onTap: () => ctrl.setFilter(RiwayatFilter.pengeluaran),
                   activeColor: const Color(0xFFEF4444),
                 ),
@@ -75,7 +76,8 @@ class RiwayatScreen extends StatelessWidget {
             final transactions = ctrl.filteredTransactions;
 
             if (transactions.isEmpty) {
-              return _EmptyState(filter: ctrl.activeFilter.value,
+              return _EmptyState(
+                  filter: ctrl.activeFilter.value,
                   query: ctrl.searchQuery.value);
             }
 
@@ -141,7 +143,7 @@ class _FilterChip extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              fontFamily: 'Poppins',
+              fontFamily: 'InterTight',
               color: isActive ? Colors.white : AppTheme.textGrey,
             )),
       ),
@@ -206,7 +208,8 @@ class _TransactionTile extends StatelessWidget {
         child: Row(children: [
           // Icon
           Container(
-            width: 42, height: 42,
+            width: 42,
+            height: 42,
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
@@ -216,13 +219,16 @@ class _TransactionTile extends StatelessWidget {
           const SizedBox(width: 12),
 
           // Title + subtitle
-          Expanded(child: Column(
+          Expanded(
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(t.title,
                   style: const TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.w600,
-                    color: AppTheme.textDark, fontFamily: 'Poppins',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppTheme.textDark,
+                    fontFamily: 'InterTight',
                   )),
               const SizedBox(height: 2),
               Text(subtitle, style: AppTheme.bodySmall),
@@ -233,8 +239,10 @@ class _TransactionTile extends StatelessWidget {
           Text(
             '${isIncome ? '+' : '-'}${ctrl.formatRupiah(t.amount)}',
             style: TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w700,
-              color: color, fontFamily: 'Poppins',
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+              color: color,
+              fontFamily: 'InterTight',
             ),
           ),
         ]),
@@ -257,7 +265,8 @@ class _EmptyState extends StatelessWidget {
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Icon(
           isSearch ? Icons.search_off_rounded : Icons.receipt_long_outlined,
-          size: 64, color: AppTheme.textGrey,
+          size: 64,
+          color: AppTheme.textGrey,
         ),
         const SizedBox(height: 14),
         Text(

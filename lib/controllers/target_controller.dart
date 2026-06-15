@@ -43,7 +43,8 @@ class TargetController extends GetxController {
   double get totalTabungan =>
       targets.fold(0.0, (s, t) => s + t.currentAmount);
 
-  int get activeTargetCount => targets.where((t) => !t.isComplete).length;
+  int get activeTargetCount =>
+      targets.where((t) => !t.isComplete).length;
 
   String formatRupiah(double amount) {
     final abs = amount.abs();
