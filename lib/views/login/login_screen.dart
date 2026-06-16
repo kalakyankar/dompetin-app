@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(
                         color: AppTheme.primaryBlue,
                         fontSize: 13,
-                        fontFamily: 'InterTight',
+
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -145,9 +145,12 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Tidak punya akun? ',
-                      style: AppTheme.bodySmall,
+                    Flexible(
+                      child: Text(
+                        'Tidak punya akun? ',
+                        style: AppTheme.bodySmall,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     GestureDetector(
                       onTap: () => Get.toNamed(AppRoutes.register),
@@ -156,7 +159,7 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AppTheme.primaryBlue,
                           fontSize: 12,
-                          fontFamily: 'InterTight',
+  
                           fontWeight: FontWeight.w600,
                         ),
                       ),

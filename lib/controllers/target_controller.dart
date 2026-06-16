@@ -256,7 +256,7 @@ class _AddTargetSheetState extends State<_AddTargetSheet> {
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(isEdit ? 'Edit Target' : 'Tambahkan Target Baru',
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                    color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                    color: Color(0xFF1A1F36))),
             GestureDetector(onTap: Get.back,
                 child: Container(width: 28, height: 28,
                     decoration: const BoxDecoration(color: Color(0xFFF5F7FF), shape: BoxShape.circle),
@@ -293,7 +293,7 @@ class _AddTargetSheetState extends State<_AddTargetSheet> {
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text(targetDate == null ? 'tanggal'
                     : '${targetDate!.day}/${targetDate!.month}/${targetDate!.year}',
-                    style: TextStyle(fontSize: 14, fontFamily: 'Poppins',
+                    style: TextStyle(fontSize: 14,
                         color: targetDate == null ? const Color(0xFF8F95B2) : const Color(0xFF1A1F36))),
                 const Icon(Icons.calendar_today_outlined, size: 16, color: Color(0xFF8F95B2)),
               ]),
@@ -327,7 +327,7 @@ class _AddTargetSheetState extends State<_AddTargetSheet> {
             const SizedBox(width: 8),
             const Expanded(child: Text('Aktifkan Notifikasi',
                 style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500,
-                    color: Color(0xFF1A1F36), fontFamily: 'Poppins'))),
+                    color: Color(0xFF1A1F36)))),
             Switch(value: notifikasi, onChanged: (v) => setState(() => notifikasi = v),
                 activeThumbColor: const Color(0xFF1A6BFF)),
           ]),
@@ -344,7 +344,7 @@ class _AddTargetSheetState extends State<_AddTargetSheet> {
                   elevation: 0),
               child: Text(isEdit ? 'Perbarui' : 'Simpan',
                   style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600,
-                      color: Colors.white, fontFamily: 'Poppins')),
+                      color: Colors.white)),
             ),
           ),
         ]),
@@ -419,11 +419,12 @@ class _TambahKurangiSheetState extends State<_TambahKurangiSheet> {
       padding: EdgeInsets.only(left: 20, right: 20, top: 20,
           bottom: MediaQuery.of(context).viewInsets.bottom + 24),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24)),
-      child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+      child: SingleChildScrollView(
+        child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(isTambah ? 'Tambah Tabungan' : 'Kurangi Tabungan',
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                  color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                  color: Color(0xFF1A1F36))),
           GestureDetector(onTap: Get.back,
               child: Container(width: 28, height: 28,
                   decoration: const BoxDecoration(color: Color(0xFFF5F7FF), shape: BoxShape.circle),
@@ -444,20 +445,20 @@ class _TambahKurangiSheetState extends State<_TambahKurangiSheet> {
             const SizedBox(width: 12),
             Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(t.name, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600,
-                  color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                  color: Color(0xFF1A1F36))),
               Text(
                 '${widget.ctrl.formatRupiah(t.currentAmount)} / ${widget.ctrl.formatRupiah(t.targetAmount)}',
-                style: const TextStyle(fontSize: 12, color: Color(0xFF8F95B2), fontFamily: 'Poppins')),
+                style: const TextStyle(fontSize: 12, color: Color(0xFF8F95B2))),
             ])),
             Text('${t.date.day}/${t.date.month}/${t.date.year}',
-                style: const TextStyle(fontSize: 11, color: Color(0xFF8F95B2), fontFamily: 'Poppins')),
+                style: const TextStyle(fontSize: 11, color: Color(0xFF8F95B2))),
           ]),
         ),
         const SizedBox(height: 16),
 
         Text(isTambah ? 'Tambah Dana' : 'Kurangi Dana',
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500,
-                color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                color: Color(0xFF1A1F36))),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
@@ -466,11 +467,11 @@ class _TambahKurangiSheetState extends State<_TambahKurangiSheet> {
               border: Border.all(color: const Color(0xFF1A6BFF), width: 1.5)),
           child: Row(children: [
             const Text('Rp ', style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600,
-                color: Color(0xFF1A6BFF), fontFamily: 'Poppins')),
+                color: Color(0xFF1A6BFF))),
             Expanded(child: TextField(
               controller: amountCtrl,
               keyboardType: TextInputType.number,
-              style: const TextStyle(fontSize: 14, fontFamily: 'Poppins', color: Color(0xFF1A1F36)),
+              style: const TextStyle(fontSize: 14, color: Color(0xFF1A1F36)),
               decoration: const InputDecoration(border: InputBorder.none, isDense: true),
             )),
           ]),
@@ -496,11 +497,12 @@ class _TambahKurangiSheetState extends State<_TambahKurangiSheet> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 elevation: 0),
             child: const Text('Simpan', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,
-                color: Colors.white, fontFamily: 'Poppins')),
+                color: Colors.white)),
           ),
         ),
-      ]),
-    );
+          ]),
+        ),
+      );
   }
 
   @override
@@ -524,13 +526,14 @@ class _ProgressSheet extends StatelessWidget {
       margin: const EdgeInsets.all(12),
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(24)),
-      child: Obx(() {
-        final t = ctrl.targets.firstWhere((x) => x.id == target.id, orElse: () => target);
-        return Column(mainAxisSize: MainAxisSize.min, children: [
+        child: Obx(() {
+          final t = ctrl.targets.firstWhere((x) => x.id == target.id, orElse: () => target);
+          return SingleChildScrollView(
+            child: Column(mainAxisSize: MainAxisSize.min, children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             const Text('Progres Penyimpanan',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                    color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                    color: Color(0xFF1A1F36))),
             GestureDetector(onTap: Get.back,
                 child: Container(width: 28, height: 28,
                     decoration: const BoxDecoration(color: Color(0xFFF5F7FF), shape: BoxShape.circle),
@@ -550,9 +553,9 @@ class _ProgressSheet extends StatelessWidget {
                 const SizedBox(height: 20),
                 Text('${t.progressPct.toStringAsFixed(0)}%',
                     style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w700,
-                        color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                        color: Color(0xFF1A1F36))),
                 const Text('Sesuai Proses',
-                    style: TextStyle(fontSize: 11, color: Color(0xFF8F95B2), fontFamily: 'Poppins')),
+                    style: TextStyle(fontSize: 11, color: Color(0xFF8F95B2))),
               ]),
             ]),
           ),
@@ -565,12 +568,11 @@ class _ProgressSheet extends StatelessWidget {
               decoration: BoxDecoration(color: const Color(0xFF1A6BFF),
                   borderRadius: BorderRadius.circular(12)),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const Text('Terkumpul', style: TextStyle(fontSize: 11, color: Colors.white70,
-                    fontFamily: 'Poppins')),
+                const Text('Terkumpul', style: TextStyle(fontSize: 11, color: Colors.white70)),
                 const SizedBox(height: 4),
                 Text(ctrl.formatRupiah(t.currentAmount),
                     style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Colors.white, fontFamily: 'Poppins')),
+                        color: Colors.white)),
               ]),
             )),
             const SizedBox(width: 10),
@@ -579,12 +581,11 @@ class _ProgressSheet extends StatelessWidget {
               decoration: BoxDecoration(color: const Color(0xFF1A6BFF),
                   borderRadius: BorderRadius.circular(12)),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const Text('Target', style: TextStyle(fontSize: 11, color: Colors.white70,
-                    fontFamily: 'Poppins')),
+                const Text('Target', style: TextStyle(fontSize: 11, color: Colors.white70)),
                 const SizedBox(height: 4),
                 Text(ctrl.formatRupiah(t.targetAmount),
                     style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700,
-                        color: Colors.white, fontFamily: 'Poppins')),
+                        color: Colors.white)),
               ]),
             )),
           ]),
@@ -601,7 +602,7 @@ class _ProgressSheet extends StatelessWidget {
                 const Icon(Icons.auto_awesome, size: 16, color: Color(0xFF1A6BFF)),
                 const SizedBox(width: 6),
                 const Text('Prediksi', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600,
-                    color: Color(0xFF1A6BFF), fontFamily: 'Poppins')),
+                    color: Color(0xFF1A6BFF))),
               ]),
               const SizedBox(height: 8),
               Text(
@@ -609,11 +610,12 @@ class _ProgressSheet extends StatelessWidget {
                 'Jika Anda mengkontribusikan bulanan sebesar 20%, Anda akan menyelesaikannya sesuai dengan target Anda.\n\n'
                 'Kontribusi bulanan yang disarankan: ${ctrl.formatRupiah(t.monthlyNeeded)}/bulan',
                 style: const TextStyle(fontSize: 12, color: Color(0xFF8F95B2),
-                    fontFamily: 'Poppins', height: 1.5),
+                    height: 1.5),
               ),
             ]),
           ),
-        ]);
+        ]),
+      );
       }),
     );
   }
@@ -702,8 +704,7 @@ class _OptionItem extends StatelessWidget {
           decoration: BoxDecoration(color: color.withValues(alpha: 0.1), shape: BoxShape.circle),
           child: Icon(icon, size: 18, color: color)),
       title: Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,
-          color: color == const Color(0xFFEF4444) ? color : const Color(0xFF1A1F36),
-          fontFamily: 'Poppins')),
+          color: color == const Color(0xFFEF4444) ? color : const Color(0xFF1A1F36))),
       onTap: onTap,
     );
   }
@@ -724,20 +725,20 @@ class _DeleteDialog extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Text('Hapus Target', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-              color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+              color: Color(0xFF1A1F36))),
           const SizedBox(height: 10),
           const Text('Yakin ingin menghapus target ini?\nSemua data tabungan Anda akan hilang.',
               style: TextStyle(fontSize: 13, color: Color(0xFF8F95B2),
-                  fontFamily: 'Poppins', height: 1.5)),
+                  height: 1.5)),
           const SizedBox(height: 20),
           Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             TextButton(onPressed: Get.back,
                 child: const Text('Batal', style: TextStyle(color: Color(0xFF8F95B2),
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w500))),
+                    fontWeight: FontWeight.w500))),
             const SizedBox(width: 8),
             TextButton(onPressed: () => ctrl.deleteTarget(target.id),
                 child: const Text('Hapus', style: TextStyle(color: Color(0xFFEF4444),
-                    fontFamily: 'Poppins', fontWeight: FontWeight.w600))),
+                    fontWeight: FontWeight.w600))),
           ]),
         ]),
       ),
@@ -752,7 +753,7 @@ class _Label extends StatelessWidget {
   const _Label(this.text);
   @override
   Widget build(BuildContext context) => Text(text, style: const TextStyle(
-      fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF1A1F36), fontFamily: 'Poppins'));
+      fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF1A1F36)));
 }
 
 class _Field extends StatelessWidget {
@@ -772,11 +773,11 @@ class _Field extends StatelessWidget {
           border: Border.all(color: const Color(0xFFE4E9F2))),
       child: Row(children: [
         if (prefix != null) Text('$prefix ', style: const TextStyle(fontSize: 14,
-            color: Color(0xFF8F95B2), fontFamily: 'Poppins')),
+            color: Color(0xFF8F95B2))),
         Expanded(child: TextField(
           controller: controller,
           keyboardType: isNumber ? TextInputType.number : TextInputType.text,
-          style: const TextStyle(fontSize: 14, fontFamily: 'Poppins', color: Color(0xFF1A1F36)),
+          style: const TextStyle(fontSize: 14, color: Color(0xFF1A1F36)),
           decoration: InputDecoration(border: InputBorder.none, isDense: true,
               hintText: hint, hintStyle: const TextStyle(color: Color(0xFF8F95B2))),
         )),

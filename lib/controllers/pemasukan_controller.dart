@@ -25,6 +25,23 @@ class PemasukanController extends GetxController {
 
   final List<String> frekuensiOptions = ['Harian', 'Mingguan', 'Bulanan', 'Tahunan'];
 
+  // Edit mode
+  Transaction? _editTarget;
+  bool get isEditing => _editTarget != null;
+
+  void setEditTarget(Transaction t) {
+    _editTarget = t;
+    amountController.text = t.amount.toStringAsFixed(0);
+    namaInstansiController.text = t.title == t.category ? '' : t.title;
+    selectedCategory.value = t.category;
+    selectedSimpan.value = t.source;
+    selectedDate.value = t.date;
+  }
+
+  void clearEditTarget() {
+    _editTarget = null;
+  }
+
   final List<KategoriItem> categories = [
     KategoriItem(label: 'Gaji', icon: Icons.account_balance_wallet_outlined),
     KategoriItem(label: 'Bonus', icon: Icons.card_giftcard_outlined),
@@ -88,7 +105,7 @@ class PemasukanController extends GetxController {
     isLoading.value = false;
 
     final homeCtrl = Get.isRegistered<HomeController>() ? Get.find<HomeController>() : null;
-    homeCtrl?.addTransaction(Transaction(
+    final t = Transaction(
       title: namaInstansiController.text.isEmpty
           ? selectedCategory.value
           : namaInstansiController.text,
@@ -97,9 +114,17 @@ class PemasukanController extends GetxController {
       isIncome: true,
       date: selectedDate.value ?? DateTime.now(),
       source: selectedSimpan.value,
-    ));
+    );
+
+    if (isEditing) {
+      homeCtrl?.updateTransaction(_editTarget!, t);
+      clearEditTarget();
+    } else {
+      homeCtrl?.addTransaction(t);
+    }
 
     Get.back();
+    Get.delete<PemasukanController>();
     Get.snackbar(
       'Berhasil! ✅',
       'Dana masuk berhasil dicatat',
@@ -113,6 +138,7 @@ class PemasukanController extends GetxController {
 
   @override
   void onClose() {
+    clearEditTarget();
     amountController.dispose();
     namaInstansiController.dispose();
     batasBulanController.dispose();
@@ -135,7 +161,8 @@ class _PemasukanRutinSheet extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
       ),
-      child: Column(
+      child: SingleChildScrollView(
+        child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -149,7 +176,7 @@ class _PemasukanRutinSheet extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                   color: Color(0xFF1A1F36),
-                  fontFamily: 'Poppins',
+
                 ),
               ),
               GestureDetector(
@@ -173,8 +200,7 @@ class _PemasukanRutinSheet extends StatelessWidget {
               style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF1A1F36),
-                  fontFamily: 'Poppins')),
+                  color: Color(0xFF1A1F36))),
           const SizedBox(height: 10),
           Obx(() => Row(
                 children: controller.frekuensiOptions.map((f) {
@@ -198,7 +224,7 @@ class _PemasukanRutinSheet extends StatelessWidget {
                             fontSize: 11,
                             fontWeight: FontWeight.w600,
                             color: isSelected ? Colors.white : const Color(0xFF8F95B2),
-                            fontFamily: 'Poppins',
+          
                           ),
                         ),
                       ),
@@ -213,12 +239,11 @@ class _PemasukanRutinSheet extends StatelessWidget {
               style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: Color(0xFF1A1F36),
-                  fontFamily: 'Poppins')),
+                  color: Color(0xFF1A1F36))),
           const SizedBox(height: 8),
           TextField(
             controller: controller.batasBulanController,
-            style: const TextStyle(fontSize: 14, fontFamily: 'Poppins'),
+            style: const TextStyle(fontSize: 14),
             decoration: InputDecoration(
               hintText: 'Tanggal',
               hintStyle: const TextStyle(color: Color(0xFF8F95B2), fontSize: 14),
@@ -271,13 +296,11 @@ class _PemasukanRutinSheet extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFF1A1F36),
-                                  fontFamily: 'Poppins')),
+                                  color: Color(0xFF1A1F36))),
                           const Text('Kirim peringatan 1hari sebelum',
                               style: TextStyle(
                                   fontSize: 11,
-                                  color: Color(0xFF8F95B2),
-                                  fontFamily: 'Poppins')),
+                                  color: Color(0xFF8F95B2))),
                         ],
                       ),
                     ),
@@ -307,11 +330,11 @@ class _PemasukanRutinSheet extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontFamily: 'Poppins')),
+                      color: Colors.white)),
             ),
           ),
         ],
+      ),
       ),
     );
   }

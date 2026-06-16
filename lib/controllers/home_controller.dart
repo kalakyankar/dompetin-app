@@ -82,6 +82,35 @@ class HomeController extends GetxController {
     isWarningDismissed.value = false;
   }
 
+  void deleteTransaction(String id) {
+    final i = transactions.indexWhere((t) => t.id == id);
+    if (i < 0) return;
+    final t = transactions[i];
+    transactions.removeAt(i);
+    if (t.isIncome) {
+      totalBalance.value -= t.amount;
+    } else {
+      totalBalance.value += t.amount;
+    }
+  }
+
+  void updateTransaction(Transaction old, Transaction updated) {
+    final i = transactions.indexWhere((t) => t.id == old.id);
+    if (i < 0) return;
+    // Adjust balance: remove old, add new
+    if (old.isIncome) {
+      totalBalance.value -= old.amount;
+    } else {
+      totalBalance.value += old.amount;
+    }
+    transactions[i] = updated;
+    if (updated.isIncome) {
+      totalBalance.value += updated.amount;
+    } else {
+      totalBalance.value -= updated.amount;
+    }
+  }
+
   /// Seed realistic dummy data so the app looks filled on first load
   void seedDummyData() {
     if (transactions.isNotEmpty) return; // only once
@@ -167,7 +196,8 @@ class _BatasPengeluaranSheetState extends State<_BatasPengeluaranSheet> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
       ),
-      child: Column(
+      child: SingleChildScrollView(
+        child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -176,7 +206,7 @@ class _BatasPengeluaranSheetState extends State<_BatasPengeluaranSheet> {
             children: [
               const Text('Tetapkan Batas Pengeluaran',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                      color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                      color: Color(0xFF1A1F36))),
               GestureDetector(
                 onTap: Get.back,
                 child: Container(
@@ -193,7 +223,7 @@ class _BatasPengeluaranSheetState extends State<_BatasPengeluaranSheet> {
           // Batas untuk Bulan
           const Text('Batas untuk Bulan',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500,
-                  color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                  color: Color(0xFF1A1F36))),
           const SizedBox(height: 8),
           GestureDetector(
             onTap: () async {
@@ -227,7 +257,7 @@ class _BatasPengeluaranSheetState extends State<_BatasPengeluaranSheet> {
                         ? 'Bulan'
                         : '${selectedMonth!.month}/${selectedMonth!.year}',
                     style: TextStyle(
-                      fontSize: 14, fontFamily: 'Poppins',
+                      fontSize: 14, 
                       color: selectedMonth == null
                           ? const Color(0xFF8F95B2) : const Color(0xFF1A1F36),
                     ),
@@ -242,18 +272,18 @@ class _BatasPengeluaranSheetState extends State<_BatasPengeluaranSheet> {
           // Batas Dana Maksimal
           const Text('Batas Dana Maksimal',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500,
-                  color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                  color: Color(0xFF1A1F36))),
           const SizedBox(height: 8),
           Row(
             children: [
               const Text('Rp ', style: TextStyle(fontSize: 18,
-                  fontWeight: FontWeight.w700, color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                  fontWeight: FontWeight.w700, color: Color(0xFF1A1F36))),
               Expanded(
                 child: TextField(
                   controller: amountController,
                   keyboardType: TextInputType.number,
                   style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700,
-                      color: Color(0xFF1A1F36), fontFamily: 'Poppins'),
+                      color: Color(0xFF1A1F36)),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: '0',
@@ -282,10 +312,10 @@ class _BatasPengeluaranSheetState extends State<_BatasPengeluaranSheet> {
                     children: const [
                       Text('Aktifkan Peringatan',
                           style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600,
-                              color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                              color: Color(0xFF1A1F36))),
                       SizedBox(height: 2),
                       Text('Beritahu saya sebelum saya melebihi batas anggaran.',
-                          style: TextStyle(fontSize: 11, color: Color(0xFF8F95B2), fontFamily: 'Poppins')),
+                          style: TextStyle(fontSize: 11, color: Color(0xFF8F95B2))),
                     ],
                   ),
                 ),
@@ -316,10 +346,11 @@ class _BatasPengeluaranSheetState extends State<_BatasPengeluaranSheet> {
               ),
               child: const Text('Simpan',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,
-                      color: Colors.white, fontFamily: 'Poppins')),
+                      color: Colors.white)),
             ),
           ),
         ],
+      ),
       ),
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../controllers/onboarding_controller.dart' show OnboardingController, OnboardingData;
+import '../../controllers/onboarding_controller.dart'
+    show OnboardingController, OnboardingData;
 import '../../theme/app_theme.dart';
 import '../../widgets/buttons.dart';
 import '../../widgets/dompetin_logo.dart';
@@ -14,7 +15,7 @@ class OnboardingScreen extends StatelessWidget {
     final controller = Get.put(OnboardingController());
 
     return Scaffold(
-      backgroundColor: AppTheme.white,
+      backgroundColor: AppTheme.onboardingBackground,
       body: SafeArea(
         child: Column(
           children: [
@@ -25,20 +26,6 @@ class OnboardingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const DompetinLogo(),
-                  Obx(() => controller.currentPage.value < 2
-                      ? TextButton(
-                          onPressed: controller.skip,
-                          child: Text(
-                            'Lewati',
-                            style: TextStyle(
-                              color: AppTheme.textGrey,
-                              fontSize: 14,
-                              fontFamily: 'Inter Tight',
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        )
-                      : const SizedBox()),
                 ],
               ),
             ),
@@ -251,23 +238,17 @@ class _IllustrationWidget extends StatelessWidget {
 class _Slide1Illustration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Person sitting with phone — emoji representation
-        Text('🧑‍💻', style: TextStyle(fontSize: 80)),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('💰', style: TextStyle(fontSize: 40)),
-            const SizedBox(width: 12),
-            Text('❓', style: TextStyle(fontSize: 40)),
-            const SizedBox(width: 12),
-            Text('📊', style: TextStyle(fontSize: 40)),
-          ],
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Center(
+          child: Image.asset(
+            'assets/images/onboarding1.png',
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            fit: BoxFit.contain,
+          ),
+        );
+      },
     );
   }
 }
@@ -275,22 +256,17 @@ class _Slide1Illustration extends StatelessWidget {
 class _Slide2Illustration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('📱', style: TextStyle(fontSize: 80)),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('📈', style: TextStyle(fontSize: 36)),
-            const SizedBox(width: 12),
-            Text('✅', style: TextStyle(fontSize: 36)),
-            const SizedBox(width: 12),
-            Text('🎯', style: TextStyle(fontSize: 36)),
-          ],
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Center(
+          child: Image.asset(
+            'assets/images/onboarding2.png',
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            fit: BoxFit.contain,
+          ),
+        );
+      },
     );
   }
 }
@@ -298,22 +274,17 @@ class _Slide2Illustration extends StatelessWidget {
 class _Slide3Illustration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('💡', style: TextStyle(fontSize: 70)),
-        const SizedBox(height: 8),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('💼', style: TextStyle(fontSize: 36)),
-            const SizedBox(width: 12),
-            Text('📉', style: TextStyle(fontSize: 36)),
-            const SizedBox(width: 12),
-            Text('🏆', style: TextStyle(fontSize: 36)),
-          ],
-        ),
-      ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Center(
+          child: Image.asset(
+            'assets/images/onboarding3.png',
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            fit: BoxFit.contain,
+          ),
+        );
+      },
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../controllers/home_controller.dart';
 import '../../controllers/riwayat_controller.dart';
+import '../../routes/app_routes.dart';
 import '../../theme/app_theme.dart';
 
 class DetailTransaksiScreen extends StatelessWidget {
@@ -29,7 +31,8 @@ class DetailTransaksiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Transaction passed as argument from Riwayat or Success screens
     final Transaction t = Get.arguments as Transaction;
-    final ctrl = RiwayatController();
+    final ctrl = Get.put(RiwayatController(), permanent: true);
+    final homeCtrl = Get.find<HomeController>();
 
     final isIncome = t.isIncome;
     final color = isIncome ? const Color(0xFF22C55E) : const Color(0xFFEF4444);
@@ -56,9 +59,18 @@ class DetailTransaksiScreen extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppTheme.textDark,
-                fontFamily: 'InterTight')),
+                color: AppTheme.textDark)),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () => _editTransaction(context, t, ctrl, homeCtrl),
+            icon: const Icon(Icons.edit_outlined, color: AppTheme.primaryBlue),
+          ),
+          IconButton(
+            onPressed: () => _confirmDelete(context, t, homeCtrl),
+            icon: const Icon(Icons.delete_outline, color: AppTheme.errorRed),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -83,7 +95,7 @@ class DetailTransaksiScreen extends StatelessWidget {
                   fontSize: 32,
                   fontWeight: FontWeight.w700,
                   color: isIncome ? AppTheme.textDark : AppTheme.textDark,
-                  fontFamily: 'InterTight',
+
                 ),
               ),
               const SizedBox(height: 10),
@@ -102,8 +114,7 @@ class DetailTransaksiScreen extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF22C55E),
-                          fontFamily: 'InterTight')),
+                          color: Color(0xFF22C55E))),
                 ]),
               ),
             ]),
@@ -139,8 +150,7 @@ class DetailTransaksiScreen extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: AppTheme.textDark,
-                          fontFamily: 'InterTight')),
+                          color: AppTheme.textDark)),
                 ]),
               ),
               const Divider(color: AppTheme.divider, height: 24),
@@ -163,8 +173,7 @@ class DetailTransaksiScreen extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppTheme.textDark,
-                        fontFamily: 'InterTight'),
+                        color: AppTheme.textDark),
                   ),
                 ),
                 const Divider(color: AppTheme.divider, height: 24),
@@ -197,11 +206,50 @@ class DetailTransaksiScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontFamily: 'InterTight')),
+                      color: Colors.white)),
             ),
           ),
         ]),
+      ),
+    );
+  }
+
+  void _editTransaction(
+      BuildContext context, Transaction t, RiwayatController ctrl, HomeController homeCtrl) {
+    Get.delete<RiwayatController>();
+    Get.toNamed(
+      t.isIncome ? AppRoutes.pemasukan : AppRoutes.pengeluaran,
+      arguments: t,
+    );
+  }
+
+  void _confirmDelete(BuildContext context, Transaction t, HomeController homeCtrl) {
+    Get.dialog(
+      AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Text('Hapus Transaksi'),
+        content: Text('Yakin ingin menghapus transaksi "${t.title}"?'),
+        actions: [
+          TextButton(
+            onPressed: Get.back,
+            child: const Text('Batal'),
+          ),
+          TextButton(
+            onPressed: () {
+              homeCtrl.deleteTransaction(t.id);
+              Get.back();
+              Get.back();
+              Get.snackbar(
+                'Terhapus',
+                'Transaksi berhasil dihapus',
+                snackPosition: SnackPosition.TOP,
+                margin: const EdgeInsets.all(16),
+                borderRadius: 12,
+              );
+            },
+            child: const Text('Hapus', style: TextStyle(color: AppTheme.errorRed)),
+          ),
+        ],
       ),
     );
   }
@@ -221,7 +269,6 @@ class _DetailSection extends StatelessWidget {
           style: const TextStyle(
               fontSize: 12,
               color: AppTheme.textGrey,
-              fontFamily: 'InterTight',
               fontWeight: FontWeight.w400)),
       const SizedBox(height: 8),
       child,
@@ -257,7 +304,6 @@ class _DetailRow extends StatelessWidget {
             style: const TextStyle(
                 fontSize: 12,
                 color: AppTheme.textGrey,
-                fontFamily: 'InterTight',
                 fontWeight: FontWeight.w400)),
         const SizedBox(height: 6),
         Row(children: [
@@ -278,8 +324,7 @@ class _DetailRow extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppTheme.textDark,
-                    fontFamily: 'InterTight')),
+                    color: AppTheme.textDark)),
           ),
         ]),
       ])),
@@ -292,15 +337,13 @@ class _DetailRow extends StatelessWidget {
         Text(rightLabel,
             style: const TextStyle(
                 fontSize: 12,
-                color: AppTheme.textGrey,
-                fontFamily: 'InterTight')),
+                color: AppTheme.textGrey)),
         const SizedBox(height: 6),
         Text(rightValue,
             style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
                 color: AppTheme.textDark,
-                fontFamily: 'InterTight',
                 height: 1.5)),
       ])),
     ]);

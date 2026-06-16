@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import '../controllers/pemasukan_controller.dart';
+import '../controllers/pengeluaran_controller.dart';
 import '../views/splash/splash_screen.dart';
 import '../views/onboarding/onboarding_screen.dart';
 import '../views/login/login_screen.dart';
@@ -52,10 +54,16 @@ class AppRoutes {
     GetPage(
         name: pemasukan,
         page: () => const PemasukanScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<PemasukanController>(() => PemasukanController());
+        }),
         transition: Transition.rightToLeft),
     GetPage(
         name: pengeluaran,
         page: () => const PengeluaranScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<PengeluaranController>(() => PengeluaranController());
+        }),
         transition: Transition.rightToLeft),
     GetPage(
         name: insight,

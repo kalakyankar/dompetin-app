@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import '../../controllers/home_controller.dart';
 import '../../controllers/pengeluaran_controller.dart';
 import '../../theme/app_theme.dart';
 
@@ -9,7 +10,12 @@ class PengeluaranScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.put(PengeluaranController());
+    final ctrl = Get.find<PengeluaranController>();
+
+    // Check if editing an existing transaction
+    if (Get.arguments != null && Get.arguments is Transaction && !ctrl.isEditing) {
+      ctrl.setEditTarget(Get.arguments as Transaction);
+    }
 
     return Scaffold(
       backgroundColor: AppTheme.white,
@@ -32,8 +38,7 @@ class PengeluaranScreen extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppTheme.textDark,
-                fontFamily: 'InterTight')),
+                color: AppTheme.textDark)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -53,8 +58,7 @@ class PengeluaranScreen extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
-                        color: AppTheme.textDark,
-                        fontFamily: 'InterTight')),
+                        color: AppTheme.textDark)),
                 Icon(Icons.add, color: AppTheme.primaryBlue, size: 20),
               ],
             ),
@@ -67,8 +71,7 @@ class PengeluaranScreen extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppTheme.textDark,
-                    fontFamily: 'InterTight')),
+                    color: AppTheme.textDark)),
             const SizedBox(height: 10),
             _DatePicker(ctrl: ctrl),
             const SizedBox(height: 20),
@@ -78,8 +81,7 @@ class PengeluaranScreen extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppTheme.textDark,
-                    fontFamily: 'InterTight')),
+                    color: AppTheme.textDark)),
             const SizedBox(height: 10),
             TextField(
               controller: ctrl.catatanController,
@@ -93,8 +95,7 @@ class PengeluaranScreen extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppTheme.textDark,
-                    fontFamily: 'InterTight')),
+                    color: AppTheme.textDark)),
             const SizedBox(height: 10),
             _AsalDanaRow(ctrl: ctrl),
             const SizedBox(height: 20),
@@ -127,8 +128,7 @@ class PengeluaranScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                fontFamily: 'InterTight')),
+                                color: Colors.white)),
                   ),
                 )),
             const SizedBox(height: 24),
@@ -164,24 +164,25 @@ class _AmountCard extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
-                      color: AppTheme.textDark,
-                      fontFamily: 'InterTight')),
+                      color: AppTheme.textDark)),
               const SizedBox(width: 12),
-              IntrinsicWidth(
-                child: TextField(
-                  controller: ctrl.amountController,
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.textDark,
-                      fontFamily: 'InterTight'),
-                  decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      isDense: true,
-                      contentPadding: EdgeInsets.zero),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 250),
+                child: IntrinsicWidth(
+                  child: TextField(
+                    controller: ctrl.amountController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.textDark),
+                    decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        isDense: true,
+                        contentPadding: EdgeInsets.zero),
+                  ),
                 ),
               ),
             ],
@@ -256,8 +257,7 @@ class _CategoryGrid extends StatelessWidget {
                                 isSelected ? FontWeight.w600 : FontWeight.w400,
                             color: isSelected
                                 ? AppTheme.primaryBlue
-                                : AppTheme.textDark,
-                            fontFamily: 'InterTight')),
+                                : AppTheme.textDark)),
                   ],
                 ),
               ),
@@ -292,7 +292,7 @@ class _DatePicker extends StatelessWidget {
                       : '${ctrl.selectedDate.value!.day}/${ctrl.selectedDate.value!.month}/${ctrl.selectedDate.value!.year}',
                   style: TextStyle(
                       fontSize: 14,
-                      fontFamily: 'InterTight',
+
                       color: ctrl.selectedDate.value == null
                           ? AppTheme.textGrey
                           : AppTheme.textDark),
@@ -373,13 +373,11 @@ class _AsalDanaRow extends StatelessWidget {
                                   fontWeight: FontWeight.w600,
                                   color: isSelected
                                       ? AppTheme.primaryBlue
-                                      : AppTheme.textDark,
-                                  fontFamily: 'InterTight')),
+                                      : AppTheme.textDark)),
                           Text(opt['sub'] as String,
                               style: const TextStyle(
                                   fontSize: 11,
-                                  color: AppTheme.textGrey,
-                                  fontFamily: 'InterTight')),
+                                  color: AppTheme.textGrey)),
                         ],
                       ),
                     ),
@@ -428,8 +426,7 @@ class _RutinToggleRow extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: AppTheme.textDark,
-                            fontFamily: 'InterTight')),
+                            color: AppTheme.textDark)),
                     Text('Ulangi setiap bulan', style: AppTheme.bodySmall),
                   ],
                 ),

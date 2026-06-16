@@ -108,13 +108,11 @@ class _PermissionStep extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF22C55E),
-                          fontFamily: 'InterTight')),
+                          color: Color(0xFF22C55E))),
                   Text('Keamanan data Anda adalah prioritas kami.',
                       style: TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF8F95B2),
-                          fontFamily: 'InterTight')),
+                          color: Color(0xFF8F95B2))),
                 ])),
           ]),
         ),
@@ -215,8 +213,7 @@ class _CameraStep extends StatelessWidget {
                           Text('Memuat kamera...',
                               style: TextStyle(
                                   color: Colors.white.withValues(alpha: 0.7),
-                                  fontSize: 14,
-                                  fontFamily: 'InterTight')),
+                                  fontSize: 14)),
                         ])))),
 
           // Top bar
@@ -239,8 +236,7 @@ class _CameraStep extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'InterTight'))),
+                              fontWeight: FontWeight.w600))),
                   _CircleBtn(
                       icon: Icons.photo_library_outlined,
                       onTap: ctrl.pickFromGallery),
@@ -268,8 +264,7 @@ class _CameraStep extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'InterTight')),
+                              fontWeight: FontWeight.w500)),
                     ]),
                   ))),
 
@@ -306,8 +301,7 @@ class _CameraStep extends StatelessWidget {
                 const Text('Foto Struk',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 12,
-                        fontFamily: 'InterTight')),
+                        fontSize: 12)),
               ])),
         ]);
       }),
@@ -442,8 +436,7 @@ class _AnalyzingStep extends StatelessWidget {
                         style: const TextStyle(
                             color: Colors.white,
                             fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'InterTight')),
+                            fontWeight: FontWeight.w500)),
                   ]),
                 )),
             const SizedBox(height: 14),
@@ -462,8 +455,7 @@ class _AnalyzingStep extends StatelessWidget {
             Obx(() => Text('${(ctrl.analysisProgress.value * 100).toInt()}%',
                 style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.7),
-                    fontSize: 12,
-                    fontFamily: 'InterTight'))),
+                    fontSize: 12))),
           ])),
     ]);
   }
@@ -495,8 +487,7 @@ class _ResultStep extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppTheme.textDark,
-                fontFamily: 'InterTight')),
+                color: AppTheme.textDark)),
         centerTitle: true,
       ),
       body: Obx(() {
@@ -532,14 +523,12 @@ class _ResultStep extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                              color: AppTheme.primaryBlue,
-                              fontFamily: 'InterTight')),
+                              color: AppTheme.primaryBlue)),
                       Text(
                           'Dompetin telah memindai struk Anda dengan akurat. Mohon verifikasi detail dibawah ini.',
                           style: TextStyle(
                               fontSize: 11,
-                              color: AppTheme.textGrey,
-                              fontFamily: 'InterTight')),
+                              color: AppTheme.textGrey)),
                     ])),
               ]),
             ),
@@ -587,7 +576,7 @@ class _ResultStep extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: 'InterTight',
+
                                     color: sel
                                         ? Colors.white
                                         : AppTheme.textGrey)),
@@ -802,8 +791,7 @@ class _SuccessStep extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
-                                color: AppTheme.textGrey,
-                                fontFamily: 'InterTight')),
+                                color: AppTheme.textGrey)),
                         Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 4),
@@ -814,16 +802,14 @@ class _SuccessStep extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w600,
-                                    color: Color(0xFF22C55E),
-                                    fontFamily: 'InterTight'))),
+                                    color: Color(0xFF22C55E)))),
                       ]),
                   const SizedBox(height: 6),
                   Text(ctrl.formatRupiah(ctrl.effectiveTotal),
                       style: const TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w700,
-                          color: AppTheme.textDark,
-                          fontFamily: 'InterTight')),
+                          color: AppTheme.textDark)),
                   const SizedBox(height: 16),
                   Row(children: [
                     Expanded(
@@ -840,8 +826,7 @@ class _SuccessStep extends StatelessWidget {
                   const Text('Asal Saldo',
                       style: TextStyle(
                           fontSize: 12,
-                          color: AppTheme.textGrey,
-                          fontFamily: 'InterTight')),
+                          color: AppTheme.textGrey)),
                   const SizedBox(height: 8),
                   Obx(() => Row(
                           children: ctrl.asalSaldoOptions.map((opt) {
@@ -867,7 +852,7 @@ class _SuccessStep extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: 'InterTight',
+
                                     color: isSel
                                         ? Colors.white
                                         : AppTheme.textGrey)),
@@ -946,8 +931,7 @@ class _FormLabel extends StatelessWidget {
       style: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w500,
-          color: AppTheme.textDark,
-          fontFamily: 'InterTight'));
+          color: AppTheme.textDark));
 }
 
 class _SummaryRow extends StatelessWidget {
@@ -963,13 +947,11 @@ class _SummaryRow extends StatelessWidget {
           Text(label,
               style: TextStyle(
                   fontSize: 13,
-                  fontFamily: 'InterTight',
                   fontWeight: bold ? FontWeight.w700 : FontWeight.w400,
                   color: bold ? AppTheme.textDark : AppTheme.textGrey)),
           Text(value,
               style: TextStyle(
                   fontSize: 13,
-                  fontFamily: 'InterTight',
                   fontWeight: bold ? FontWeight.w700 : FontWeight.w500,
                   color: bold ? AppTheme.textDark : AppTheme.textDark)),
         ],
@@ -993,8 +975,7 @@ class _InfoChip extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: AppTheme.textDark,
-                  fontFamily: 'InterTight')),
+                  color: AppTheme.textDark)),
         ]),
       );
 }
@@ -1016,8 +997,7 @@ class _DetailRow extends StatelessWidget {
               child: Text(label,
                   style: TextStyle(
                       fontSize: 12,
-                      color: AppTheme.textGrey,
-                      fontFamily: 'InterTight'))),
+                      color: AppTheme.textGrey))),
           Row(children: [
             if (icon != null) ...[
               Icon(icon!, size: 14, color: AppTheme.textGrey),
@@ -1027,8 +1007,7 @@ class _DetailRow extends StatelessWidget {
                 style: TextStyle(
                     fontSize: large ? 15 : 13,
                     fontWeight: large ? FontWeight.w700 : FontWeight.w500,
-                    color: valueColor ?? AppTheme.textDark,
-                    fontFamily: 'InterTight')),
+                    color: valueColor ?? AppTheme.textDark)),
           ]),
         ]),
       );
@@ -1062,8 +1041,7 @@ class _Btn extends StatelessWidget {
                   style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontFamily: 'InterTight')),
+                      color: Colors.white)),
         ),
       );
 }
@@ -1087,8 +1065,7 @@ class _OutBtn extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: AppTheme.textGrey,
-                  fontFamily: 'InterTight')),
+                  color: AppTheme.textGrey)),
         ),
       );
 }

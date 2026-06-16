@@ -3,11 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Colors
-  static const Color primaryBlue = Color(0xFF1A6BFF);
+  static const Color primaryBlue = Color(0xFF2563EB);
   static const Color deepBlue = Color(0xFF0A4FD8);
   static const Color lightBlue = Color(0xFF4D8EFF);
   static const Color accentYellow = Color(0xFFFFCC00);
-  static const Color onboardingBackground = Color(0xFFF6F9FF);
+  static const Color onboardingBackground = Color(0xFFEFF6FF);
   static const Color white = Color(0xFFFFFFFF);
   static const Color offWhite = Color(0xFFF5F7FF);
   static const Color textDark = Color(0xFF1A1F36);
@@ -26,7 +26,7 @@ class AppTheme {
         secondary: accentYellow,
         surface: white,
       ),
-      textTheme: GoogleFonts.poppinsTextTheme(),
+      textTheme: GoogleFonts.interTightTextTheme(),
       scaffoldBackgroundColor: onboardingBackground,
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
@@ -37,46 +37,46 @@ class AppTheme {
   }
 
   // Text Styles
-  static TextStyle get heading1 => GoogleFonts.poppins(
+  static TextStyle get heading1 => GoogleFonts.interTight(
         fontSize: 28,
         fontWeight: FontWeight.w700,
         color: textDark,
         height: 1.3,
       );
 
-  static TextStyle get heading2 => GoogleFonts.poppins(
+  static TextStyle get heading2 => GoogleFonts.interTight(
         fontSize: 22,
         fontWeight: FontWeight.w700,
         color: textDark,
         height: 1.3,
       );
 
-  static TextStyle get heading3 => GoogleFonts.poppins(
+  static TextStyle get heading3 => GoogleFonts.interTight(
         fontSize: 18,
         fontWeight: FontWeight.w600,
         color: textDark,
       );
 
-  static TextStyle get body => GoogleFonts.poppins(
+  static TextStyle get body => GoogleFonts.interTight(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: textGrey,
         height: 1.6,
       );
 
-  static TextStyle get bodySmall => GoogleFonts.poppins(
+  static TextStyle get bodySmall => GoogleFonts.interTight(
         fontSize: 12,
         fontWeight: FontWeight.w400,
         color: textGrey,
       );
 
-  static TextStyle get button => GoogleFonts.poppins(
+  static TextStyle get button => GoogleFonts.interTight(
         fontSize: 16,
         fontWeight: FontWeight.w600,
         color: white,
       );
 
-  static TextStyle get label => GoogleFonts.poppins(
+  static TextStyle get label => GoogleFonts.interTight(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         color: textDark,
@@ -102,7 +102,7 @@ class AppTheme {
   }) =>
       InputDecoration(
         hintText: hint,
-        hintStyle: GoogleFonts.poppins(
+        hintStyle: GoogleFonts.interTight(
           fontSize: 14,
           color: textGrey,
           fontWeight: FontWeight.w400,

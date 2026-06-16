@@ -34,8 +34,7 @@ class ProfilScreen extends StatelessWidget {
                             style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                                fontFamily: 'InterTight')))),
+                                color: Colors.white)))),
                 const SizedBox(width: 14),
                 Expanded(
                     child: Column(
@@ -45,8 +44,7 @@ class ProfilScreen extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
-                              color: AppTheme.textDark,
-                              fontFamily: 'InterTight')),
+                              color: AppTheme.textDark)),
                       Text(ctrl.email.value, style: AppTheme.bodySmall),
                       Text(ctrl.telepon.value, style: AppTheme.bodySmall),
                     ])),
@@ -141,8 +139,7 @@ class _MenuCard extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     color: item.destructive
                         ? const Color(0xFFEF4444)
-                        : AppTheme.textDark,
-                    fontFamily: 'InterTight')),
+                        : AppTheme.textDark)),
             trailing: item.destructive
                 ? null
                 : const Icon(Icons.chevron_right,
@@ -189,8 +186,7 @@ class EditProfilScreen extends StatelessWidget {
                           style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                              fontFamily: 'InterTight'))))),
+                              color: Colors.white))))),
               Positioned(
                   bottom: 0,
                   right: 0,
@@ -218,8 +214,7 @@ class EditProfilScreen extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
-                        color: AppTheme.textDark,
-                        fontFamily: 'InterTight')),
+                        color: AppTheme.textDark)),
                 const SizedBox(height: 6),
                 Obx(() => DropdownButtonFormField<String>(
                       initialValue: ctrl.jenisKelamin.value,
@@ -248,8 +243,7 @@ class EditProfilScreen extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontFamily: 'InterTight')),
+                          color: Colors.white)),
                 )),
           ])),
     );
@@ -294,8 +288,7 @@ class PusatBantuanScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: AppTheme.textDark,
-                      fontFamily: 'InterTight')),
+                      color: AppTheme.textDark)),
               const SizedBox(height: 12),
               Container(
                   decoration: BoxDecoration(
@@ -348,8 +341,7 @@ class _FaqTileState extends State<_FaqTile> {
                                     fontWeight: _open
                                         ? FontWeight.w600
                                         : FontWeight.w500,
-                                    color: AppTheme.textDark,
-                                    fontFamily: 'InterTight'))),
+                                    color: AppTheme.textDark))),
                         const SizedBox(width: 8),
                         AnimatedRotation(
                             duration: const Duration(milliseconds: 200),
@@ -376,7 +368,7 @@ class PengingatScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppTheme.offWhite,
         appBar: _appBar('Pengingat'),
-        body: Padding(
+        body: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -428,8 +420,7 @@ class PengingatScreen extends StatelessWidget {
       style: const TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
-          color: AppTheme.textGrey,
-          fontFamily: 'InterTight'));
+          color: AppTheme.textGrey));
 
   Widget _toggleCard(
       List<(IconData, Color, String, String, RxBool, Function(bool))> items) {
@@ -458,8 +449,7 @@ class PengingatScreen extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: AppTheme.textDark,
-                          fontFamily: 'InterTight')),
+                          color: AppTheme.textDark)),
                   subtitle: Text(it.$4, style: AppTheme.bodySmall),
                   contentPadding:
                       const EdgeInsets.symmetric(horizontal: 14, vertical: 2),
@@ -534,7 +524,7 @@ class GantiKataSandiScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: AppTheme.offWhite,
         appBar: _appBar('Ganti Kata Sandi'),
-        body: Padding(
+        body: SingleChildScrollView(
             padding: const EdgeInsets.all(20),
             child: Column(children: [
               _card([
@@ -571,8 +561,7 @@ class GantiKataSandiScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                fontFamily: 'InterTight')),
+                                color: Colors.white)),
                   ))),
             ])));
   }
@@ -596,8 +585,7 @@ PreferredSizeWidget _appBar(String title) => AppBar(
           style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: AppTheme.textDark,
-              fontFamily: 'InterTight')),
+              color: AppTheme.textDark)),
       centerTitle: true,
     );
 
@@ -618,8 +606,7 @@ Widget _field(String label, TextEditingController ctrl, String hint,
           style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
-              color: AppTheme.textDark,
-              fontFamily: 'InterTight')),
+              color: AppTheme.textDark)),
       const SizedBox(height: 6),
       TextField(
           controller: ctrl,
@@ -636,8 +623,7 @@ Widget _pwField(String label, TextEditingController ctrl, String hint,
           style: const TextStyle(
               fontSize: 13,
               fontWeight: FontWeight.w500,
-              color: AppTheme.textDark,
-              fontFamily: 'InterTight')),
+              color: AppTheme.textDark)),
       const SizedBox(height: 6),
       Obx(() => TextField(
             controller: ctrl,

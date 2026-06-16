@@ -26,6 +26,23 @@ class PengeluaranController extends GetxController {
 
   final List<String> frekuensiOptions = ['Harian', 'Mingguan', 'Bulanan', 'Tahunan'];
 
+  // Edit mode
+  Transaction? _editTarget;
+  bool get isEditing => _editTarget != null;
+
+  void setEditTarget(Transaction t) {
+    _editTarget = t;
+    amountController.text = t.amount.toStringAsFixed(0);
+    catatanController.text = t.note;
+    selectedCategory.value = t.category;
+    selectedAsalDana.value = t.source;
+    selectedDate.value = t.date;
+  }
+
+  void clearEditTarget() {
+    _editTarget = null;
+  }
+
   final List<KategoriPengeluaran> categories = [
     KategoriPengeluaran(label: 'Makan & Minum', icon: Icons.restaurant_outlined),
     KategoriPengeluaran(label: 'Sewa', icon: Icons.home_outlined),
@@ -89,7 +106,7 @@ class PengeluaranController extends GetxController {
 
     if (Get.isRegistered<HomeController>()) {
       final homeCtrl = Get.find<HomeController>();
-      homeCtrl.addTransaction(Transaction(
+      final t = Transaction(
         title: catatanController.text.isEmpty
             ? selectedCategory.value
             : catatanController.text,
@@ -98,10 +115,18 @@ class PengeluaranController extends GetxController {
         isIncome: false,
         date: selectedDate.value ?? DateTime.now(),
         source: selectedAsalDana.value,
-      ));
+      );
+
+      if (isEditing) {
+        homeCtrl.updateTransaction(_editTarget!, t);
+        clearEditTarget();
+      } else {
+        homeCtrl.addTransaction(t);
+      }
     }
 
     Get.back();
+    Get.delete<PengeluaranController>();
     Get.snackbar(
       'Berhasil! ✅',
       'Pengeluaran berhasil dicatat',
@@ -115,6 +140,7 @@ class PengeluaranController extends GetxController {
 
   @override
   void onClose() {
+    clearEditTarget();
     amountController.dispose();
     catatanController.dispose();
     batasBulanController.dispose();
@@ -137,7 +163,8 @@ class _PengeluaranRutinSheet extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
       ),
-      child: Column(
+      child: SingleChildScrollView(
+        child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -146,7 +173,7 @@ class _PengeluaranRutinSheet extends StatelessWidget {
             children: [
               const Text('Pengeluaran Rutin',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700,
-                      color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                      color: Color(0xFF1A1F36))),
               GestureDetector(
                 onTap: Get.back,
                 child: Container(
@@ -161,7 +188,7 @@ class _PengeluaranRutinSheet extends StatelessWidget {
           const SizedBox(height: 20),
           const Text('Frekuensi Waktu',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500,
-                  color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                  color: Color(0xFF1A1F36))),
           const SizedBox(height: 10),
           Obx(() => Row(
                 children: controller.frekuensiOptions.map((f) {
@@ -180,8 +207,7 @@ class _PengeluaranRutinSheet extends StatelessWidget {
                             textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 11,
                                 fontWeight: FontWeight.w600,
-                                color: isSel ? Colors.white : const Color(0xFF8F95B2),
-                                fontFamily: 'Poppins')),
+                                color: isSel ? Colors.white : const Color(0xFF8F95B2))),
                       ),
                     ),
                   );
@@ -190,7 +216,7 @@ class _PengeluaranRutinSheet extends StatelessWidget {
           const SizedBox(height: 16),
           const Text('Batas untuk Bulan',
               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500,
-                  color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                  color: Color(0xFF1A1F36))),
           const SizedBox(height: 8),
           Obx(() => GestureDetector(
                 onTap: () async {
@@ -222,7 +248,7 @@ class _PengeluaranRutinSheet extends StatelessWidget {
                         controller.rutinSelectedDate.value == null
                             ? 'Tanggal'
                             : '${controller.rutinSelectedDate.value!.day}/${controller.rutinSelectedDate.value!.month}/${controller.rutinSelectedDate.value!.year}',
-                        style: TextStyle(fontSize: 14, fontFamily: 'Poppins',
+                        style: TextStyle(fontSize: 14, 
                             color: controller.rutinSelectedDate.value == null
                                 ? const Color(0xFF8F95B2) : const Color(0xFF1A1F36)),
                       ),
@@ -257,9 +283,9 @@ class _PengeluaranRutinSheet extends StatelessWidget {
                         children: const [
                           Text('Aktifkan Notifikasi',
                               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600,
-                                  color: Color(0xFF1A1F36), fontFamily: 'Poppins')),
+                                  color: Color(0xFF1A1F36))),
                           Text('Kirim peringatan 1hari sebelum',
-                              style: TextStyle(fontSize: 11, color: Color(0xFF8F95B2), fontFamily: 'Poppins')),
+                              style: TextStyle(fontSize: 11, color: Color(0xFF8F95B2))),
                         ],
                       ),
                     ),
@@ -283,10 +309,11 @@ class _PengeluaranRutinSheet extends StatelessWidget {
               ),
               child: const Text('Simpan',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600,
-                      color: Colors.white, fontFamily: 'Poppins')),
+                      color: Colors.white)),
             ),
           ),
         ],
+      ),
       ),
     );
   }

@@ -41,7 +41,7 @@ class DompetinLogo extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: 'Dompet',
+                text: 'Dompe',
                 style: GoogleFonts.interTight(
                   fontSize: 18 * size,
                   fontWeight: FontWeight.w700,
@@ -49,7 +49,7 @@ class DompetinLogo extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: 'in',
+                text: 'tin',
                 style: GoogleFonts.interTight(
                   fontSize: 18 * size,
                   fontWeight: FontWeight.w700,

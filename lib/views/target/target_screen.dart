@@ -66,8 +66,7 @@ class _EmptyState extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontFamily: 'InterTight')),
+                    color: Colors.white)),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.primaryBlue,
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
@@ -181,15 +180,13 @@ class _TargetBalanceCard extends StatelessWidget {
           Text('Total Tabungan',
               style: TextStyle(
                   color: Colors.white.withValues(alpha: 0.8),
-                  fontSize: 12,
-                  fontFamily: 'InterTight')),
+                  fontSize: 12)),
           const SizedBox(height: 6),
           Obx(() => Text(ctrl.formatRupiah(ctrl.totalTabungan),
               style: const TextStyle(
                   color: Colors.white,
                   fontSize: 26,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'InterTight'))),
+                  fontWeight: FontWeight.w700))),
           const SizedBox(height: 12),
           Obx(() => Container(
                 padding:
@@ -205,8 +202,7 @@ class _TargetBalanceCard extends StatelessWidget {
                       style: const TextStyle(
                           color: Colors.white,
                           fontSize: 11,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'InterTight')),
+                          fontWeight: FontWeight.w600)),
                 ]),
               )),
           const SizedBox(height: 4),
@@ -252,8 +248,7 @@ class _TargetCard extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: AppTheme.textDark,
-                        fontFamily: 'InterTight')),
+                        color: AppTheme.textDark)),
                 Row(children: [
                   const Icon(Icons.calendar_today_outlined,
                       size: 11, color: AppTheme.textGrey),
@@ -285,7 +280,7 @@ class _TargetCard extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
                   '${ctrl.formatRupiah(t.currentAmount)} / ${ctrl.formatRupiah(t.targetAmount)}',
-                  style: AppTheme.bodySmall.copyWith(fontFamily: 'InterTight')),
+                  style: AppTheme.bodySmall.copyWith()),
               const SizedBox(height: 4),
               ClipRRect(
                 borderRadius: BorderRadius.circular(6),
@@ -307,8 +302,7 @@ class _TargetCard extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: AppTheme.primaryBlue,
-                    fontFamily: 'InterTight')),
+                    color: AppTheme.primaryBlue)),
           ),
         ]),
         const SizedBox(height: 12),
@@ -322,8 +316,7 @@ class _TargetCard extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                      fontFamily: 'InterTight')),
+                      color: Colors.white)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.primaryBlue,
                 shape: RoundedRectangleBorder(
@@ -343,8 +336,7 @@ class _TargetCard extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: AppTheme.textGrey,
-                      fontFamily: 'InterTight')),
+                      color: AppTheme.textGrey)),
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: AppTheme.inputBorder),
                 shape: RoundedRectangleBorder(

@@ -164,9 +164,12 @@ class RegisterScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Sudah punya akun? ',
-                      style: AppTheme.bodySmall,
+                    Flexible(
+                      child: Text(
+                        'Sudah punya akun? ',
+                        style: AppTheme.bodySmall,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     GestureDetector(
                       onTap: () => Get.offNamed(AppRoutes.login),
@@ -175,7 +178,7 @@ class RegisterScreen extends StatelessWidget {
                         style: TextStyle(
                           color: AppTheme.primaryBlue,
                           fontSize: 12,
-                          fontFamily: 'InterTight',
+
                           fontWeight: FontWeight.w600,
                         ),
                       ),

@@ -143,7 +143,7 @@ class _FilterChip extends StatelessWidget {
             style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
-              fontFamily: 'InterTight',
+
               color: isActive ? Colors.white : AppTheme.textGrey,
             )),
       ),
@@ -228,7 +228,7 @@ class _TransactionTile extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                     color: AppTheme.textDark,
-                    fontFamily: 'InterTight',
+      
                   )),
               const SizedBox(height: 2),
               Text(subtitle, style: AppTheme.bodySmall),
@@ -236,13 +236,17 @@ class _TransactionTile extends StatelessWidget {
           )),
 
           // Amount
-          Text(
-            '${isIncome ? '+' : '-'}${ctrl.formatRupiah(t.amount)}',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: color,
-              fontFamily: 'InterTight',
+          Flexible(
+            child: Text(
+              '${isIncome ? '+' : '-'}${ctrl.formatRupiah(t.amount)}',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: color,
+
+              ),
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.end,
             ),
           ),
         ]),

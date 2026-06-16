@@ -207,7 +207,7 @@ class _CheckEmailStep extends StatelessWidget {
                           color: AppTheme.primaryBlue,
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
-                          fontFamily: 'InterTight',
+
                         ),
                       ),
                       const TextSpan(
@@ -233,8 +233,7 @@ class _CheckEmailStep extends StatelessWidget {
                     controller.otpError.value,
                     style: const TextStyle(
                         color: AppTheme.errorRed,
-                        fontSize: 12,
-                        fontFamily: 'InterTight'),
+                        fontSize: 12),
                   ),
                 )
               : const SizedBox()),
@@ -250,7 +249,9 @@ class _CheckEmailStep extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Tidak menerima email? ', style: AppTheme.bodySmall),
+              Flexible(
+                child: Text('Tidak menerima email? ', style: AppTheme.bodySmall, overflow: TextOverflow.ellipsis),
+              ),
               GestureDetector(
                 onTap: () {
                   controller.currentStep.value = ForgotStep.email;
@@ -260,7 +261,6 @@ class _CheckEmailStep extends StatelessWidget {
                   style: TextStyle(
                     color: AppTheme.primaryBlue,
                     fontSize: 12,
-                    fontFamily: 'InterTight',
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -282,11 +282,11 @@ class _OtpInputRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(4, (index) {
-        return Container(
-          width: 60,
-          height: 64,
-          margin: const EdgeInsets.symmetric(horizontal: 6),
-          child: TextField(
+        return Expanded(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            height: 64,
+            child: TextField(
             controller: controller.otpControllers[index],
             focusNode: controller.otpFocusNodes[index],
             textAlign: TextAlign.center,
@@ -297,7 +297,6 @@ class _OtpInputRow extends StatelessWidget {
               fontSize: 24,
               fontWeight: FontWeight.w700,
               color: AppTheme.textDark,
-              fontFamily: 'InterTight',
             ),
             decoration: InputDecoration(
               counterText: '',
@@ -322,6 +321,7 @@ class _OtpInputRow extends StatelessWidget {
             ),
             onChanged: (value) => controller.onOtpChanged(value, index),
           ),
+        ),
         );
       }),
     );

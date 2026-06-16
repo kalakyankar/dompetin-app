@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import '../../controllers/home_controller.dart';
 import '../../controllers/pemasukan_controller.dart';
 import '../../theme/app_theme.dart';
 
@@ -9,7 +10,12 @@ class PemasukanScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.put(PemasukanController());
+    final ctrl = Get.find<PemasukanController>();
+
+    // Check if editing an existing transaction
+    if (Get.arguments != null && Get.arguments is Transaction && !ctrl.isEditing) {
+      ctrl.setEditTarget(Get.arguments as Transaction);
+    }
 
     return Scaffold(
       backgroundColor: AppTheme.offWhite,
@@ -34,7 +40,7 @@ class PemasukanScreen extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.w700,
             color: AppTheme.textDark,
-            fontFamily: 'InterTight',
+
           ),
         ),
         centerTitle: true,
@@ -104,8 +110,7 @@ class PemasukanScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                fontFamily: 'InterTight')),
+                                color: Colors.white)),
                   ),
                 )),
             const SizedBox(height: 24),
@@ -152,13 +157,15 @@ class _AmountCard extends StatelessWidget {
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                   color: AppTheme.textDark,
-                  fontFamily: 'InterTight',
+      
                 ),
               ),
               const SizedBox(width: 12),
-              IntrinsicWidth(
-                child: TextField(
-                  controller: ctrl.amountController,
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 250),
+                child: IntrinsicWidth(
+                  child: TextField(
+                    controller: ctrl.amountController,
                   keyboardType: TextInputType.number,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   textAlign: TextAlign.center,
@@ -166,7 +173,7 @@ class _AmountCard extends StatelessWidget {
                     fontSize: 32,
                     fontWeight: FontWeight.w700,
                     color: AppTheme.textDark,
-                    fontFamily: 'InterTight',
+        
                   ),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -175,6 +182,7 @@ class _AmountCard extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
             ],
           ),
           const SizedBox(height: 8),
@@ -256,7 +264,7 @@ class _CategoryGrid extends StatelessWidget {
                         color: isSelected
                             ? AppTheme.primaryBlue
                             : AppTheme.textDark,
-                        fontFamily: 'InterTight',
+            
                       ),
                     ),
                   ],
@@ -298,7 +306,7 @@ class _DatePicker extends StatelessWidget {
                     color: ctrl.selectedDate.value == null
                         ? AppTheme.textGrey
                         : AppTheme.textDark,
-                    fontFamily: 'InterTight',
+        
                   ),
                 ),
                 const Icon(Icons.calendar_today_outlined,
@@ -392,7 +400,7 @@ class _SimpanCard extends StatelessWidget {
                   fontSize: 13,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                   color: isSelected ? AppTheme.primaryBlue : AppTheme.textDark,
-                  fontFamily: 'InterTight',
+      
                 ),
               ),
             ],
@@ -439,8 +447,7 @@ class _RutinToggleRow extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: AppTheme.textDark,
-                            fontFamily: 'InterTight')),
+                            color: AppTheme.textDark)),
                     Text('Ulangi setiap bulan', style: AppTheme.bodySmall),
                   ],
                 ),

@@ -162,8 +162,7 @@ class _BalanceCard extends StatelessWidget {
             Text('Total Saldo Utama',
                 style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.8),
-                    fontSize: 13,
-                    fontFamily: 'InterTight')),
+                    fontSize: 13)),
             Row(children: [
               Icon(Icons.credit_card,
                   color: Colors.white.withValues(alpha: 0.7), size: 20),
@@ -174,15 +173,17 @@ class _BalanceCard extends StatelessWidget {
           ]),
           const SizedBox(height: 8),
           Obx(() => Row(children: [
-                Text(
-                  ctrl.isBalanceVisible.value
-                      ? ctrl.formatRupiah(ctrl.totalBalance.value)
-                      : 'Rp ••••••',
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: 'InterTight'),
+                Flexible(
+                  child: Text(
+                    ctrl.isBalanceVisible.value
+                        ? ctrl.formatRupiah(ctrl.totalBalance.value)
+                        : 'Rp ••••••',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 GestureDetector(
@@ -211,7 +212,7 @@ class _BalanceCard extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 11,
-                        fontFamily: 'InterTight',
+
                         fontWeight: FontWeight.w600)),
               ]),
             ),
@@ -219,8 +220,7 @@ class _BalanceCard extends StatelessWidget {
             Text('Bulan ini',
                 style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.7),
-                    fontSize: 11,
-                    fontFamily: 'InterTight')),
+                    fontSize: 11)),
           ]),
         ]),
       ]),
@@ -296,8 +296,7 @@ class _TabChip extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: isActive ? activeColor : AppTheme.textGrey,
-                    fontFamily: 'InterTight')),
+                    color: isActive ? activeColor : AppTheme.textGrey)),
           ]),
         ),
       ),
@@ -350,8 +349,7 @@ class _WalletEmpty extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontFamily: 'InterTight')),
+                    color: Colors.white)),
           ),
         ),
       ]),
@@ -398,16 +396,14 @@ class _WalletFilled extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
-                              color: AppTheme.textGrey,
-                              fontFamily: 'InterTight')),
+                              color: AppTheme.textGrey)),
                     ]),
                     const SizedBox(height: 8),
                     Obx(() => Text(ctrl.formatRupiah(ctrl.totalBalance.value),
                         style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
-                            color: AppTheme.textDark,
-                            fontFamily: 'InterTight'))),
+                            color: AppTheme.textDark))),
                   ]),
             ),
           ),
@@ -431,7 +427,7 @@ class _WalletFilled extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 8,
                           color: AppTheme.primaryBlue,
-                          fontFamily: 'InterTight',
+  
                           fontWeight: FontWeight.w500)),
                 ]),
           ),
@@ -463,7 +459,6 @@ class _WalletFilled extends StatelessWidget {
                       : 'Tetapkan Batas Pengeluaran',
                   style: TextStyle(
                       fontSize: 13,
-                      fontFamily: 'InterTight',
                       fontWeight: FontWeight.w500,
                       color: ctrl.isOverBudget
                           ? const Color(0xFFEF4444)
@@ -486,70 +481,69 @@ class _WalletFilled extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(24)),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Text('Tambah Transaksi',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: AppTheme.textDark,
-                  fontFamily: 'InterTight')),
-          const SizedBox(height: 20),
-          Row(children: [
-            Expanded(
-                child: GestureDetector(
-              onTap: () {
-                Get.back();
-                Get.toNamed(AppRoutes.pemasukan);
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                decoration: BoxDecoration(
-                    color: const Color(0xFF22C55E).withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                        color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
-                child: Column(children: const [
-                  Icon(Icons.arrow_downward_rounded,
-                      color: Color(0xFF22C55E), size: 28),
-                  SizedBox(height: 6),
-                  Text('Pemasukan',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF22C55E),
-                          fontFamily: 'InterTight')),
-                ]),
-              ),
-            )),
-            const SizedBox(width: 12),
-            Expanded(
-                child: GestureDetector(
-              onTap: () {
-                Get.back();
-                Get.toNamed(AppRoutes.pengeluaran);
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                decoration: BoxDecoration(
-                    color: const Color(0xFFEF4444).withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                        color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
-                child: Column(children: const [
-                  Icon(Icons.arrow_upward_rounded,
-                      color: Color(0xFFEF4444), size: 28),
-                  SizedBox(height: 6),
-                  Text('Pengeluaran',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFFEF4444),
-                          fontFamily: 'InterTight')),
-                ]),
-              ),
-            )),
+        child: SingleChildScrollView(
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            const Text('Tambah Transaksi',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.textDark)),
+            const SizedBox(height: 20),
+            Row(children: [
+              Expanded(
+                  child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.pemasukan);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  decoration: BoxDecoration(
+                      color: const Color(0xFF22C55E).withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                          color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
+                  child: Column(children: const [
+                    Icon(Icons.arrow_downward_rounded,
+                        color: Color(0xFF22C55E), size: 28),
+                    SizedBox(height: 6),
+                    Text('Pemasukan',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF22C55E))),
+                  ]),
+                ),
+              )),
+              const SizedBox(width: 12),
+              Expanded(
+                  child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.pengeluaran);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  decoration: BoxDecoration(
+                      color: const Color(0xFFEF4444).withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                          color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
+                  child: Column(children: const [
+                    Icon(Icons.arrow_upward_rounded,
+                        color: Color(0xFFEF4444), size: 28),
+                    SizedBox(height: 6),
+                    Text('Pengeluaran',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFEF4444))),
+                  ]),
+                ),
+              )),
+            ]),
           ]),
-        ]),
+        ),
       ),
       backgroundColor: Colors.transparent,
     );
@@ -567,9 +561,18 @@ class _ChartSection extends StatelessWidget {
     return Obx(() {
       if (ctrl.transactions.isEmpty) return const SizedBox();
       final list = ctrl.transactions.toList();
+      final income = ctrl.totalIncome;
+      final expense = ctrl.totalExpense;
+      final isOver = ctrl.isOverBudget;
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: _ChartContent(ctrl: ctrl, transactions: list),
+        child: _ChartContent(
+          ctrl: ctrl,
+          transactions: list,
+          totalIncome: income,
+          totalExpense: expense,
+          isOverBudget: isOver,
+        ),
       );
     });
   }
@@ -578,16 +581,25 @@ class _ChartSection extends StatelessWidget {
 class _ChartContent extends StatelessWidget {
   final HomeController ctrl;
   final List<Transaction> transactions;
-  const _ChartContent({required this.ctrl, required this.transactions});
+  final double totalIncome;
+  final double totalExpense;
+  final bool isOverBudget;
+  const _ChartContent({
+    required this.ctrl,
+    required this.transactions,
+    required this.totalIncome,
+    required this.totalExpense,
+    required this.isOverBudget,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final income = ctrl.totalIncome;
-    final expense = ctrl.totalExpense;
+    final income = totalIncome;
+    final expense = totalExpense;
     final maxVal = income > expense ? income : expense;
     final incomeH = maxVal > 0 ? (income / maxVal) * 90 : 8.0;
     final expenseH = maxVal > 0 ? (expense / maxVal) * 90 : 8.0;
-    final isOver = ctrl.isOverBudget;
+    final isOver = isOverBudget;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -646,8 +658,7 @@ class _ChartContent extends StatelessWidget {
                       style: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF22C55E),
-                          fontFamily: 'InterTight')))),
+                          color: Color(0xFF22C55E))))),
           Expanded(
               child: Center(
                   child: Text(ctrl.formatRupiah(expense),
@@ -656,8 +667,7 @@ class _ChartContent extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           color: isOver
                               ? const Color(0xFFEF4444)
-                              : const Color(0xFFFFB3C1),
-                          fontFamily: 'InterTight')))),
+                              : const Color(0xFFFFB3C1))))),
         ]),
         const SizedBox(height: 2),
         const Row(children: [
@@ -666,15 +676,13 @@ class _ChartContent extends StatelessWidget {
                   child: Text('Masuk',
                       style: TextStyle(
                           fontSize: 10,
-                          color: AppTheme.textGrey,
-                          fontFamily: 'InterTight')))),
+                          color: AppTheme.textGrey)))),
           Expanded(
               child: Center(
                   child: Text('Keluar',
                       style: TextStyle(
                           fontSize: 10,
-                          color: AppTheme.textGrey,
-                          fontFamily: 'InterTight')))),
+                          color: AppTheme.textGrey)))),
         ]),
       ]),
     );
@@ -695,9 +703,15 @@ class _WarningBanner extends StatelessWidget {
       }
       final limit = ctrl.batasPengeluaran.value;
       final expense = ctrl.totalExpense;
+      final isOver = ctrl.isOverBudget;
       return Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-        child: _WarningContent(ctrl: ctrl, limit: limit, expense: expense),
+        child: _WarningContent(
+          ctrl: ctrl,
+          limit: limit,
+          expense: expense,
+          isOverBudget: isOver,
+        ),
       );
     });
   }
@@ -707,10 +721,12 @@ class _WarningContent extends StatelessWidget {
   final HomeController ctrl;
   final double limit;
   final double expense;
+  final bool isOverBudget;
   const _WarningContent({
     required this.ctrl,
     required this.limit,
     required this.expense,
+    required this.isOverBudget,
   });
 
   @override
@@ -733,8 +749,7 @@ class _WarningContent extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFFEF4444),
-                      fontFamily: 'InterTight'))),
+                      color: Color(0xFFEF4444)))),
           GestureDetector(
               onTap: ctrl.dismissWarning,
               child:
@@ -748,13 +763,11 @@ class _WarningContent extends StatelessWidget {
                 const Text('Rp 0',
                     style: TextStyle(
                         fontSize: 11,
-                        color: Color(0xFFEF4444),
-                        fontFamily: 'InterTight')),
+                        color: Color(0xFFEF4444))),
                 Text('Limit: ${ctrl.formatRupiah(limit)}',
                     style: const TextStyle(
                         fontSize: 11,
-                        color: Color(0xFFEF4444),
-                        fontFamily: 'InterTight')),
+                        color: Color(0xFFEF4444))),
               ]),
           const SizedBox(height: 4),
           ClipRRect(
@@ -781,8 +794,7 @@ class _WarningContent extends StatelessWidget {
               'Pengeluaran ${ctrl.formatRupiah(expense)} melebihi batas ${ctrl.formatRupiah(limit)}. Harap kurangi pengeluaran untuk bulan ini.',
               style: const TextStyle(
                   fontSize: 11,
-                  color: Color(0xFFEF4444),
-                  fontFamily: 'InterTight'),
+                  color: Color(0xFFEF4444)),
             )),
           ]),
         ),
@@ -853,7 +865,7 @@ class _TransactionList extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
-                        fontFamily: 'InterTight',
+
                         color: AppTheme.textDark)),
                 subtitle: Text('${t.category} • ${t.date.day}/${t.date.month}',
                     style: AppTheme.bodySmall),
@@ -864,8 +876,7 @@ class _TransactionList extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       color: t.isIncome
                           ? const Color(0xFF22C55E)
-                          : const Color(0xFFEF4444),
-                      fontFamily: 'InterTight'),
+                          : const Color(0xFFEF4444)),
                 ),
               ),
               if (i < list.length - 1)
@@ -953,8 +964,7 @@ class _NavItem extends StatelessWidget {
               style: TextStyle(
                   fontSize: 10,
                   fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
-                  color: isActive ? AppTheme.primaryBlue : AppTheme.textGrey,
-                  fontFamily: 'InterTight')),
+                  color: isActive ? AppTheme.primaryBlue : AppTheme.textGrey)),
         ]),
       ),
     );
@@ -985,100 +995,98 @@ class _QrFab extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(24)),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
-          const Text('Tambah Transaksi',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: AppTheme.textDark,
-                  fontFamily: 'InterTight')),
-          const SizedBox(height: 20),
-          Row(children: [
-            Expanded(
-                child: GestureDetector(
-              onTap: () {
-                Get.back();
-                Get.toNamed(AppRoutes.pemasukan);
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                decoration: BoxDecoration(
-                    color: const Color(0xFF22C55E).withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                        color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
-                child: Column(children: const [
-                  Icon(Icons.arrow_downward_rounded,
-                      color: Color(0xFF22C55E), size: 28),
-                  SizedBox(height: 6),
-                  Text('Pemasukan',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF22C55E),
-                          fontFamily: 'InterTight')),
-                ]),
-              ),
-            )),
-            const SizedBox(width: 12),
-            Expanded(
-                child: GestureDetector(
-              onTap: () {
-                Get.back();
-                Get.toNamed(AppRoutes.pengeluaran);
-              },
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                decoration: BoxDecoration(
-                    color: const Color(0xFFEF4444).withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                        color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
-                child: Column(children: const [
-                  Icon(Icons.arrow_upward_rounded,
-                      color: Color(0xFFEF4444), size: 28),
-                  SizedBox(height: 6),
-                  Text('Pengeluaran',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFFEF4444),
-                          fontFamily: 'InterTight')),
-                ]),
-              ),
-            )),
-          ]),
-          const SizedBox(height: 12),
-          // Scan Struk button
-          GestureDetector(
-            onTap: () {
-              Get.back();
-              Get.toNamed(AppRoutes.scan);
-            },
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              decoration: BoxDecoration(
-                  color: AppTheme.primaryBlue.withValues(alpha: 0.06),
-                  borderRadius: BorderRadius.circular(14),
-                  border: Border.all(
-                      color: AppTheme.primaryBlue.withValues(alpha: 0.3))),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.document_scanner_outlined,
-                        color: AppTheme.primaryBlue, size: 22),
-                    SizedBox(width: 8),
-                    Text('Scan Struk',
+        child: SingleChildScrollView(
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            const Text('Tambah Transaksi',
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.textDark)),
+            const SizedBox(height: 20),
+            Row(children: [
+              Expanded(
+                  child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.pemasukan);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  decoration: BoxDecoration(
+                      color: const Color(0xFF22C55E).withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                          color: const Color(0xFF22C55E).withValues(alpha: 0.4))),
+                  child: Column(children: const [
+                    Icon(Icons.arrow_downward_rounded,
+                        color: Color(0xFF22C55E), size: 28),
+                    SizedBox(height: 6),
+                    Text('Pemasukan',
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
-                            color: AppTheme.primaryBlue,
-                            fontFamily: 'InterTight')),
+                            color: Color(0xFF22C55E))),
                   ]),
+                ),
+              )),
+              const SizedBox(width: 12),
+              Expanded(
+                  child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.pengeluaran);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 18),
+                  decoration: BoxDecoration(
+                      color: const Color(0xFFEF4444).withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                          color: const Color(0xFFEF4444).withValues(alpha: 0.4))),
+                  child: Column(children: const [
+                    Icon(Icons.arrow_upward_rounded,
+                        color: Color(0xFFEF4444), size: 28),
+                    SizedBox(height: 6),
+                    Text('Pengeluaran',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFFEF4444))),
+                  ]),
+                ),
+              )),
+            ]),
+            const SizedBox(height: 12),
+            // Scan Struk button
+            GestureDetector(
+              onTap: () {
+                Get.back();
+                Get.toNamed(AppRoutes.scan);
+              },
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                decoration: BoxDecoration(
+                    color: AppTheme.primaryBlue.withValues(alpha: 0.06),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                        color: AppTheme.primaryBlue.withValues(alpha: 0.3))),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.document_scanner_outlined,
+                          color: AppTheme.primaryBlue, size: 22),
+                      SizedBox(width: 8),
+                      Text('Scan Struk',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.primaryBlue)),
+                    ]),
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
       backgroundColor: Colors.transparent,
     );

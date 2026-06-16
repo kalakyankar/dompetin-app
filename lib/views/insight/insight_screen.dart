@@ -32,8 +32,7 @@ class InsightScreen extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppTheme.textDark,
-                fontFamily: 'InterTight')),
+                color: AppTheme.textDark)),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -84,8 +83,7 @@ class _TotalBalanceCard extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.w700,
-                  color: AppTheme.textDark,
-                  fontFamily: 'InterTight'))),
+                  color: AppTheme.textDark))),
         ],
       ),
     );
@@ -148,8 +146,7 @@ class _DonutChart extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w700,
-                        color: AppTheme.textDark,
-                        fontFamily: 'InterTight')),
+                        color: AppTheme.textDark)),
                 Text('tabungan', style: AppTheme.bodySmall),
               ],
             ),
@@ -194,16 +191,14 @@ class _IncomeExpenseRow extends StatelessWidget {
                     const Text('Penghasilan',
                         style: TextStyle(
                             fontSize: 11,
-                            color: AppTheme.textGrey,
-                            fontFamily: 'InterTight')),
+                            color: AppTheme.textGrey)),
                   ]),
                   const SizedBox(height: 4),
                   Text(ctrl.formatRupiah(income),
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFF22C55E),
-                          fontFamily: 'InterTight')),
+                          color: Color(0xFF22C55E))),
                 ]),
           ),
         ),
@@ -232,16 +227,14 @@ class _IncomeExpenseRow extends StatelessWidget {
                     const Text('Pengeluaran',
                         style: TextStyle(
                             fontSize: 11,
-                            color: AppTheme.textGrey,
-                            fontFamily: 'InterTight')),
+                            color: AppTheme.textGrey)),
                   ]),
                   const SizedBox(height: 4),
                   Text(ctrl.formatRupiah(expense),
                       style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFFEF4444),
-                          fontFamily: 'InterTight')),
+                          color: Color(0xFFEF4444))),
                 ]),
           ),
         ),
@@ -326,8 +319,7 @@ class _IncomeSources extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: AppTheme.textDark,
-                    fontFamily: 'InterTight')),
+                    color: AppTheme.textDark)),
             const SizedBox(height: 14),
             ...byCategory.entries.map((e) {
               final pct = total > 0 ? e.value / total : 0.0;
@@ -352,18 +344,20 @@ class _IncomeSources extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(e.key,
-                                  style: const TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppTheme.textDark,
-                                      fontFamily: 'InterTight')),
+                              Flexible(
+                                child: Text(e.key,
+                                    style: const TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppTheme.textDark),
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                              const SizedBox(width: 8),
                               Text(ctrl.formatRupiah(e.value),
                                   style: const TextStyle(
                                       fontSize: 13,
                                       fontWeight: FontWeight.w600,
-                                      color: Color(0xFF22C55E),
-                                      fontFamily: 'InterTight')),
+                                      color: Color(0xFF22C55E))),
                             ],
                           ),
                           const SizedBox(height: 4),
@@ -435,8 +429,7 @@ class _ExpenseBreakdown extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: AppTheme.textDark,
-                    fontFamily: 'InterTight')),
+                    color: AppTheme.textDark)),
             const SizedBox(height: 14),
             ...byCategory.entries.map((e) => Padding(
                   padding: const EdgeInsets.only(bottom: 12),
@@ -458,18 +451,20 @@ class _ExpenseBreakdown extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(e.key,
-                              style: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppTheme.textDark,
-                                  fontFamily: 'InterTight')),
+                          Flexible(
+                            child: Text(e.key,
+                                style: const TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppTheme.textDark),
+                                overflow: TextOverflow.ellipsis),
+                          ),
+                          const SizedBox(width: 8),
                           Text(ctrl.formatRupiah(e.value),
                               style: const TextStyle(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w600,
-                                  color: Color(0xFFEF4444),
-                                  fontFamily: 'InterTight')),
+                                  color: Color(0xFFEF4444))),
                         ],
                       ),
                     ),
