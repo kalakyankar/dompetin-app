@@ -77,9 +77,9 @@ class AppRoutes {
         page: () => const HomeScreen(),
         binding: BindingsBuilder(() {
           Get.lazyPut<HomeController>(() => HomeController());
-          Get.lazyPut<TargetController>(() => TargetController());
-          Get.lazyPut<RiwayatController>(() => RiwayatController());
-          Get.lazyPut<ProfilController>(() => ProfilController());
+          Get.put<TargetController>(TargetController());
+          Get.put<RiwayatController>(RiwayatController());
+          Get.put<ProfilController>(ProfilController());
         }),
         transition: Transition.fadeIn),
     GetPage(

@@ -17,24 +17,38 @@ class ProfilScreen extends StatelessWidget {
           color: AppTheme.white,
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
           child: Obx(() => Row(children: [
-                Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: LinearGradient(
-                            colors: [AppTheme.primaryBlue, AppTheme.deepBlue],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight)),
-                    child: Center(
-                        child: Text(
-                            ctrl.nama.value.isNotEmpty
-                                ? ctrl.nama.value[0].toUpperCase()
-                                : 'U',
-                            style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white)))),
+                Stack(children: [
+                  Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                              colors: [AppTheme.primaryBlue, AppTheme.deepBlue],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight)),
+                      child: Center(
+                          child: Text(
+                              ctrl.nama.value.isNotEmpty
+                                  ? ctrl.nama.value[0].toUpperCase()
+                                  : 'U',
+                              style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white)))),
+                  Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                          width: 22,
+                          height: 22,
+                          decoration: BoxDecoration(
+                              color: AppTheme.primaryBlue,
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Colors.white, width: 2)),
+                          child: const Icon(Icons.camera_alt_rounded,
+                              size: 12, color: Colors.white))),
+                ]),
                 const SizedBox(width: 14),
                 Expanded(
                     child: Column(
@@ -45,6 +59,7 @@ class ProfilScreen extends StatelessWidget {
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
                               color: AppTheme.textDark)),
+                      const SizedBox(height: 2),
                       Text(ctrl.email.value, style: AppTheme.bodySmall),
                       Text(ctrl.telepon.value, style: AppTheme.bodySmall),
                     ])),
@@ -54,13 +69,13 @@ class ProfilScreen extends StatelessWidget {
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
-                          color: AppTheme.inputFill,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: AppTheme.inputBorder)),
+                          color: AppTheme.primaryBlue.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(10)),
                       child: const Icon(Icons.edit_outlined,
-                          size: 16, color: AppTheme.textGrey)),
+                          size: 16, color: AppTheme.primaryBlue)),
                 ),
               ]))),
+      const Divider(height: 1, color: AppTheme.divider, indent: 20, endIndent: 20),
       const SizedBox(height: 12),
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -118,7 +133,13 @@ class _MenuCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppTheme.white,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppTheme.inputBorder)),
+          border: Border.all(color: AppTheme.inputBorder),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withValues(alpha: 0.04),
+                blurRadius: 8,
+                offset: const Offset(0, 2))
+          ]),
       child: Column(
           children: items.asMap().entries.map((e) {
         final i = e.key;
@@ -416,11 +437,14 @@ class PengingatScreen extends StatelessWidget {
             ])));
   }
 
-  Widget _sh(String t) => Text(t,
-      style: const TextStyle(
-          fontSize: 13,
-          fontWeight: FontWeight.w600,
-          color: AppTheme.textGrey));
+  Widget _sh(String t) => Padding(
+      padding: const EdgeInsets.only(left: 2),
+      child: Text(t,
+          style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.textGrey,
+              letterSpacing: 0.3)));
 
   Widget _toggleCard(
       List<(IconData, Color, String, String, RxBool, Function(bool))> items) {
@@ -428,7 +452,13 @@ class PengingatScreen extends StatelessWidget {
         decoration: BoxDecoration(
             color: AppTheme.white,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppTheme.inputBorder)),
+            border: Border.all(color: AppTheme.inputBorder),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.04),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2))
+            ]),
         child: Column(
             children: items.asMap().entries.map((e) {
           final i = e.key;
@@ -437,18 +467,21 @@ class PengingatScreen extends StatelessWidget {
             Obx(() => SwitchListTile(
                   value: it.$5.value,
                   onChanged: it.$6,
+                  activeTrackColor: AppTheme.primaryBlue.withValues(alpha: 0.3),
                   activeThumbColor: AppTheme.primaryBlue,
+                  inactiveTrackColor: const Color(0xFFE4E9F2),
+                  inactiveThumbColor: AppTheme.textGrey,
                   secondary: Container(
                       width: 36,
                       height: 36,
                       decoration: BoxDecoration(
-                          color: it.$2.withValues(alpha: 0.1),
+                          color: it.$2.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(10)),
                       child: Icon(it.$1, size: 18, color: it.$2)),
                   title: Text(it.$3,
                       style: const TextStyle(
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                           color: AppTheme.textDark)),
                   subtitle: Text(it.$4, style: AppTheme.bodySmall),
                   contentPadding:
