@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../theme/app_theme.dart';
+
+// ─── Transaction Model ─────────────────────────────────────────────────────────
 
 class Transaction {
   final String id;
@@ -8,8 +11,8 @@ class Transaction {
   final double amount;
   final bool isIncome;
   final DateTime date;
-  final String source; // 'Dana', 'Cash', 'Bank', dll
-  final String note;   // catatan / nama instansi
+  final String source;
+  final String note;
 
   Transaction({
     String? id,
@@ -23,17 +26,66 @@ class Transaction {
   }) : id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
 }
 
+// ─── Digital Wallet Model ──────────────────────────────────────────────────────
+
+class DigitalWallet {
+  final String id;
+  final String name;
+  final double balance;
+  final IconData icon;
+  final Color color;
+
+  DigitalWallet({
+    String? id,
+    required this.name,
+    this.balance = 0,
+    this.icon = Icons.account_balance_wallet_outlined,
+    this.color = AppTheme.primaryBlue,
+  }) : id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
+
+  DigitalWallet copyWith({double? balance}) {
+    return DigitalWallet(
+      id: id,
+      name: name,
+      balance: balance ?? this.balance,
+      icon: icon,
+      color: color,
+    );
+  }
+}
+
+// ─── Default Wallet Presets ───────────────────────────────────────────────────
+
+final List<Map<String, dynamic>> walletPresets = [
+  {'name': 'Dana', 'icon': Icons.account_balance_wallet_outlined, 'color': const Color(0xFF1A6BFF)},
+  {'name': 'ShopeePay', 'icon': Icons.shopping_bag_outlined, 'color': const Color(0xFFEE4D2D)},
+  {'name': 'GoPay', 'icon': Icons.payments_outlined, 'color': const Color(0xFF00AA13)},
+  {'name': 'OVO', 'icon': Icons.account_balance_wallet_outlined, 'color': const Color(0xFF4B2A9B)},
+  {'name': 'Bank BCA', 'icon': Icons.account_balance_outlined, 'color': const Color(0xFF003D79)},
+  {'name': 'Bank Mandiri', 'icon': Icons.account_balance_outlined, 'color': const Color(0xFF0066AA)},
+  {'name': 'Bank BRI', 'icon': Icons.account_balance_outlined, 'color': const Color(0xFF00529C)},
+  {'name': 'Cash', 'icon': Icons.monetization_on_outlined, 'color': const Color(0xFF22C55E)},
+  {'name': 'Lainnya', 'icon': Icons.add_circle_outline, 'color': const Color(0xFF8F95B2)},
+];
+
+// ─── Home Controller ───────────────────────────────────────────────────────────
+
 class HomeController extends GetxController {
   final currentTabIndex = 0.obs;
-  final activeTransactionTab = 0.obs; // 0=Pemasukan, 1=Pengeluaran
-  final totalBalance = 0.0.obs;
-  final transactions = <Transaction>[].obs;
+  final activeTransactionTab = 0.obs;
   final isBalanceVisible = true.obs;
 
-  // Batas peringatan pengeluaran
+  final wallets = <DigitalWallet>[].obs;
+  final transactions = <Transaction>[].obs;
+
+  // Expense limit
   final batasPengeluaran = 0.0.obs;
   final isBatasAktif = false.obs;
   final isWarningDismissed = false.obs;
+
+  // ── Computed ──────────────────────────────────────────────────────────────────
+
+  double get totalBalance => wallets.fold(0.0, (sum, w) => sum + w.balance);
 
   double get totalIncome =>
       transactions.where((t) => t.isIncome).fold(0.0, (s, t) => s + t.amount);
@@ -51,16 +103,12 @@ class HomeController extends GetxController {
     return (totalExpense / batasPengeluaran.value).clamp(0.0, 1.0);
   }
 
-  List<Transaction> get recentTransactions => transactions.take(10).toList();
+  List<Transaction> get recentTransactions => transactions.take(5).toList();
 
-  List<Transaction> get filteredTransactions {
-    if (activeTransactionTab.value == 0) {
-      return transactions.where((t) => t.isIncome).toList();
-    }
-    return transactions.where((t) => !t.isIncome).toList();
-  }
+  // ── UI Actions ───────────────────────────────────────────────────────────────
 
-  void toggleBalanceVisibility() => isBalanceVisible.value = !isBalanceVisible.value;
+  void toggleBalanceVisibility() =>
+      isBalanceVisible.value = !isBalanceVisible.value;
   void switchTab(int index) => currentTabIndex.value = index;
   void switchTransactionTab(int index) => activeTransactionTab.value = index;
 
@@ -72,13 +120,27 @@ class HomeController extends GetxController {
 
   void dismissWarning() => isWarningDismissed.value = true;
 
+  // ── Wallet Management ────────────────────────────────────────────────────────
+
+  void addWallet(DigitalWallet wallet) {
+    wallets.add(wallet);
+  }
+
+  void _applyToWallet(String walletName, double delta) {
+    final i = wallets.indexWhere((w) => w.name == walletName);
+    if (i >= 0) {
+      wallets[i] = wallets[i].copyWith(balance: wallets[i].balance + delta);
+    } else if (walletName.isNotEmpty) {
+      wallets.add(DigitalWallet(name: walletName, balance: delta));
+    }
+  }
+
+  // ── Transaction Management ───────────────────────────────────────────────────
+
   void addTransaction(Transaction t) {
     transactions.insert(0, t);
-    if (t.isIncome) {
-      totalBalance.value += t.amount;
-    } else {
-      totalBalance.value -= t.amount;
-    }
+    final delta = t.isIncome ? t.amount : -t.amount;
+    _applyToWallet(t.source, delta);
     isWarningDismissed.value = false;
   }
 
@@ -87,55 +149,75 @@ class HomeController extends GetxController {
     if (i < 0) return;
     final t = transactions[i];
     transactions.removeAt(i);
-    if (t.isIncome) {
-      totalBalance.value -= t.amount;
-    } else {
-      totalBalance.value += t.amount;
-    }
+    final delta = t.isIncome ? -t.amount : t.amount;
+    _applyToWallet(t.source, delta);
   }
 
   void updateTransaction(Transaction old, Transaction updated) {
     final i = transactions.indexWhere((t) => t.id == old.id);
     if (i < 0) return;
-    // Adjust balance: remove old, add new
-    if (old.isIncome) {
-      totalBalance.value -= old.amount;
-    } else {
-      totalBalance.value += old.amount;
-    }
+    final oldDelta = old.isIncome ? -old.amount : old.amount;
+    _applyToWallet(old.source, oldDelta);
+    final newDelta = updated.isIncome ? updated.amount : -updated.amount;
+    _applyToWallet(updated.source, newDelta);
     transactions[i] = updated;
-    if (updated.isIncome) {
-      totalBalance.value += updated.amount;
-    } else {
-      totalBalance.value -= updated.amount;
-    }
   }
 
-  /// Seed realistic dummy data so the app looks filled on first load
+  // ── Dummy Data ───────────────────────────────────────────────────────────────
+
   void seedDummyData() {
-    if (transactions.isNotEmpty) return; // only once
+    if (transactions.isNotEmpty || wallets.isNotEmpty) return;
+
+    wallets.addAll([
+      DigitalWallet(
+        name: 'Dana',
+        balance: 3599000,
+        icon: Icons.account_balance_wallet_outlined,
+        color: const Color(0xFF1A6BFF),
+      ),
+      DigitalWallet(
+        name: 'Cash',
+        balance: 500000,
+        icon: Icons.monetization_on_outlined,
+        color: const Color(0xFF22C55E),
+      ),
+    ]);
+
     final now = DateTime.now();
     final dummies = [
-      Transaction(id: 'dummy_1', title: 'Pemasukan', category: 'Gaji',
-          amount: 4000000, isIncome: true,
-          date: now.subtract(const Duration(days: 5, hours: 17)),
-          source: 'Dana', note: 'Dana'),
-      Transaction(id: 'dummy_2', title: 'Steak House Buffet', category: 'Makan & Minum',
-          amount: 350000, isIncome: false,
-          date: now.subtract(const Duration(days: 3, hours: 9, minutes: 40)),
-          source: 'Dana', note: 'Steak House Buffet'),
-      Transaction(id: 'dummy_3', title: 'Jajan', category: 'Makan & Minum',
-          amount: 51000, isIncome: false,
-          date: now.subtract(const Duration(days: 1, hours: 8, minutes: 31)),
-          source: 'Cash', note: 'Mako - 3 Croissant'),
+      Transaction(
+        id: 'dummy_1',
+        title: 'Pemasukan',
+        category: 'Gaji',
+        amount: 4000000,
+        isIncome: true,
+        date: now.subtract(const Duration(days: 5, hours: 17)),
+        source: 'Dana',
+        note: 'Dana',
+      ),
+      Transaction(
+        id: 'dummy_2',
+        title: 'Steak House Buffet',
+        category: 'Makan & Minum',
+        amount: 350000,
+        isIncome: false,
+        date: now.subtract(const Duration(days: 3, hours: 9, minutes: 40)),
+        source: 'Dana',
+        note: 'Steak House Buffet',
+      ),
+      Transaction(
+        id: 'dummy_3',
+        title: 'Jajan',
+        category: 'Makan & Minum',
+        amount: 51000,
+        isIncome: false,
+        date: now.subtract(const Duration(days: 1, hours: 8, minutes: 31)),
+        source: 'Cash',
+        note: 'Mako - 3 Croissant',
+      ),
     ];
     for (final t in dummies) {
       transactions.add(t);
-      if (t.isIncome) {
-        totalBalance.value += t.amount;
-      } else {
-        totalBalance.value -= t.amount;
-      }
     }
   }
 

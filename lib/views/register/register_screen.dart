@@ -12,7 +12,7 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(RegisterController());
+    final controller = Get.find<RegisterController>();
 
     return Scaffold(
       backgroundColor: AppTheme.white,

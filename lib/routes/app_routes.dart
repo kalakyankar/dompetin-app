@@ -1,6 +1,16 @@
 import 'package:get/get.dart';
+import '../controllers/home_controller.dart';
+import '../controllers/login_controller.dart';
+import '../controllers/onboarding_controller.dart';
 import '../controllers/pemasukan_controller.dart';
 import '../controllers/pengeluaran_controller.dart';
+import '../controllers/register_controller.dart';
+import '../controllers/forgot_password_controller.dart';
+import '../controllers/target_controller.dart';
+import '../controllers/profil_controller.dart';
+import '../controllers/scan_controller.dart';
+import '../controllers/riwayat_controller.dart';
+import '../controllers/splash_controller.dart';
 import '../views/splash/splash_screen.dart';
 import '../views/onboarding/onboarding_screen.dart';
 import '../views/login/login_screen.dart';
@@ -30,39 +40,60 @@ class AppRoutes {
     GetPage(
         name: splash,
         page: () => const SplashScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<SplashController>(() => SplashController());
+        }),
         transition: Transition.fadeIn),
     GetPage(
         name: onboarding,
         page: () => const OnboardingScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<OnboardingController>(() => OnboardingController());
+        }),
         transition: Transition.rightToLeft),
     GetPage(
         name: login,
         page: () => const LoginScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<LoginController>(() => LoginController());
+        }),
         transition: Transition.rightToLeft),
     GetPage(
         name: register,
         page: () => const RegisterScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<RegisterController>(() => RegisterController());
+        }),
         transition: Transition.rightToLeft),
     GetPage(
         name: forgotPassword,
         page: () => const ForgotPasswordScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<ForgotPasswordController>(() => ForgotPasswordController());
+        }),
         transition: Transition.rightToLeft),
     GetPage(
         name: home,
         page: () => const HomeScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<HomeController>(() => HomeController());
+          Get.lazyPut<TargetController>(() => TargetController());
+          Get.lazyPut<RiwayatController>(() => RiwayatController());
+          Get.lazyPut<ProfilController>(() => ProfilController());
+        }),
         transition: Transition.fadeIn),
     GetPage(
         name: pemasukan,
         page: () => const PemasukanScreen(),
         binding: BindingsBuilder(() {
-          Get.lazyPut<PemasukanController>(() => PemasukanController());
+          Get.put<PemasukanController>(PemasukanController());
         }),
         transition: Transition.rightToLeft),
     GetPage(
         name: pengeluaran,
         page: () => const PengeluaranScreen(),
         binding: BindingsBuilder(() {
-          Get.lazyPut<PengeluaranController>(() => PengeluaranController());
+          Get.put<PengeluaranController>(PengeluaranController());
         }),
         transition: Transition.rightToLeft),
     GetPage(
@@ -72,6 +103,9 @@ class AppRoutes {
     GetPage(
         name: scan,
         page: () => const ScanScreen(),
+        binding: BindingsBuilder(() {
+          Get.lazyPut<ScanController>(() => ScanController());
+        }),
         transition: Transition.downToUp),
     GetPage(
         name: detailTransaksi,

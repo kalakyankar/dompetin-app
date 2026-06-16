@@ -79,7 +79,7 @@ class _TotalBalanceCard extends StatelessWidget {
               style: AppTheme.bodySmall
                   .copyWith(letterSpacing: 1.2, fontWeight: FontWeight.w600)),
           const SizedBox(height: 6),
-          Obx(() => Text(ctrl.formatRupiah(ctrl.totalBalance.value),
+          Obx(() => Text(ctrl.formatRupiah(ctrl.totalBalance),
               style: const TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.w700,

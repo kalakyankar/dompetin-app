@@ -11,7 +11,7 @@ class ScanScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.put(ScanController());
+    final ctrl = Get.find<ScanController>();
     return Scaffold(
       backgroundColor: AppTheme.white,
       body: Obx(() {

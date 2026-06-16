@@ -31,7 +31,7 @@ class DetailTransaksiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Transaction passed as argument from Riwayat or Success screens
     final Transaction t = Get.arguments as Transaction;
-    final ctrl = Get.put(RiwayatController(), permanent: true);
+    final ctrl = RiwayatController();
     final homeCtrl = Get.find<HomeController>();
 
     final isIncome = t.isIncome;
@@ -216,7 +216,6 @@ class DetailTransaksiScreen extends StatelessWidget {
 
   void _editTransaction(
       BuildContext context, Transaction t, RiwayatController ctrl, HomeController homeCtrl) {
-    Get.delete<RiwayatController>();
     Get.toNamed(
       t.isIncome ? AppRoutes.pemasukan : AppRoutes.pengeluaran,
       arguments: t,

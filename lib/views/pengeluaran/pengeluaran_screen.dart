@@ -13,7 +13,7 @@ class PengeluaranScreen extends StatelessWidget {
     final ctrl = Get.find<PengeluaranController>();
 
     // Check if editing an existing transaction
-    if (Get.arguments != null && Get.arguments is Transaction && !ctrl.isEditing) {
+    if (Get.arguments != null && Get.arguments is Transaction) {
       ctrl.setEditTarget(Get.arguments as Transaction);
     }
 

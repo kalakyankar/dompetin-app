@@ -8,7 +8,7 @@ class TargetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.put(TargetController());
+    final ctrl = Get.find<TargetController>();
 
     return SafeArea(
       child: Obx(() => ctrl.targets.isEmpty

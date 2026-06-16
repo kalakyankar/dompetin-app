@@ -125,8 +125,8 @@ class PengeluaranController extends GetxController {
       }
     }
 
+    resetForm();
     Get.back();
-    Get.delete<PengeluaranController>();
     Get.snackbar(
       'Berhasil! ✅',
       'Pengeluaran berhasil dicatat',
@@ -136,6 +136,16 @@ class PengeluaranController extends GetxController {
       margin: const EdgeInsets.all(16),
       borderRadius: 12,
     );
+  }
+
+  void resetForm() {
+    _editTarget = null;
+    amountController.text = '0';
+    catatanController.clear();
+    selectedCategory.value = '';
+    selectedAsalDana.value = 'Dana';
+    selectedDate.value = null;
+    isPengeluaranRutin.value = false;
   }
 
   @override

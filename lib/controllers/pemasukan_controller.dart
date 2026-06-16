@@ -123,8 +123,8 @@ class PemasukanController extends GetxController {
       homeCtrl?.addTransaction(t);
     }
 
+    resetForm();
     Get.back();
-    Get.delete<PemasukanController>();
     Get.snackbar(
       'Berhasil! ✅',
       'Dana masuk berhasil dicatat',
@@ -134,6 +134,16 @@ class PemasukanController extends GetxController {
       margin: const EdgeInsets.all(16),
       borderRadius: 12,
     );
+  }
+
+  void resetForm() {
+    _editTarget = null;
+    amountController.text = '0';
+    namaInstansiController.clear();
+    selectedCategory.value = '';
+    selectedSimpan.value = '';
+    selectedDate.value = null;
+    isPemasukanRutin.value = false;
   }
 
   @override

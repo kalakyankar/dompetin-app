@@ -8,10 +8,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SplashController());
-
-    final screenHeight = MediaQuery.of(context).size.height;
-
+    Get.find<SplashController>();
     return Scaffold(
       // Hanya menggunakan primary color sesuai permintaan
       backgroundColor: AppTheme.primaryBlue,
@@ -34,7 +31,7 @@ class SplashScreen extends StatelessWidget {
 
             // 2. Garis PNG putih dari tengah (bawah kartu/logo) sampai ke eclipse bawah
             Positioned(
-              top: screenHeight * 0.5 +
+              top: MediaQuery.of(context).size.height * 0.5 +
                   60, // Mulai tepat dari bawah logo/kartu di tengah
               bottom: 80, // Memanjang sampai menyentuh area eclipse bawah
               child: Image.asset(

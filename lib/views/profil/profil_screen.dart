@@ -9,7 +9,7 @@ class ProfilScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctrl = Get.put(ProfilController());
+    final ctrl = Get.find<ProfilController>();
     return SafeArea(
         child: SingleChildScrollView(
             child: Column(children: [

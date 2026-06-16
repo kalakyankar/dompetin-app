@@ -10,7 +10,7 @@ class RiwayatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // RiwayatController needs HomeController already registered
-    final ctrl = Get.put(RiwayatController());
+    final ctrl = Get.find<RiwayatController>();
 
     return SafeArea(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

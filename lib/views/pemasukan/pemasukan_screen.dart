@@ -12,8 +12,7 @@ class PemasukanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ctrl = Get.find<PemasukanController>();
 
-    // Check if editing an existing transaction
-    if (Get.arguments != null && Get.arguments is Transaction && !ctrl.isEditing) {
+    if (Get.arguments != null && Get.arguments is Transaction) {
       ctrl.setEditTarget(Get.arguments as Transaction);
     }
 

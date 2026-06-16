@@ -12,7 +12,7 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OnboardingController());
+    final controller = Get.find<OnboardingController>();
 
     return Scaffold(
       backgroundColor: AppTheme.onboardingBackground,
